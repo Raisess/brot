@@ -1,14 +1,15 @@
 CC=g++
-
 FLAGS=-lSDL2
 
 COMMON_PATH=$(SRC_DIR)/common
+UTIL_PATH=$(SRC_DIR)/util
 GFX_PATH=$(SRC_DIR)/gfx
 
 SRC_DIR=./src
 SRC=$(SRC_DIR)/main.cpp
 
 GFX_SRC=$(GFX_PATH)/Window.cpp \
+				$(GFX_PATH)/Renderer.cpp \
 				$(GFX_PATH)/main.cpp
 
 OUT_DIR=./build
