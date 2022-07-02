@@ -9,9 +9,7 @@ GFX::Renderer::Renderer(const Window& window) {
 }
 
 GFX::Renderer::~Renderer() {
-  Common::Logger::debug("Destroying renderer...");
   SDL_DestroyRenderer(renderer);
-  Common::Logger::debug("Renderer destroyed.");
 }
 
 void GFX::Renderer::clear() const {

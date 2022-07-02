@@ -11,10 +11,8 @@ GFX::Window::Window(const std::string& title, const Common::Size& size) {
 }
 
 GFX::Window::~Window(void) {
-  Common::Logger::debug("Destroying window...");
   SDL_DestroyWindow(window);
   SDL_Quit();
-  Common::Logger::debug("Window destroyed.");
 }
 
 void GFX::Window::loop(std::function<void(void)> game_loop) const {
