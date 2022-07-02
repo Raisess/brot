@@ -1,3 +1,4 @@
+#include "../common/Logger.h"
 #include "Window.h"
 
 GFX::Window::Window(const std::string& title, const Common::Size& size) {

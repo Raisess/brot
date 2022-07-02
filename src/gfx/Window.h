@@ -3,7 +3,6 @@
 #include <iostream>
 #include <functional>
 #include <SDL2/SDL.h>
-#include "../common/Logger.h"
 #include "../common/types.h"
 
 namespace GFX {

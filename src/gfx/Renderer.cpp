@@ -1,3 +1,4 @@
+#include "../common/Logger.h"
 #include "Renderer.h"
 
 GFX::Renderer::Renderer(const Window& window) {
