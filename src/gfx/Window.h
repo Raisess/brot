@@ -13,10 +13,14 @@ public:
   Window(const std::string& title, const Common::Size& size);
   ~Window(void);
 
+  SDL_Window* get() const {
+    return window;
+  }
+
   void loop(std::function<void(void)> game_loop) const;
 
 private:
-  SDL_Window* sdl_window;
+  SDL_Window* window;
 };
 
 }

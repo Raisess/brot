@@ -2,16 +2,16 @@
 
 GFX::Window::Window(const std::string& title, const Common::Size& size) {
   SDL_Init(SDL_INIT_VIDEO);
-  sdl_window = SDL_CreateWindow(title.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, size.width, size.height, 0);
 
-  if (sdl_window == nullptr) {
+  window = SDL_CreateWindow(title.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, size.width, size.height, 0);
+  if (window == nullptr) {
     Common::Logger::error("Error creating the window " + std::string(SDL_GetError()));
   }
 }
 
 GFX::Window::~Window(void) {
   Common::Logger::debug("Destroying window...");
-  SDL_DestroyWindow(sdl_window);
+  SDL_DestroyWindow(window);
   SDL_Quit();
   Common::Logger::debug("Window destroyed.");
 }
