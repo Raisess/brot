@@ -1,10 +1,13 @@
 #pragma once
 
+#include <assert.h>
+#include <iostream>
+
 namespace Common {
 
 typedef struct {
-  unsigned int width;
-  unsigned int height;
+  int width;
+  int height;
 } Size;
 
 typedef struct {
