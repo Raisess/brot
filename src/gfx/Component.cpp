@@ -12,10 +12,11 @@ void GFX::Component::draw(const Renderer& renderer, bool fill) {
   sdl_value.y = position.y;
 
   SDL_SetRenderDrawColor(renderer.get(), 255, 255, 255, 255);
-  SDL_RenderDrawRect(renderer.get(), &sdl_value);
 
   if (fill) {
     SDL_RenderFillRect(renderer.get(), &sdl_value);
+  } else {
+    SDL_RenderDrawRect(renderer.get(), &sdl_value);
   }
 
   SDL_SetRenderDrawColor(renderer.get(), 0, 0, 0, 255);

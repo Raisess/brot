@@ -8,8 +8,8 @@ int main() {
   GFX::Component component({ 100, 100 }, { 0, 0 });
 
   window.loop([&]() -> void {
-    component.draw(renderer, true);
     renderer.clear();
+    component.draw(renderer, true);
   });
 
   return 0;

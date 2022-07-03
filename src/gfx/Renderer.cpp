@@ -15,8 +15,7 @@ GFX::Renderer::~Renderer() {
 }
 
 void GFX::Renderer::clear() const {
-  SDL_SetRenderDrawColor(sdl_value, 0, 0, 0, 0);
+  SDL_SetRenderDrawColor(sdl_value, 0, 0, 0, 255);
   SDL_RenderClear(sdl_value);
-  SDL_RenderCopy(sdl_value, nullptr, nullptr, nullptr);
   SDL_RenderPresent(sdl_value);
 }

@@ -21,14 +21,16 @@ void GFX::Window::loop(std::function<void(void)> game_loop) const {
   SDL_Event event;
 
   while (true) {
-    SDL_PollEvent(&event);
-    switch (event.type) {
-      case SDL_QUIT:
-        Common::Logger::debug("Quiting...");
-        return;
-      break;
+    while (SDL_PollEvent(&event)) {
+      switch (event.type) {
+        case SDL_QUIT:
+          Common::Logger::debug("Quiting...");
+          return;
+        break;
+      }
     }
 
     game_loop();
+    SDL_Delay(1000);
   }
 }
