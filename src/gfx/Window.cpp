@@ -6,7 +6,7 @@ GFX::Window::Window(const std::string& title, const Common::Size& size) : size(s
     Common::Logger::error("Error initializing the video " + std::string(SDL_GetError()));
   }
 
-  sdl_value = SDL_CreateWindow(title.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, size.width, size.height, 0);
+  sdl_value = SDL_CreateWindow(title.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, size.width, size.height, SDL_WINDOW_SHOWN | SDL_WINDOW_OPENGL);
   if (sdl_value == nullptr) {
     Common::Logger::error("Error creating the window " + std::string(SDL_GetError()));
   }
@@ -31,6 +31,6 @@ void GFX::Window::loop(std::function<void(void)> loop) const {
     }
 
     loop();
-    SDL_Delay(100);
+    SDL_Delay(50);
   }
 }
