@@ -10,6 +10,8 @@ class Component : public SDLController<SDL_Rect> {
 public:
   Component();
 
+  void draw(const Renderer& renderer, const bool& fill);
+
   const Common::Size get_size() const {
     return size;
   }
@@ -18,11 +20,11 @@ public:
     size = new_size;
   }
 
-  const Common::Pos get_pos() const {
+  const Common::Position get_position() const {
     return position;
   }
 
-  void set_pos(const Common::Pos& new_position) {
+  void set_position(const Common::Position& new_position) {
     position = new_position;
   }
 
@@ -34,11 +36,9 @@ public:
     color = new_color;
   }
 
-  void draw(const Renderer& renderer, const bool& fill);
-
 private:
   Common::Size size;
-  Common::Pos position;
+  Common::Position position;
   Common::Color color;
 };
 

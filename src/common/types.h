@@ -1,8 +1,5 @@
 #pragma once
 
-#include <assert.h>
-#include <iostream>
-
 namespace Common {
 
 typedef struct {
@@ -13,7 +10,7 @@ typedef struct {
 typedef struct {
   int x;
   int y;
-} Pos;
+} Position;
 
 typedef struct Color {
   int red = 255;

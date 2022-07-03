@@ -11,7 +11,7 @@ int main() {
 
   GFX::Component component;
   component.set_size({ 100, 100 });
-  component.set_pos({ 0, 0 });
+  component.set_position({ 0, 0 });
   component.set_color({ 255, 0, 0 });
 
   bool up = false;
@@ -21,16 +21,16 @@ int main() {
     component.draw(renderer, true);
 
     if (up) {
-      if (component.get_pos().y <= -VEL) {
+      if (component.get_position().y <= -VEL) {
         up = false;
       }
-      component.set_pos({ i - VEL, i - VEL });
+      component.set_position({ i - VEL, i - VEL });
       i -= VEL;
     } else {
-      if (component.get_pos().y >= (window.get_size().height - component.get_size().height - VEL)) {
+      if (component.get_position().y >= (window.get_size().height - component.get_size().height - VEL)) {
         up = true;
       }
-      component.set_pos({ i + VEL, i + VEL });
+      component.set_position({ i + VEL, i + VEL });
       i += VEL;
     }
   });
