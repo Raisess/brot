@@ -8,10 +8,10 @@ In development...
 
 ```shell
 # for arch based systems
-sudo pacman -S sdl2
+sudo pacman -S sdl2 sdl2_image
 
 # for ubuntu based systems
-sudo apt install sdl2 libsdl2-dev
+sudo apt install sdl2 sdl2_image libsdl2-dev
 ```
 
 ### Setup
