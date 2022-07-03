@@ -6,6 +6,8 @@ GFX::Renderer::Renderer(const Window& window) {
   if (renderer == nullptr) {
     Common::Logger::error("Error creating the renderer " + std::string(SDL_GetError()));
   }
+
+  clear();
 }
 
 GFX::Renderer::~Renderer() {
@@ -13,7 +15,7 @@ GFX::Renderer::~Renderer() {
 }
 
 void GFX::Renderer::clear() const {
-  SDL_SetRenderDrawColor(renderer, 0x00, 0x00, 0x00, 0x00);
+  SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
   SDL_RenderClear(renderer);
   SDL_RenderCopy(renderer, nullptr, nullptr, nullptr);
   SDL_RenderPresent(renderer);
