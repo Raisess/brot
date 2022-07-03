@@ -6,12 +6,7 @@
 
 namespace GFX {
 
-class ComponentSDLAux {
-public:
-  SDL_Rect rect;
-};
-
-class Component : public SDLController<ComponentSDLAux> {
+class Component : public SDLController<SDL_Rect> {
 public:
   Component(const Renderer& renderer);
 
