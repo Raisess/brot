@@ -8,7 +8,7 @@ namespace GFX {
 
 class Component : public SDLController<SDL_Rect> {
 public:
-  Component(const Common::Size& size, const Common::Pos& position);
+  Component();
 
   Common::Size get_size() const {
     return size;

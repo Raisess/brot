@@ -1,8 +1,7 @@
 #include "../common/Logger.h"
 #include "Component.h"
 
-GFX::Component::Component(const Common::Size& size, const Common::Pos& position)
-  : size(size), position(position) {
+GFX::Component::Component() : size({ 0, 0 }), position({ 0, 0 }) {
 }
 
 void GFX::Component::draw(const Renderer& renderer, bool fill) {

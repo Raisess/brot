@@ -5,7 +5,10 @@
 int main() {
   GFX::Window window("Brot Engine", { 840, 600 });
   GFX::Renderer renderer(window);
-  GFX::Component component({ 100, 100 }, { 0, 0 });
+
+  GFX::Component component;
+  component.set_size({ 100, 100 });
+  component.set_pos({ 0, 0 });
 
   window.loop([&]() -> void {
     renderer.clear();
