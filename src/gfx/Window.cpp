@@ -1,17 +1,18 @@
+#include <unistd.h>
 #include "../common/Logger.h"
 #include "Window.h"
 
 GFX::Window::Window(const std::string& title, const Common::Size& size) {
   SDL_Init(SDL_INIT_VIDEO);
 
-  window = SDL_CreateWindow(title.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, size.width, size.height, 0);
-  if (window == nullptr) {
+  sdl_value = SDL_CreateWindow(title.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, size.width, size.height, 0);
+  if (sdl_value == nullptr) {
     Common::Logger::error("Error creating the window " + std::string(SDL_GetError()));
   }
 }
 
 GFX::Window::~Window(void) {
-  SDL_DestroyWindow(window);
+  SDL_DestroyWindow(sdl_value);
   SDL_Quit();
 }
 

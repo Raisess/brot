@@ -1,18 +1,14 @@
 #pragma once
 
-#include <SDL2/SDL.h>
 #include "../common/types.h"
 #include "Renderer.h"
+#include "SDLController.h"
 
 namespace GFX {
 
-class Component {
+class Component : public SDLController<SDL_Rect> {
 public:
   Component(const Common::Size& size, const Common::Pos& position);
-
-  SDL_Rect get() const {
-    return rect;
-  }
 
   Common::Size get_size() const {
     return size;
@@ -33,7 +29,6 @@ public:
   void draw(const Renderer& renderer, bool fill);
 
 private:
-  SDL_Rect rect;
   Common::Size size;
   Common::Pos position;
 };
