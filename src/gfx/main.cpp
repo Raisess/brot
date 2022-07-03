@@ -23,8 +23,6 @@ int main() {
   int i = 0;
   window.loop([&]() -> void {
     renderer.clear();
-    red_component.draw(true);
-    blue_component.draw(false);
 
     if (up) {
       if (red_component.get_position().y <= -VEL) {
@@ -40,6 +38,8 @@ int main() {
       i += VEL;
     }
 
+    red_component.draw(true);
+    blue_component.draw(false);
     renderer.draw();
   });
 
