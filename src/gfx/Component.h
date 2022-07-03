@@ -22,15 +22,24 @@ public:
     return position;
   }
 
-  void set_pos(const Common::Pos new_position) {
+  void set_pos(const Common::Pos& new_position) {
     position = new_position;
   }
 
-  void draw(const Renderer& renderer, bool fill);
+  const Common::Color get_color() const {
+    return color;
+  }
+
+  void set_color(const Common::Color& new_color) {
+    color = new_color;
+  }
+
+  void draw(const Renderer& renderer, const bool& fill);
 
 private:
   Common::Size size;
   Common::Pos position;
+  Common::Color color;
 };
 
 }

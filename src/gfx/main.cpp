@@ -12,6 +12,7 @@ int main() {
   GFX::Component component;
   component.set_size({ 100, 100 });
   component.set_pos({ 0, 0 });
+  component.set_color({ 255, 0, 0 });
 
   bool up = false;
   int i = 0;
