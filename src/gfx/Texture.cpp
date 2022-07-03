@@ -10,6 +10,5 @@ GFX::Texture::Texture(const Renderer& renderer, const std::string& img_path) {
 }
 
 GFX::Texture::~Texture() {
-  Common::Logger::debug("Destroying texture...");
   SDL_DestroyTexture(sdl_value);
 }
