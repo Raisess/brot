@@ -1,8 +1,10 @@
 #pragma once
 
+#include <memory>
 #include "../common/types.h"
 #include "Renderer.h"
 #include "SDLController.h"
+#include "Texture.h"
 
 namespace GFX {
 
@@ -10,6 +12,7 @@ class Component : public SDLController<SDL_Rect> {
 public:
   Component(const Renderer& renderer);
 
+  void attach_texture(const std::string& texture);
   void draw(const bool& fill);
 
   const Common::Size get_size() const {
@@ -37,7 +40,8 @@ public:
   }
 
 private:
-  Renderer renderer;
+  const Renderer renderer;
+  std::unique_ptr<Texture> texture;
   Common::Size size;
   Common::Position position;
   Common::Color color;
