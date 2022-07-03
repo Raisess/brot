@@ -1,7 +1,7 @@
 #include "../common/Logger.h"
 #include "Window.h"
 
-GFX::Window::Window(const std::string& title, const Common::Size& size) {
+GFX::Window::Window(const std::string& title, const Common::Size& size) : size(size) {
   if (SDL_Init(SDL_INIT_VIDEO) < 0) {
     Common::Logger::error("Error initializing the video " + std::string(SDL_GetError()));
   }
@@ -17,7 +17,7 @@ GFX::Window::~Window(void) {
   SDL_Quit();
 }
 
-void GFX::Window::loop(std::function<void(void)> game_loop) const {
+void GFX::Window::loop(std::function<void(void)> loop) const {
   SDL_Event event;
 
   while (true) {
@@ -30,7 +30,7 @@ void GFX::Window::loop(std::function<void(void)> game_loop) const {
       }
     }
 
-    game_loop();
-    SDL_Delay(1000);
+    loop();
+    SDL_Delay(100);
   }
 }

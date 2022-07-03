@@ -10,7 +10,7 @@ class Component : public SDLController<SDL_Rect> {
 public:
   Component();
 
-  Common::Size get_size() const {
+  const Common::Size get_size() const {
     return size;
   }
 
@@ -18,7 +18,7 @@ public:
     size = new_size;
   }
 
-  Common::Pos get_pos() const {
+  const Common::Pos get_pos() const {
     return position;
   }
 

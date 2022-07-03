@@ -12,7 +12,14 @@ public:
   Window(const std::string& title, const Common::Size& size);
   ~Window(void);
 
-  void loop(std::function<void(void)> game_loop) const;
+  const Common::Size get_size() const {
+    return size;
+  }
+
+  void loop(std::function<void(void)> loop) const;
+
+private:
+  Common::Size size;
 };
 
 }
