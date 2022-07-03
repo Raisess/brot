@@ -9,30 +9,38 @@ int main() {
   GFX::Window window("Brot Engine", { 840, 600 });
   GFX::Renderer renderer(window);
 
-  GFX::Component component;
-  component.set_size({ 100, 100 });
-  component.set_position({ 0, 0 });
-  component.set_color({ 255, 0, 0 });
+  GFX::Component red_component(renderer);
+  red_component.set_size({ 100, 100 });
+  red_component.set_position({ 0, 0 });
+  red_component.set_color({ 255, 0, 0 });
+
+  GFX::Component blue_component(renderer);
+  blue_component.set_size({ 100, 100 });
+  blue_component.set_position({ window.get_size().width - blue_component.get_size().width - 50, 50 });
+  blue_component.set_color({ 0, 0, 255 });
 
   bool up = false;
   int i = 0;
   window.loop([&]() -> void {
     renderer.clear();
-    component.draw(renderer, true);
+    red_component.draw(true);
+    blue_component.draw(false);
 
     if (up) {
-      if (component.get_position().y <= -VEL) {
+      if (red_component.get_position().y <= -VEL) {
         up = false;
       }
-      component.set_position({ i - VEL, i - VEL });
+      red_component.set_position({ i - VEL, i - VEL });
       i -= VEL;
     } else {
-      if (component.get_position().y >= (window.get_size().height - component.get_size().height - VEL)) {
+      if (red_component.get_position().y >= (window.get_size().height - red_component.get_size().height - VEL)) {
         up = true;
       }
-      component.set_position({ i + VEL, i + VEL });
+      red_component.set_position({ i + VEL, i + VEL });
       i += VEL;
     }
+
+    renderer.draw();
   });
 
   return 0;

@@ -6,11 +6,16 @@
 
 namespace GFX {
 
-class Component : public SDLController<SDL_Rect> {
+class ComponentSDLAux {
 public:
-  Component();
+  SDL_Rect rect;
+};
 
-  void draw(const Renderer& renderer, const bool& fill);
+class Component : public SDLController<ComponentSDLAux> {
+public:
+  Component(const Renderer& renderer);
+
+  void draw(const bool& fill);
 
   const Common::Size get_size() const {
     return size;
@@ -37,6 +42,7 @@ public:
   }
 
 private:
+  Renderer renderer;
   Common::Size size;
   Common::Position position;
   Common::Color color;

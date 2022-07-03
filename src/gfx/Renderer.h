@@ -10,6 +10,7 @@ public:
   Renderer(const Window& window);
   ~Renderer();
 
+  void draw() const;
   void clear() const;
 };
 
