@@ -10,6 +10,7 @@ SRC=$(SRC_DIR)/main.cpp
 
 GFX_SRC=$(GFX_PATH)/Window.cpp \
 				$(GFX_PATH)/Renderer.cpp \
+				$(GFX_PATH)/Component.cpp \
 				$(GFX_PATH)/main.cpp
 
 OUT_DIR=./build
