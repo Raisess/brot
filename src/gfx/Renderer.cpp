@@ -4,7 +4,7 @@
 GFX::Renderer::Renderer(const Window& window) {
   sdl_value = SDL_CreateRenderer(window.get(), -1, SDL_RENDERER_ACCELERATED);
   if (sdl_value == nullptr) {
-    Common::Logger::error("Error creating the renderer " + std::string(SDL_GetError()));
+    Common::Logger::error("Error creating renderer " + std::string(SDL_GetError()));
   }
 
   clear();
