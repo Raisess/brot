@@ -32,3 +32,5 @@ make run_gfx
 
 The graphical module is for all implementations of window, rendering, textures and screen components, 
 so it's a low level module and will not be highly used by the engine.
+
+- [Documentation](./docs/gfx.md)
