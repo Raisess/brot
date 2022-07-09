@@ -1,5 +1,6 @@
 #pragma once
 
+#include <iostream>
 #include <SDL2/SDL_image.h>
 #include "Renderer.h"
 #include "SDLController.h"
