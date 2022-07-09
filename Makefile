@@ -1,5 +1,5 @@
 CC=g++
-FLAGS=-lSDL2 -lSDL2_image
+FLAGS=-lSDL2 -lSDL2_image -lSDL2_ttf
 
 SRC_DIR=./src
 COMMON_PATH=$(SRC_DIR)/common
@@ -13,6 +13,7 @@ GFX_SRC=$(COMMON_SRC) \
 				$(GFX_PATH)/Window.cpp \
 				$(GFX_PATH)/Renderer.cpp \
 				$(GFX_PATH)/Texture.cpp \
+				$(GFX_PATH)/Text.cpp \
 				$(GFX_PATH)/Component.cpp \
 				$(GFX_PATH)/test.cpp
 
