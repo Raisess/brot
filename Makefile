@@ -6,10 +6,13 @@ COMMON_PATH=$(SRC_DIR)/common
 UTIL_PATH=$(SRC_DIR)/util
 GFX_PATH=$(SRC_DIR)/gfx
 
+UTIL_SRC=$(UTIL_PATH)/Time.cpp
+
 COMMON_SRC=$(COMMON_PATH)/Vec2.cpp \
 					 $(COMMON_PATH)/Size.cpp
 
-GFX_SRC=$(COMMON_SRC) \
+GFX_SRC=$(UTIL_SRC) \
+				$(COMMON_SRC) \
 				$(GFX_PATH)/Window.cpp \
 				$(GFX_PATH)/Renderer.cpp \
 				$(GFX_PATH)/Texture.cpp \
