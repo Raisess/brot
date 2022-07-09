@@ -1,10 +1,11 @@
-#include "../common/Logger.h"
+#include "../util/Logger.h"
 #include "Renderer.h"
 
 GFX::Renderer::Renderer(const Window& window) {
   sdl_value = SDL_CreateRenderer(window.get(), -1, SDL_RENDERER_ACCELERATED);
   if (sdl_value == nullptr) {
-    Common::Logger::error("Error creating renderer " + std::string(SDL_GetError()));
+    Util::Logger::error("Error creating renderer " + std::string(SDL_GetError()));
+    exit(1);
   }
 
   clear();

@@ -1,4 +1,3 @@
-#include "../common/Logger.h"
 #include "Component.h"
 #include "Renderer.h"
 #include "Window.h"

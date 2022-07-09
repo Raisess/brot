@@ -1,4 +1,3 @@
-#include "../common/Logger.h"
 #include "Component.h"
 
 GFX::Component::Component(const Renderer& renderer)
