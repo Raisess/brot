@@ -6,7 +6,7 @@
 
 ```cpp
 // window(title, size{ width, height })
-Window window(std::string, { int, int });
+GFX::Window window(std::string, { int, int });
 ```
 
 ### Methods
@@ -24,7 +24,7 @@ window.loop(std::function<void(void)>);
 #include "gfx/Window.h"
 
 int main() {
-  Window window("Title", { 800, 600 });
+  GFX::Window window("Title", { 800, 600 });
 
   window.loop([&]() -> void {});
 
