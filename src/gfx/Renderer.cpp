@@ -1,4 +1,5 @@
 #include "../util/Logger.h"
+#include "Text.h"
 #include "Renderer.h"
 
 GFX::Renderer::Renderer(const Window& window) {
@@ -9,9 +10,11 @@ GFX::Renderer::Renderer(const Window& window) {
   }
 
   clear();
+  Text::Init();
 }
 
 GFX::Renderer::~Renderer() {
+  Text::Close();
   SDL_DestroyRenderer(sdl_value);
 }
 
