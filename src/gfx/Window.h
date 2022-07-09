@@ -2,7 +2,7 @@
 
 #include <iostream>
 #include <functional>
-#include "../common/types.h"
+#include "../common/Size.h"
 #include "SDLController.h"
 
 namespace GFX {

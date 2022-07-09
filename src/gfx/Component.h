@@ -2,6 +2,7 @@
 
 #include <memory>
 #include "../common/types.h"
+#include "../common/Size.h"
 #include "../common/Vec2.h"
 #include "Renderer.h"
 #include "SDLController.h"
