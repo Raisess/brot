@@ -23,6 +23,7 @@ int main() {
   red_component.set_size({ 100, 100 });
   red_component.set_position({ 0, 0 });
   red_component.set_color({ 255, 0, 0 });
+  red_component.fill();
   red_component.attach_texture(test_image);
 
   GFX::Component green_component(renderer);
@@ -44,7 +45,7 @@ int main() {
   window.loop([&]() -> void {
     text_component.attach_text(test_font, "FPS: " + std::to_string(window.get_fps()));
     renderer.clear();
-    bg.draw(false);
+    bg.draw();
 
     if (up) {
       if (red_component.get_position().y <= 0) {
@@ -60,16 +61,17 @@ int main() {
       i += VELOCITY;
     }
 
-    red_component.draw(true);
-
     if (up) {
-      green_component.draw(true);
+      green_component.fill();
+      green_component.draw();
     } else {
-      green_component.draw(false);
+      green_component.unfill();
+      green_component.draw();
     }
 
-    blue_component.draw(false);
-    text_component.draw(false);
+    red_component.draw();
+    blue_component.draw();
+    text_component.draw();
     renderer.draw();
   });
 

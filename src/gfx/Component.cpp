@@ -3,15 +3,7 @@
 GFX::Component::Component(const Renderer& renderer)
   : renderer(renderer), size({ 0, 0 }), position({ 0, 0 }) {}
 
-void GFX::Component::attach_texture(const Image& image) {
-  texture = std::make_unique<Texture>(renderer, image);
-}
-
-void GFX::Component::attach_text(const Font& font, const std::string& _text) {
-  text = std::make_unique<Text>(renderer, font, _text, color);
-}
-
-void GFX::Component::draw(bool fill) {
+void GFX::Component::draw() {
   sdl_value.w = size.width;
   sdl_value.h = size.height;
   sdl_value.x = position.x;
@@ -19,7 +11,7 @@ void GFX::Component::draw(bool fill) {
 
   SDL_SetRenderDrawColor(renderer.get(), color.red, color.green, color.blue, color.alpha);
 
-  if (fill) {
+  if (_fill) {
     SDL_RenderFillRect(renderer.get(), &sdl_value);
   } else {
     SDL_RenderDrawRect(renderer.get(), &sdl_value);
@@ -32,6 +24,14 @@ void GFX::Component::draw(bool fill) {
   } else {
     SDL_RenderCopy(renderer.get(), nullptr, nullptr, &sdl_value);
   }
+}
+
+void GFX::Component::attach_texture(const Image& image) {
+  texture = std::make_unique<Texture>(renderer, image);
+}
+
+void GFX::Component::attach_text(const Font& font, const std::string& _text) {
+  text = std::make_unique<Text>(renderer, font, _text, color);
 }
 
 const Size GFX::Component::get_size() const {
@@ -56,4 +56,12 @@ const Color GFX::Component::get_color() const {
 
 void GFX::Component::set_color(const Color& new_color) {
   color = new_color;
+}
+
+void GFX::Component::fill() {
+  _fill = true;
+}
+
+void GFX::Component::unfill() {
+  _fill = false;
 }
