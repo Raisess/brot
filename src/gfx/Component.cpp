@@ -8,8 +8,8 @@ void GFX::Component::attach_texture(const std::string& img_path) {
 }
 
 void GFX::Component::draw(const bool& fill) {
-  sdl_value.w = (int) size.width;
-  sdl_value.h = (int) size.height;
+  sdl_value.w = size.width;
+  sdl_value.h = size.height;
   sdl_value.x = position.x;
   sdl_value.y = position.y;
 
@@ -26,4 +26,28 @@ void GFX::Component::draw(const bool& fill) {
   } else {
     SDL_RenderCopy(renderer.get(), nullptr, nullptr, &sdl_value);
   }
+}
+
+const Size GFX::Component::get_size() const {
+  return size;
+}
+
+void GFX::Component::set_size(const Size& new_size) {
+  size = new_size;
+}
+
+const Vec2 GFX::Component::get_position() const {
+  return position;
+}
+
+void GFX::Component::set_position(const Vec2& new_position) {
+  position = new_position;
+}
+
+const Color GFX::Component::get_color() const {
+  return color;
+}
+
+void GFX::Component::set_color(const Color& new_color) {
+  color = new_color;
 }

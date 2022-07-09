@@ -2,9 +2,12 @@
 
 #include <memory>
 #include "../common/types.h"
+#include "../common/Vec2.h"
 #include "Renderer.h"
 #include "SDLController.h"
 #include "Texture.h"
+
+using namespace Common;
 
 namespace GFX {
 
@@ -14,37 +17,19 @@ public:
 
   void attach_texture(const std::string& texture);
   void draw(const bool& fill);
-
-  const Common::Size get_size() const {
-    return size;
-  }
-
-  void set_size(const Common::Size& new_size) {
-    size = new_size;
-  }
-
-  const Common::Position get_position() const {
-    return position;
-  }
-
-  void set_position(const Common::Position& new_position) {
-    position = new_position;
-  }
-
-  const Common::Color get_color() const {
-    return color;
-  }
-
-  void set_color(const Common::Color& new_color) {
-    color = new_color;
-  }
+  const Size get_size() const;
+  void set_size(const Size& new_size);
+  const Vec2 get_position() const;
+  void set_position(const Vec2& new_position);
+  const Color get_color() const;
+  void set_color(const Color& new_color);
 
 private:
   const Renderer renderer;
   std::unique_ptr<Texture> texture;
-  Common::Size size;
-  Common::Position position;
-  Common::Color color;
+  Size size;
+  Vec2 position;
+  Color color;
 };
 
 }
