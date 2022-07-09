@@ -8,7 +8,8 @@ GFX_PATH=$(SRC_DIR)/gfx
 SRC_DIR=./src
 SRC=$(SRC_DIR)/main.cpp
 
-COMMON_SRC=$(COMMON_PATH)/Vec2.cpp
+COMMON_SRC=$(COMMON_PATH)/Vec2.cpp \
+					 $(COMMON_PATH)/Size.cpp
 
 GFX_SRC=$(COMMON_SRC) \
 				$(GFX_PATH)/Window.cpp \

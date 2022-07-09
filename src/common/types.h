@@ -2,11 +2,6 @@
 
 namespace Common {
 
-typedef struct {
-  int width;
-  int height;
-} Size;
-
 typedef struct Color {
   int red = 255;
   int green = 255;
