@@ -6,7 +6,7 @@
 #define VELOCITY 5
 
 int main() {
-  GFX::Window window("Brot Engine", { 840, 600 });
+  GFX::Window window("Brot Engine", { 800, 600 });
   GFX::Renderer renderer(window);
 
   GFX::Component red_component(renderer);
@@ -15,9 +15,14 @@ int main() {
   red_component.set_color({ 255, 0, 0 });
   red_component.attach_texture(TEXTURE_PATH);
 
+  GFX::Component green_component(renderer);
+  green_component.set_size({ 100, 100 });
+  green_component.set_position({ 500, 300 });
+  green_component.set_color({ 0, 255, 0 });
+
   GFX::Component blue_component(renderer);
   blue_component.set_size({ 100, 100 });
-  blue_component.set_position({ window.get_size().width - blue_component.get_size().width - 50, 50 });
+  blue_component.set_position({ 700, 50 });
   blue_component.set_color({ 0, 0, 255 });
   blue_component.attach_texture(TEXTURE_PATH);
 
@@ -27,7 +32,7 @@ int main() {
     renderer.clear();
 
     if (up) {
-      if (red_component.get_position().y <= -VELOCITY) {
+      if (red_component.get_position().y <= 0) {
         up = false;
       }
       red_component.set_position({ i - VELOCITY, i - VELOCITY });
@@ -41,7 +46,16 @@ int main() {
     }
 
     red_component.draw(true);
+
+    if (up) {
+      green_component.draw(true);
+    } else {
+      green_component.draw(false);
+    }
+
     blue_component.draw(false);
+
+
     renderer.draw();
   });
 
