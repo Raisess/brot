@@ -19,8 +19,8 @@ public:
   Component(const Renderer& renderer);
 
   void attach_texture(const std::string& img_path);
-  void attach_text(const std::string& font_path, const std::string& text);
-  void draw(const bool& fill);
+  void attach_text(const Font& font, const std::string& text);
+  void draw(bool fill);
   const Size get_size() const;
   void set_size(const Size& new_size);
   const Vec2 get_position() const;
@@ -29,7 +29,7 @@ public:
   void set_color(const Color& new_color);
 
 private:
-  const Renderer renderer;
+  const Renderer& renderer;
   std::unique_ptr<Texture> texture;
   std::unique_ptr<Text> text;
   Size size;

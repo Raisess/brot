@@ -10,6 +10,7 @@
 int main() {
   GFX::Window window("Brot Engine", { 800, 600 });
   GFX::Renderer renderer(window);
+  GFX::Font test_font(FONT_PATH);
 
   GFX::Component red_component(renderer);
   red_component.set_size({ 100, 100 });
@@ -34,7 +35,7 @@ int main() {
   bool up = false;
   int i = 0;
   window.loop([&]() -> void {
-    text_component.attach_text(FONT_PATH, "FPS: " + std::to_string(window.get_fps()));
+    text_component.attach_text(test_font, "FPS: " + std::to_string(window.get_fps()));
     renderer.clear();
 
     if (up) {

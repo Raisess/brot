@@ -7,11 +7,11 @@ void GFX::Component::attach_texture(const std::string& img_path) {
   texture = std::make_unique<Texture>(renderer, img_path);
 }
 
-void GFX::Component::attach_text(const std::string& font_path, const std::string& _text) {
-  text = std::make_unique<Text>(renderer, font_path, _text, color);
+void GFX::Component::attach_text(const Font& font, const std::string& _text) {
+  text = std::make_unique<Text>(renderer, font, _text, color);
 }
 
-void GFX::Component::draw(const bool& fill) {
+void GFX::Component::draw(bool fill) {
   sdl_value.w = size.width;
   sdl_value.h = size.height;
   sdl_value.x = position.x;
