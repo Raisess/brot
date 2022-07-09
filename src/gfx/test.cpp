@@ -1,3 +1,4 @@
+#include <iostream>
 #include "Component.h"
 #include "Renderer.h"
 #include "Window.h"
@@ -28,12 +29,12 @@ int main() {
   blue_component.attach_texture(TEXTURE_PATH);
 
   GFX::Component text_component(renderer);
-  text_component.set_size({ 300, 100 });
-  text_component.attach_text(FONT_PATH, "Hello, world!");
+  text_component.set_size({ 100, 50 });
 
   bool up = false;
   int i = 0;
   window.loop([&]() -> void {
+    text_component.attach_text(FONT_PATH, "FPS: " + std::to_string(window.get_fps()));
     renderer.clear();
 
     if (up) {

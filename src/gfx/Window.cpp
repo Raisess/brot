@@ -1,4 +1,5 @@
 #include "../util/Logger.h"
+#include "../util/Time.h"
 #include "Window.h"
 
 GFX::Window::Window(const std::string& title, const Common::Size& size) : size(size) {
@@ -19,8 +20,11 @@ GFX::Window::~Window(void) {
   SDL_Quit();
 }
 
-void GFX::Window::loop(std::function<void(void)> loop) const {
+unsigned int GFX::Window::MinimumDeltaTime = 1000 / FPS_LIMIT;
+
+void GFX::Window::loop(std::function<void(void)> loop) {
   SDL_Event event;
+  int last_time = SDL_GetTicks64();
 
   while (true) {
     while (SDL_PollEvent(&event)) {
@@ -32,11 +36,29 @@ void GFX::Window::loop(std::function<void(void)> loop) const {
       }
     }
 
-    loop();
-    SDL_Delay(50);
+    int now = SDL_GetTicks64();
+
+    if (last_time < now) {
+      int delta_time = now - last_time;
+
+      if (delta_time < MinimumDeltaTime) {
+        delta_time = MinimumDeltaTime;
+      }
+
+      last_time = now;
+      fps = 1000 / delta_time;
+
+      loop();
+    } else {
+      Util::Time::delay(1);
+    }
   }
 }
 
 const Common::Size GFX::Window::get_size() const {
   return size;
+}
+
+const unsigned int GFX::Window::get_fps() const {
+  return fps;
 }
