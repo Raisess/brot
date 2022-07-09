@@ -18,7 +18,7 @@ class Component : public SDLController<SDL_Rect> {
 public:
   Component(const Renderer& renderer);
 
-  void attach_texture(const std::string& img_path);
+  void attach_texture(const Image& image);
   void attach_text(const Font& font, const std::string& text);
   void draw(bool fill);
   const Size get_size() const;

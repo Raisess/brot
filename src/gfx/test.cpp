@@ -8,15 +8,16 @@
 #define VELOCITY 5
 
 int main() {
-  GFX::Window window("Brot Engine", { 800, 600 });
+  GFX::Window window("Brot Engine | GFX Test", { 800, 600 });
   GFX::Renderer renderer(window);
+  GFX::Image test_image(TEXTURE_PATH);
   GFX::Font test_font(FONT_PATH);
 
   GFX::Component red_component(renderer);
   red_component.set_size({ 100, 100 });
   red_component.set_position({ 0, 0 });
   red_component.set_color({ 255, 0, 0 });
-  red_component.attach_texture(TEXTURE_PATH);
+  red_component.attach_texture(test_image);
 
   GFX::Component green_component(renderer);
   green_component.set_size({ 100, 100 });
@@ -27,7 +28,7 @@ int main() {
   blue_component.set_size({ 100, 100 });
   blue_component.set_position({ 700, 50 });
   blue_component.set_color({ 0, 0, 255 });
-  blue_component.attach_texture(TEXTURE_PATH);
+  blue_component.attach_texture(test_image);
 
   GFX::Component text_component(renderer);
   text_component.set_size({ 100, 50 });

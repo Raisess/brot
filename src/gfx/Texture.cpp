@@ -1,13 +1,20 @@
 #include "../util/Logger.h"
 #include "Texture.h"
 
-GFX::Texture::Texture(const Renderer& renderer, const std::string& img_path) {
-  sdl_value = IMG_LoadTexture(renderer.get(), img_path.c_str());
-
+GFX::Image::Image(const std::string& path) {
+  sdl_value = IMG_Load(path.c_str());
   if (sdl_value == nullptr) {
-    Util::Logger::error("Error loading image at: " + img_path);
+    Util::Logger::error("Error loading image at: " + path);
     exit(1);
   }
+}
+
+GFX::Image::~Image() {
+  SDL_FreeSurface(sdl_value);
+}
+
+GFX::Texture::Texture(const Renderer& renderer, const Image& image) {
+  sdl_value = SDL_CreateTextureFromSurface(renderer.get(), image.get());
 }
 
 GFX::Texture::~Texture() {

@@ -3,8 +3,8 @@
 GFX::Component::Component(const Renderer& renderer)
   : renderer(renderer), size({ 0, 0 }), position({ 0, 0 }) {}
 
-void GFX::Component::attach_texture(const std::string& img_path) {
-  texture = std::make_unique<Texture>(renderer, img_path);
+void GFX::Component::attach_texture(const Image& image) {
+  texture = std::make_unique<Texture>(renderer, image);
 }
 
 void GFX::Component::attach_text(const Font& font, const std::string& _text) {

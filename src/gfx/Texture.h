@@ -7,9 +7,15 @@
 
 namespace GFX {
 
+class Image : public SDLController<SDL_Surface*> {
+public:
+  Image(const std::string& path);
+  ~Image();
+};
+
 class Texture : public SDLController<SDL_Texture*> {
 public:
-  Texture(const Renderer& renderer, const std::string& img_path);
+  Texture(const Renderer& renderer, const Image& image);
   ~Texture();
 };
 
