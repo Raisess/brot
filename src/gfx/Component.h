@@ -1,11 +1,13 @@
 #pragma once
 
+#include <iostream>
 #include <memory>
 #include "../common/Color.h"
 #include "../common/Size.h"
 #include "../common/Vec2.h"
 #include "Renderer.h"
 #include "SDLController.h"
+#include "Text.h"
 #include "Texture.h"
 
 using namespace Common;
@@ -16,7 +18,8 @@ class Component : public SDLController<SDL_Rect> {
 public:
   Component(const Renderer& renderer);
 
-  void attach_texture(const std::string& texture);
+  void attach_texture(const std::string& img_path);
+  void attach_text(const std::string& font_path, const std::string& text);
   void draw(const bool& fill);
   const Size get_size() const;
   void set_size(const Size& new_size);
@@ -28,6 +31,7 @@ public:
 private:
   const Renderer renderer;
   std::unique_ptr<Texture> texture;
+  std::unique_ptr<Text> text;
   Size size;
   Vec2 position;
   Color color;

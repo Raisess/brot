@@ -2,7 +2,8 @@
 #include "Renderer.h"
 #include "Window.h"
 
-#define TEXTURE_PATH "../test-img.png"
+#define TEXTURE_PATH "../tmp/test-img.png"
+#define FONT_PATH "../tmp/test-font.ttf"
 #define VELOCITY 5
 
 int main() {
@@ -25,6 +26,10 @@ int main() {
   blue_component.set_position({ 700, 50 });
   blue_component.set_color({ 0, 0, 255 });
   blue_component.attach_texture(TEXTURE_PATH);
+
+  GFX::Component text_component(renderer);
+  text_component.set_size({ 300, 100 });
+  text_component.attach_text(FONT_PATH, "Hello, world!");
 
   bool up = false;
   int i = 0;
@@ -54,6 +59,7 @@ int main() {
     }
 
     blue_component.draw(false);
+    text_component.draw(false);
     renderer.draw();
   });
 

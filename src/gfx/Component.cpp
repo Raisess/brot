@@ -7,6 +7,10 @@ void GFX::Component::attach_texture(const std::string& img_path) {
   texture = std::make_unique<Texture>(renderer, img_path);
 }
 
+void GFX::Component::attach_text(const std::string& font_path, const std::string& _text) {
+  text = std::make_unique<Text>(renderer, font_path, _text, color);
+}
+
 void GFX::Component::draw(const bool& fill) {
   sdl_value.w = size.width;
   sdl_value.h = size.height;
@@ -23,6 +27,8 @@ void GFX::Component::draw(const bool& fill) {
 
   if (texture != nullptr) {
     SDL_RenderCopy(renderer.get(), texture->get(), nullptr, &sdl_value);
+  } else if (text != nullptr) {
+    SDL_RenderCopy(renderer.get(), text->get(), nullptr, &sdl_value);
   } else {
     SDL_RenderCopy(renderer.get(), nullptr, nullptr, &sdl_value);
   }
