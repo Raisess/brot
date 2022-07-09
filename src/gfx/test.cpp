@@ -3,6 +3,7 @@
 #include "Renderer.h"
 #include "Window.h"
 
+#define BG_TEXTURE_PATH "../tmp/test-bg-img.png"
 #define TEXTURE_PATH "../tmp/test-img.png"
 #define FONT_PATH "../tmp/test-font.ttf"
 #define VELOCITY 5
@@ -10,8 +11,13 @@
 int main() {
   GFX::Window window("Brot Engine | GFX Test", { 800, 600 });
   GFX::Renderer renderer(window);
+  GFX::Image test_bg_image(BG_TEXTURE_PATH);
   GFX::Image test_image(TEXTURE_PATH);
   GFX::Font test_font(FONT_PATH);
+
+  GFX::Component bg(renderer);
+  bg.set_size(window.get_size());
+  bg.attach_texture(test_bg_image);
 
   GFX::Component red_component(renderer);
   red_component.set_size({ 100, 100 });
@@ -38,6 +44,7 @@ int main() {
   window.loop([&]() -> void {
     text_component.attach_text(test_font, "FPS: " + std::to_string(window.get_fps()));
     renderer.clear();
+    bg.draw(false);
 
     if (up) {
       if (red_component.get_position().y <= 0) {
