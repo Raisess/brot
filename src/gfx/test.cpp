@@ -54,8 +54,6 @@ int main() {
     }
 
     blue_component.draw(false);
-
-
     renderer.draw();
   });
 

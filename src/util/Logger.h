@@ -9,7 +9,7 @@ namespace Util {
 class Logger {
 public:
   static void error(const std::string& message) {
-    Logger::log("DEBUG", message);
+    Logger::log("ERROR", message);
   }
 
   static void debug(const std::string& message) {
