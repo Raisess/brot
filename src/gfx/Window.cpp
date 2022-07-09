@@ -36,3 +36,7 @@ void GFX::Window::loop(std::function<void(void)> loop) const {
     SDL_Delay(50);
   }
 }
+
+const Common::Size GFX::Window::get_size() const {
+  return size;
+}

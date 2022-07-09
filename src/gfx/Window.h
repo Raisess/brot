@@ -13,10 +13,7 @@ public:
   ~Window(void);
 
   void loop(std::function<void(void)> loop) const;
-
-  const Common::Size get_size() const {
-    return size;
-  }
+  const Common::Size get_size() const;
 
 private:
   Common::Size size;
