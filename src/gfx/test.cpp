@@ -37,13 +37,13 @@ int main() {
   blue_component.set_color({ 0, 0, 255 });
   blue_component.attach_texture(test_image);
 
-  GFX::Component text_component(renderer);
-  text_component.set_size({ 100, 50 });
+  GFX::Component fps_text_component(renderer);
+  fps_text_component.set_size({ 100, 50 });
 
   bool up = false;
   int i = 0;
   window.loop([&]() -> void {
-    text_component.attach_text(test_font, "FPS: " + std::to_string(window.get_fps()));
+    fps_text_component.attach_text(test_font, "FPS: " + std::to_string(window.get_fps()));
     renderer.clear();
     bg.draw();
 
@@ -71,7 +71,7 @@ int main() {
 
     red_component.draw();
     blue_component.draw();
-    text_component.draw();
+    fps_text_component.draw();
     renderer.draw();
   });
 
