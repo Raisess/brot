@@ -14,6 +14,7 @@ public:
   Window(const std::string& title, const Common::Size& size);
   ~Window(void);
 
+  void quit() const;
   void loop(std::function<void(void)> loop);
   const Common::Size get_size() const;
   const unsigned int get_fps() const;

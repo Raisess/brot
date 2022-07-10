@@ -16,8 +16,14 @@ GFX::Window::Window(const std::string& title, const Common::Size& size) : size(s
 }
 
 GFX::Window::~Window(void) {
+  Util::Logger::debug("Quiting...");
   SDL_DestroyWindow(sdl_value);
   SDL_Quit();
+}
+
+void GFX::Window::quit() const {
+  this->~Window();
+  exit(0);
 }
 
 unsigned int GFX::Window::MinimumDeltaTime = 1000 / FPS_LIMIT;
@@ -30,7 +36,6 @@ void GFX::Window::loop(std::function<void(void)> loop) {
     while (SDL_PollEvent(&event)) {
       switch (event.type) {
         case SDL_QUIT:
-          Util::Logger::debug("Quiting...");
           return;
         break;
       }
