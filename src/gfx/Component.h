@@ -34,10 +34,10 @@ private:
   const Renderer& renderer;
   std::unique_ptr<Texture> texture;
   std::unique_ptr<Text> text;
+  bool _fill = false;
   Size size;
   Vec2 position;
   Color color;
-  bool _fill;
 };
 
 }
