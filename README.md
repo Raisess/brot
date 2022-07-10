@@ -21,16 +21,16 @@ git clone https://github.com/Raisess/brot
 cd brot
 ```
 
-### Compiling and running the GFX module
-
-```shell
-make build_gfx
-make run_gfx
-```
-
 ## GFX Module
 
 The graphical module is for all implementations of window, rendering, textures and screen components, 
 so it's a low level module and will not be highly used by the engine.
 
 - [Documentation](./docs/gfx.md)
+
+### Compiling and running the GFX module test program
+
+```shell
+make build_gfx
+make run_gfx
+```
