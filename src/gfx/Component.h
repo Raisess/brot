@@ -27,6 +27,8 @@ public:
   void set_position(const Vec2& new_position);
   const Color get_color() const;
   void set_color(const Color& new_color);
+  int get_angle();
+  void set_angle(int value);
   void fill();
   void unfill();
 
@@ -35,8 +37,9 @@ private:
   std::unique_ptr<Texture> texture;
   std::unique_ptr<Text> text;
   bool _fill = false;
-  Size size;
+  int angle = 0;
   Vec2 position;
+  Size size;
   Color color;
 };
 

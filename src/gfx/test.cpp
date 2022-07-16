@@ -63,14 +63,14 @@ int main() {
 
     if (up) {
       green_component.fill();
-      green_component.draw();
     } else {
       green_component.unfill();
-      green_component.draw();
     }
 
-    red_component.draw();
+    blue_component.set_angle(i);
     blue_component.draw();
+    red_component.draw();
+    green_component.draw();
     fps_text_component.draw();
     renderer.draw();
   });

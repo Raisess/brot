@@ -18,9 +18,9 @@ void GFX::Component::draw() {
   }
 
   if (texture != nullptr) {
-    SDL_RenderCopy(renderer.get(), texture->get(), nullptr, &sdl_value);
+    SDL_RenderCopyEx(renderer.get(), texture->get(), nullptr, &sdl_value, angle, nullptr, {});
   } else if (text != nullptr) {
-    SDL_RenderCopy(renderer.get(), text->get(), nullptr, &sdl_value);
+    SDL_RenderCopyEx(renderer.get(), text->get(), nullptr, &sdl_value, angle, nullptr, {});
   } else {
     SDL_RenderCopy(renderer.get(), nullptr, nullptr, &sdl_value);
   }
@@ -30,8 +30,8 @@ void GFX::Component::attach_texture(const Image& image) {
   texture = std::make_unique<Texture>(renderer, image);
 }
 
-void GFX::Component::attach_text(const Font& font, const std::string& _text) {
-  text = std::make_unique<Text>(renderer, font, _text, color);
+void GFX::Component::attach_text(const Font& font, const std::string& str) {
+  text = std::make_unique<Text>(renderer, font, str, color);
 }
 
 const Size GFX::Component::get_size() const {
@@ -56,6 +56,14 @@ const Color GFX::Component::get_color() const {
 
 void GFX::Component::set_color(const Color& new_color) {
   color = new_color;
+}
+
+int GFX::Component::get_angle() {
+  return angle;
+}
+
+void GFX::Component::set_angle(int value) {
+  angle = value;
 }
 
 void GFX::Component::fill() {
