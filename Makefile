@@ -1,13 +1,16 @@
 CC=g++
 FLAGS=-lSDL2 -lSDL2_image -lSDL2_ttf
 
+# PATHS
 SRC_DIR=./src
 COMMON_PATH=$(SRC_DIR)/common
 UTIL_PATH=$(SRC_DIR)/util
 GFX_PATH=$(SRC_DIR)/gfx
 SFX_PATH=$(SRC_DIR)/sfx
 INPUT_PATH=$(SRC_DIR)/input
+ENGINE_PATH=$(SRC_DIR)/engine
 
+# SOURCES
 UTIL_SRC=$(UTIL_PATH)/Time.cpp
 
 COMMON_SRC=$(COMMON_PATH)/Vec2.cpp \
@@ -24,11 +27,21 @@ SFX_SRC=
 INPUT_SRC=$(INPUT_PATH)/Keyboard.cpp \
 					$(INPUT_PATH)/Mouse.cpp
 
+ENGINE_SRC=$(ENGINE_PATH)/Game.cpp \
+					 $(ENGINE_PATH)/entity/Entity.cpp
+
+# OUTPUT
 OUT_DIR=./build
+OUT=$(OUT_DIR)/out.o
+
+clean:
+	rm -rf $(OUT_DIR)
+
+# TEST ONLY
 GFX_OUT=$(OUT_DIR)/gfx.o
 SFX_OUT=$(OUT_DIR)/sfx.o
 INPUT_OUT=$(OUT_DIR)/input.o
-OUT=$(OUT_DIR)/out.o
+ENGINE_OUT=$(OUT_DIR)/engine.o
 
 build_gfx:
 	mkdir -p $(OUT_DIR)
@@ -51,5 +64,9 @@ build_input:
 run_input:
 	$(INPUT_OUT)
 
-clean:
-	rm -rf $(OUT_DIR)
+build_engine:
+	mkdir -p $(OUT_DIR)
+	$(CC) $(FLAGS) $(COMMON_SRC) $(UTIL_SRC) $(GFX_SRC) $(SFX_SRC) $(INPUT_SRC) $(ENGINE_SRC) $(ENGINE_PATH)/test.cpp -o $(ENGINE_OUT)
+
+run_engine:
+	$(ENGINE_OUT)
