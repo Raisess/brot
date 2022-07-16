@@ -19,8 +19,8 @@ public:
   Component(const Renderer& renderer);
 
   void draw();
-  void attach_texture(const Image& image);
-  void attach_text(const Font& font, const std::string& text);
+  void bind_texture(const Image& image);
+  void bind_text(const Font& font, const std::string& text);
   const Size get_size() const;
   void set_size(const Size& new_size);
   const Vec2 get_position() const;

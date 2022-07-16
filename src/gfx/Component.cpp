@@ -26,11 +26,11 @@ void GFX::Component::draw() {
   }
 }
 
-void GFX::Component::attach_texture(const Image& image) {
+void GFX::Component::bind_texture(const Image& image) {
   texture = std::make_unique<Texture>(renderer, image);
 }
 
-void GFX::Component::attach_text(const Font& font, const std::string& str) {
+void GFX::Component::bind_text(const Font& font, const std::string& str) {
   text = std::make_unique<Text>(renderer, font, str, _color);
 }
 
