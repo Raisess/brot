@@ -27,7 +27,7 @@ public:
   void set_position(const Vec2& new_position);
   const Color get_color() const;
   void set_color(const Color& new_color);
-  int get_angle();
+  const int get_angle() const;
   void set_angle(int value);
   void fill();
   void unfill();

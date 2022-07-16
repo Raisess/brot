@@ -58,7 +58,7 @@ void GFX::Component::set_color(const Color& color) {
   _color = color;
 }
 
-int GFX::Component::get_angle() {
+const int GFX::Component::get_angle() const {
   return _angle;
 }
 
