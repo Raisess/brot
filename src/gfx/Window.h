@@ -10,12 +10,15 @@
 namespace GFX {
 
 class Window : public SDLController<SDL_Window*> {
+
+using Loop = std::function<void(void)>;
+
 public:
   Window(const std::string& title, const Common::Size& size);
   ~Window(void);
 
   void quit() const;
-  void loop(std::function<void(void)> loop);
+  void loop(const Loop& loop);
   const Common::Size get_size() const;
   const unsigned int get_fps() const;
 

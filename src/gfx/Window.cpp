@@ -28,7 +28,7 @@ void GFX::Window::quit() const {
 
 unsigned int GFX::Window::MinimumDeltaTime = 1000 / FPS_LIMIT;
 
-void GFX::Window::loop(std::function<void(void)> loop) {
+void GFX::Window::loop(const Loop& loop) {
   SDL_Event event;
   int last_time = SDL_GetTicks64();
 
