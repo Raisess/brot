@@ -20,7 +20,7 @@ int main() {
       Util::Logger::debug("pressed LCTRL + ONE");
     });
 
-    Input::Mouse::OnLeftClick([&](Common::Vec2 pos) -> void {
+    Input::Mouse::OnClick(Input::Mouse::LEFT, [&](Common::Vec2 pos) -> void {
       Util::Logger::debug("pressed LEFT_CLICK at " + pos.to_print_string());
     });
   });

@@ -1,19 +1,10 @@
 #include "Mouse.h"
 
-void Input::Mouse::OnLeftClick(Callback callback) {
+void Input::Mouse::OnClick(const Button& button, const Callback& callback) {
   Common::Vec2 pos(0, 0);
   unsigned int buttons = SDL_GetMouseState(&pos.x, &pos.y);
 
-  if ((buttons & LEFT) != 0) {
-    callback(pos);
-  }
-}
-
-void Input::Mouse::OnRightClick(Callback callback) {
-  Common::Vec2 pos(0, 0);
-  unsigned int buttons = SDL_GetMouseState(&pos.x, &pos.y);
-
-  if ((buttons & RIGHT) != 0) {
+  if ((buttons & button) != 0) {
     callback(pos);
   }
 }

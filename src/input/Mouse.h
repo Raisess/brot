@@ -11,15 +11,12 @@ class Mouse {
 using Callback = std::function<void(Common::Vec2)>;
 
 public:
-  enum Click {
+  enum Button {
     LEFT = SDL_BUTTON_LMASK,
     RIGHT = SDL_BUTTON_RMASK,
   };
 
-  static void OnLeftClick(Callback callback);
-  static void OnRightClick(Callback callback);
-
-private:
+  static void OnClick(const Button& button, const Callback& callback);
 };
 
 }
