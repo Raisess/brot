@@ -37,10 +37,10 @@ private:
   std::unique_ptr<Texture> texture;
   std::unique_ptr<Text> text;
   bool _fill = false;
-  int angle = 0;
-  Vec2 position;
-  Size size;
-  Color color;
+  int _angle = 0;
+  Vec2 _position;
+  Size _size;
+  Color _color;
 };
 
 }

@@ -2,7 +2,7 @@
 #include "../util/Time.h"
 #include "Window.h"
 
-GFX::Window::Window(const std::string& title, const Common::Size& size) : size(size) {
+GFX::Window::Window(const std::string& title, const Common::Size& size) : _size(size) {
   if (SDL_Init(SDL_INIT_VIDEO) < 0) {
     Util::Logger::error("Error initializing video " + std::string(SDL_GetError()));
     exit(1);
@@ -51,7 +51,7 @@ void GFX::Window::loop(std::function<void(void)> loop) {
       }
 
       last_time = now;
-      fps = 1000 / delta_time;
+      _fps = 1000 / delta_time;
 
       loop();
     } else {
@@ -61,9 +61,9 @@ void GFX::Window::loop(std::function<void(void)> loop) {
 }
 
 const Common::Size GFX::Window::get_size() const {
-  return size;
+  return _size;
 }
 
 const unsigned int GFX::Window::get_fps() const {
-  return fps;
+  return _fps;
 }

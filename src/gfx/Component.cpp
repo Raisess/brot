@@ -1,15 +1,15 @@
 #include "Component.h"
 
 GFX::Component::Component(const Renderer& renderer)
-  : renderer(renderer), size({ 0, 0 }), position({ 0, 0 }) {}
+  : renderer(renderer), _size({ 0, 0 }), _position({ 0, 0 }) {}
 
 void GFX::Component::draw() {
-  sdl_value.w = size.width;
-  sdl_value.h = size.height;
-  sdl_value.x = position.x;
-  sdl_value.y = position.y;
+  sdl_value.w = _size.width;
+  sdl_value.h = _size.height;
+  sdl_value.x = _position.x;
+  sdl_value.y = _position.y;
 
-  SDL_SetRenderDrawColor(renderer.get(), color.red, color.green, color.blue, color.alpha);
+  SDL_SetRenderDrawColor(renderer.get(), _color.red, _color.green, _color.blue, _color.alpha);
 
   if (_fill) {
     SDL_RenderFillRect(renderer.get(), &sdl_value);
@@ -18,9 +18,9 @@ void GFX::Component::draw() {
   }
 
   if (texture != nullptr) {
-    SDL_RenderCopyEx(renderer.get(), texture->get(), nullptr, &sdl_value, angle, nullptr, {});
+    SDL_RenderCopyEx(renderer.get(), texture->get(), nullptr, &sdl_value, _angle, nullptr, {});
   } else if (text != nullptr) {
-    SDL_RenderCopyEx(renderer.get(), text->get(), nullptr, &sdl_value, angle, nullptr, {});
+    SDL_RenderCopyEx(renderer.get(), text->get(), nullptr, &sdl_value, _angle, nullptr, {});
   } else {
     SDL_RenderCopy(renderer.get(), nullptr, nullptr, &sdl_value);
   }
@@ -31,39 +31,39 @@ void GFX::Component::attach_texture(const Image& image) {
 }
 
 void GFX::Component::attach_text(const Font& font, const std::string& str) {
-  text = std::make_unique<Text>(renderer, font, str, color);
+  text = std::make_unique<Text>(renderer, font, str, _color);
 }
 
 const Size GFX::Component::get_size() const {
-  return size;
+  return _size;
 }
 
-void GFX::Component::set_size(const Size& new_size) {
-  size = new_size;
+void GFX::Component::set_size(const Size& size) {
+  _size = size;
 }
 
 const Vec2 GFX::Component::get_position() const {
-  return position;
+  return _position;
 }
 
-void GFX::Component::set_position(const Vec2& new_position) {
-  position = new_position;
+void GFX::Component::set_position(const Vec2& position) {
+  _position = position;
 }
 
 const Color GFX::Component::get_color() const {
-  return color;
+  return _color;
 }
 
-void GFX::Component::set_color(const Color& new_color) {
-  color = new_color;
+void GFX::Component::set_color(const Color& color) {
+  _color = color;
 }
 
 int GFX::Component::get_angle() {
-  return angle;
+  return _angle;
 }
 
-void GFX::Component::set_angle(int value) {
-  angle = value;
+void GFX::Component::set_angle(int angle) {
+  _angle = angle;
 }
 
 void GFX::Component::fill() {

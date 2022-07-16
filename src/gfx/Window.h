@@ -21,8 +21,8 @@ public:
 
 private:
   static unsigned int MinimumDeltaTime;
-  unsigned int fps = 0;
-  Common::Size size;
+  unsigned int _fps = 0;
+  Common::Size _size;
 };
 
 }
