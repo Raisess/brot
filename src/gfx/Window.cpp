@@ -22,8 +22,8 @@ GFX::Window::~Window(void) {
 }
 
 void GFX::Window::quit() const {
-  this->~Window();
-  exit(0);
+  SDL_Event quit_event = { SDL_QUIT };
+  SDL_PushEvent(&quit_event);
 }
 
 unsigned int GFX::Window::MinimumDeltaTime = 1000 / FPS_LIMIT;
