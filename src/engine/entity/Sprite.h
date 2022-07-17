@@ -4,17 +4,20 @@
 #include <memory>
 #include "../../gfx/Texture.h"
 
+#define SPRITE_DELAY 700
+
 namespace Engine {
 
 class Sprite {
 public:
-  Sprite(const std::string& img_path, unsigned int delay = 0);
+  Sprite(const std::string& img_path);
 
   std::shared_ptr<GFX::Image> image() const;
+  const std::string path() const;
 
 private:
   std::shared_ptr<GFX::Image> _image;
-  unsigned int _delay;
+  std::string _path;
 };
 
 }
