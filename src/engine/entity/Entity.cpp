@@ -9,14 +9,20 @@ void Engine::Entity::update() {
   gfx_component->set_size(size);
   gfx_component->set_color(color);
 
-  if (sprites.size()) {
-    gfx_component->bind_texture(*sprites[_sprite_count]->image());
+  if (spritesheet_index != _last_spritesheet_index) {
+    _sprite_count = 0;
+  }
+
+  if (spritesheets[spritesheet_index].size()) {
+    gfx_component->bind_texture(*spritesheets[spritesheet_index][_sprite_count]->image());
 
     _sprite_count += 1;
-    if (_sprite_count == sprites.size()) {
+    if (_sprite_count == spritesheets[spritesheet_index].size()) {
       _sprite_count = 0;
     }
   }
+
+  _last_spritesheet_index = spritesheet_index;
 }
 
 void Engine::Entity::draw() const {
