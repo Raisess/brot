@@ -5,7 +5,7 @@
 #include "../common/Size.h"
 #include "SDLController.h"
 
-#define FPS_LIMIT 60
+#define FPS_LIMIT 30
 
 namespace GFX {
 
