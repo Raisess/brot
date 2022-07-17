@@ -29,6 +29,7 @@ public:
   Game(const std::string& title);
 
   void loop(const Loop& callback) const;
+  void end() const;
 };
 
 }

@@ -14,3 +14,7 @@ void Engine::Game::loop(const Loop& callback) const {
     ctx.render_ctx->draw();
   });
 }
+
+void Engine::Game::end() const {
+  ctx.window_ctx->quit();
+}
