@@ -4,7 +4,7 @@
 #include <memory>
 #include "../../gfx/Texture.h"
 
-#define SPRITE_DELAY 700
+#define SPRITE_DELAY 50
 
 namespace Engine {
 

@@ -22,13 +22,14 @@ public:
 
   Entity(const GameContext& game_ctx);
 
-  void update() const;
+  void update();
   void draw() const;
   void hide();
   void unhide();
 
 private:
   std::unique_ptr<GFX::Component> gfx_component;
+  size_t _sprite_count = 0;
   bool _hidden = false;
 };
 

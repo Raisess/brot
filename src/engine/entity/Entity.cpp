@@ -3,14 +3,19 @@
 Engine::Entity::Entity(const Engine::GameContext& game_ctx) 
   : gfx_component(std::make_unique<GFX::Component>(*game_ctx.render_ctx)) {}
 
-void Engine::Entity::update() const {
+void Engine::Entity::update() {
   gfx_component->set_angle(angle);
   gfx_component->set_position(position);
   gfx_component->set_size(size);
   gfx_component->set_color(color);
 
-  for (auto sprite : sprites) {
-    gfx_component->bind_texture(*sprite->image());
+  if (sprites.size()) {
+    gfx_component->bind_texture(*sprites[_sprite_count]->image());
+
+    _sprite_count += 1;
+    if (_sprite_count == sprites.size()) {
+      _sprite_count = 0;
+    }
   }
 }
 
