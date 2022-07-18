@@ -18,9 +18,9 @@ void GFX::Component::draw() {
   }
 
   if (texture != nullptr) {
-    SDL_RenderCopyEx(renderer.get(), texture->get(), nullptr, &sdl_value, _angle, nullptr, {});
+    SDL_RenderCopyEx(renderer.get(), texture->get(), nullptr, &sdl_value, _angle, nullptr, _flip ? SDL_FLIP_HORIZONTAL : SDL_FLIP_NONE);
   } else if (text != nullptr) {
-    SDL_RenderCopyEx(renderer.get(), text->get(), nullptr, &sdl_value, _angle, nullptr, {});
+    SDL_RenderCopyEx(renderer.get(), text->get(), nullptr, &sdl_value, _angle, nullptr, SDL_FLIP_NONE);
   } else {
     SDL_RenderCopy(renderer.get(), nullptr, nullptr, &sdl_value);
   }
@@ -72,4 +72,12 @@ void GFX::Component::fill() {
 
 void GFX::Component::unfill() {
   _fill = false;
+}
+
+void GFX::Component::flip() {
+  _flip = true;
+}
+
+void GFX::Component::unflip() {
+  _flip = false;
 }

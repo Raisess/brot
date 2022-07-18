@@ -49,6 +49,7 @@ int main() {
       entity.position.y = entity.position.y - VELOCITY;
     });
     Input::Keyboard::OnPressed(Input::Keyboard::A, [&]() -> void {
+      entity.flip = true;
       entity.spritesheet_index = RUNNING;
       entity.position.x = entity.position.x - VELOCITY;
     });
@@ -56,6 +57,7 @@ int main() {
       entity.position.y = entity.position.y + VELOCITY;
     });
     Input::Keyboard::OnPressed(Input::Keyboard::D, [&]() -> void {
+      entity.flip = false;
       entity.spritesheet_index = RUNNING;
       entity.position.x = entity.position.x + VELOCITY;
     });

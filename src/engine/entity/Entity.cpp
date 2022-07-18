@@ -9,6 +9,18 @@ void Engine::Entity::update() {
   gfx_component->set_size(size);
   gfx_component->set_color(color);
 
+  if (fill) {
+    gfx_component->fill();
+  } else {
+    gfx_component->unfill();
+  }
+
+  if (flip) {
+    gfx_component->flip();
+  } else {
+    gfx_component->unflip();
+  }
+
   if (spritesheet_index != _last_spritesheet_index) {
     _sprite_count = 0;
   }
@@ -27,12 +39,6 @@ void Engine::Entity::update() {
 
 void Engine::Entity::draw() const {
   if (_hidden) return;
-
-  if (fill) {
-    gfx_component->fill();
-  } else {
-    gfx_component->unfill();
-  }
 
   gfx_component->draw();
 }

@@ -14,6 +14,7 @@ namespace Engine {
 
 class Entity {
 public:
+  // TODO: handle more than 3 spritesheets
   std::array<std::vector<std::shared_ptr<Sprite>>, 3> spritesheets;
   size_t spritesheet_index = 0;
   Common::Color color = {};
@@ -21,6 +22,7 @@ public:
   Common::Vec2 position = { 0, 0 };
   int angle = 0;
   bool fill = false;
+  bool flip = false;
 
   Entity(const GameContext& game_ctx);
 

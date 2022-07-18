@@ -31,12 +31,15 @@ public:
   void set_angle(int value);
   void fill();
   void unfill();
+  void flip();
+  void unflip();
 
 private:
   const Renderer& renderer;
   std::unique_ptr<Texture> texture;
   std::unique_ptr<Text> text;
   bool _fill = false;
+  bool _flip = false;
   int _angle = 0;
   Vec2 _position;
   Size _size;
