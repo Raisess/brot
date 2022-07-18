@@ -21,6 +21,7 @@ public:
   Common::Size size = { 0, 0 };
   Common::Vec2 position = { 0, 0 };
   int angle = 0;
+  bool hide = false;
   bool fill = false;
   bool flip = false;
 
@@ -28,14 +29,11 @@ public:
 
   void update();
   void draw() const;
-  void hide();
-  void unhide();
 
 private:
   std::unique_ptr<GFX::Component> gfx_component;
   size_t _last_spritesheet_index = 0;
   size_t _sprite_count = 0;
-  bool _hidden = false;
 };
 
 }

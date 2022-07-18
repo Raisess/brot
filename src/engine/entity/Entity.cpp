@@ -38,15 +38,7 @@ void Engine::Entity::update() {
 }
 
 void Engine::Entity::draw() const {
-  if (_hidden) return;
+  if (hide) return;
 
   gfx_component->draw();
-}
-
-void Engine::Entity::hide() {
-  _hidden = true;
-}
-
-void Engine::Entity::unhide() {
-  _hidden = false;
 }

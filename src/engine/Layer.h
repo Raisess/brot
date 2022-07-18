@@ -14,9 +14,13 @@ public:
   void hide();
   void unhide();
   void toggle_hide();
+  void fill();
+  void unfill();
+  void toggle_fill();
 
 private:
   bool _hidden = false;
+  bool _filled = false;
 };
 
 }

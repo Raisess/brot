@@ -18,7 +18,7 @@ int main() {
   Engine::Scene scene("main_scene");
   Engine::Entity entity(game.ctx);
 
-  entity.fill = true;
+  entity.fill = false;
   entity.size = { 100, 100 };
   entity.spritesheets[IDLE].push_back(std::make_shared<Engine::Sprite>(std::string(TEXTURE_PATH) + "idle_1" + std::string(TEXTURE_EXT)));
   entity.spritesheets[IDLE].push_back(std::make_shared<Engine::Sprite>(std::string(TEXTURE_PATH) + "idle_2" + std::string(TEXTURE_EXT)));
@@ -46,6 +46,7 @@ int main() {
       return game.end();
     });
     Input::Keyboard::OnPressed(Input::Keyboard::W, [&]() -> void {
+      entity.spritesheet_index = RUNNING;
       entity.position.y = entity.position.y - VELOCITY;
     });
     Input::Keyboard::OnPressed(Input::Keyboard::A, [&]() -> void {
@@ -54,6 +55,7 @@ int main() {
       entity.position.x = entity.position.x - VELOCITY;
     });
     Input::Keyboard::OnPressed(Input::Keyboard::S, [&]() -> void {
+      entity.spritesheet_index = RUNNING;
       entity.position.y = entity.position.y + VELOCITY;
     });
     Input::Keyboard::OnPressed(Input::Keyboard::D, [&]() -> void {
@@ -62,7 +64,7 @@ int main() {
       entity.position.x = entity.position.x + VELOCITY;
     });
     Input::Keyboard::OnPressed(Input::Keyboard::ONE, [&]() -> void {
-      entity.fill = !entity.fill;
+      level_layer->toggle_fill();
       Util::Time::delay(100);
     });
     Input::Keyboard::OnPressed(Input::Keyboard::TWO, [&]() -> void {
