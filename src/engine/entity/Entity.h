@@ -6,7 +6,7 @@
 #include "../../common/Color.h"
 #include "../../common/Size.h"
 #include "../../common/Vec2.h"
-#include "../../gfx/Component.h"
+#include "../../gfx/TextureComponent.h"
 #include "../Game.h"
 #include "Sprite.h"
 
@@ -31,7 +31,7 @@ public:
   void draw() const;
 
 private:
-  std::unique_ptr<GFX::Component> gfx_component;
+  std::unique_ptr<GFX::TextureComponent> texture_component;
   size_t _last_spritesheet_index = 0;
   size_t _sprite_count = 0;
 };

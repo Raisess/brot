@@ -1,24 +1,24 @@
 #include "./Entity.h"
 
 Engine::Entity::Entity(const Engine::GameContext& game_ctx) 
-  : gfx_component(std::make_unique<GFX::Component>(*game_ctx.render_ctx)) {}
+  : texture_component(std::make_unique<GFX::TextureComponent>(*game_ctx.render_ctx)) {}
 
 void Engine::Entity::update() {
-  gfx_component->set_angle(angle);
-  gfx_component->set_position(position);
-  gfx_component->set_size(size);
-  gfx_component->set_color(color);
+  texture_component->set_angle(angle);
+  texture_component->set_position(position);
+  texture_component->set_size(size);
+  texture_component->set_color(color);
 
   if (fill) {
-    gfx_component->fill();
+    texture_component->fill();
   } else {
-    gfx_component->unfill();
+    texture_component->unfill();
   }
 
   if (flip) {
-    gfx_component->flip();
+    texture_component->flip();
   } else {
-    gfx_component->unflip();
+    texture_component->unflip();
   }
 
   if (spritesheet_index != _last_spritesheet_index) {
@@ -26,7 +26,7 @@ void Engine::Entity::update() {
   }
 
   if (spritesheets[spritesheet_index].size()) {
-    gfx_component->bind_texture(*spritesheets[spritesheet_index][_sprite_count]->image());
+    texture_component->bind(*spritesheets[spritesheet_index][_sprite_count]->image());
 
     _sprite_count += 1;
     if (_sprite_count == spritesheets[spritesheet_index].size()) {
@@ -40,5 +40,5 @@ void Engine::Entity::update() {
 void Engine::Entity::draw() const {
   if (hide) return;
 
-  gfx_component->draw();
+  texture_component->draw();
 }
