@@ -24,6 +24,7 @@ public:
   bool hide = false;
   bool fill = false;
   bool flip = false;
+  bool rect = false;
 
   Entity(const GameContext& game_ctx);
 

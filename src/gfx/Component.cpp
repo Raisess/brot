@@ -11,10 +11,12 @@ void GFX::Component::draw() {
 
   SDL_SetRenderDrawColor(renderer.get(), _color.red, _color.green, _color.blue, _color.alpha);
 
-  if (_fill) {
-    SDL_RenderFillRect(renderer.get(), &sdl_value);
-  } else {
-    SDL_RenderDrawRect(renderer.get(), &sdl_value);
+  if ((texture == nullptr && text == nullptr) || _rect || _fill) {
+    if (_fill) {
+      SDL_RenderFillRect(renderer.get(), &sdl_value);
+    } else {
+      SDL_RenderDrawRect(renderer.get(), &sdl_value);
+    }
   }
 
   if (texture != nullptr) {
@@ -72,4 +74,12 @@ void GFX::Component::flip() {
 
 void GFX::Component::unflip() {
   _flip = false;
+}
+
+void GFX::Component::rect() {
+  _rect = true;
+}
+
+void GFX::Component::unrect() {
+  _rect = false;
 }

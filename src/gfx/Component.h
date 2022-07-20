@@ -31,6 +31,8 @@ public:
   void unfill();
   void flip();
   void unflip();
+  void rect();
+  void unrect();
 
 protected:
   const Renderer& renderer;
@@ -38,6 +40,7 @@ protected:
   std::unique_ptr<Text> text;
   bool _fill = false;
   bool _flip = false;
+  bool _rect = false;
   int _angle = 0;
   Vec2 _position;
   Size _size;

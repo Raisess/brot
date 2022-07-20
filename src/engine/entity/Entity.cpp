@@ -21,6 +21,12 @@ void Engine::Entity::update() {
     texture_component->unflip();
   }
 
+  if (rect) {
+    texture_component->rect();
+  } else {
+    texture_component->unrect();
+  }
+
   if (spritesheet_index != _last_spritesheet_index) {
     _sprite_count = 0;
   }
