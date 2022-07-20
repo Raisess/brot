@@ -26,14 +26,6 @@ void GFX::Component::draw() {
   }
 }
 
-void GFX::Component::bind_texture(const Image& image) {
-  texture = std::make_unique<Texture>(renderer, image);
-}
-
-void GFX::Component::bind_text(const Font& font, const std::string& str) {
-  text = std::make_unique<Text>(renderer, font, str, _color);
-}
-
 const Size GFX::Component::get_size() const {
   return _size;
 }

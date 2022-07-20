@@ -1,6 +1,8 @@
 #include <iostream>
 #include "Component.h"
 #include "Renderer.h"
+#include "TextComponent.h"
+#include "TextureComponent.h"
 #include "Window.h"
 
 #define BG_TEXTURE_PATH "../tmp/test-bg-img.png"
@@ -15,35 +17,35 @@ int main() {
   GFX::Image test_image(TEXTURE_PATH);
   GFX::Font test_font(FONT_PATH);
 
-  GFX::Component bg(renderer);
+  GFX::TextureComponent bg(renderer);
   bg.set_size(window.get_size());
-  bg.bind_texture(test_bg_image);
+  bg.bind(test_bg_image);
 
-  GFX::Component red_component(renderer);
+  GFX::TextureComponent red_component(renderer);
   red_component.set_size({ 100, 100 });
   red_component.set_position({ 0, 0 });
   red_component.set_color({ 255, 0, 0 });
   red_component.fill();
-  red_component.bind_texture(test_image);
+  red_component.bind(test_image);
 
   GFX::Component green_component(renderer);
   green_component.set_size({ 100, 100 });
   green_component.set_position({ 500, 300 });
   green_component.set_color({ 0, 255, 0 });
 
-  GFX::Component blue_component(renderer);
+  GFX::TextureComponent blue_component(renderer);
   blue_component.set_size({ 100, 100 });
   blue_component.set_position({ 700, 50 });
   blue_component.set_color({ 0, 0, 255 });
-  blue_component.bind_texture(test_image);
+  blue_component.bind(test_image);
 
-  GFX::Component fps_text_component(renderer);
+  GFX::TextComponent fps_text_component(renderer);
   fps_text_component.set_size({ 100, 50 });
 
   bool up = false;
   int i = 0;
   window.loop([&]() -> void {
-    fps_text_component.bind_text(test_font, "FPS: " + std::to_string(window.get_fps()));
+    fps_text_component.bind(test_font, "FPS: " + std::to_string(window.get_fps()));
     renderer.clear();
     bg.draw();
 

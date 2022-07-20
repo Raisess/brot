@@ -19,8 +19,6 @@ public:
   Component(const Renderer& renderer);
 
   void draw();
-  void bind_texture(const Image& image);
-  void bind_text(const Font& font, const std::string& text);
   const Size get_size() const;
   void set_size(const Size& new_size);
   const Vec2 get_position() const;
@@ -34,7 +32,7 @@ public:
   void flip();
   void unflip();
 
-private:
+protected:
   const Renderer& renderer;
   std::unique_ptr<Texture> texture;
   std::unique_ptr<Text> text;
