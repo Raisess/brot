@@ -1,4 +1,5 @@
-CC=g++
+CXX=g++
+#CXX=clang -std=c++11
 FLAGS=-lSDL2 -lSDL2_image -lSDL2_ttf
 
 # PATHS
@@ -48,28 +49,28 @@ ENGINE_OUT=$(OUT_DIR)/engine.o
 
 build_gfx:
 	mkdir -p $(OUT_DIR)
-	$(CC) $(FLAGS) $(COMMON_SRC) $(UTIL_SRC) $(GFX_SRC) $(GFX_PATH)/test.cpp -o $(GFX_OUT)
+	$(CXX) $(FLAGS) $(COMMON_SRC) $(UTIL_SRC) $(GFX_SRC) $(GFX_PATH)/test.cpp -o $(GFX_OUT)
 
 run_gfx:
 	$(GFX_OUT)
 
 build_sfx:
 	mkdir -p $(OUT_DIR)
-	$(CC) $(FLAGS) $(COMMON_SRC) $(UTIL_SRC) $(SFX_SRC) $(GFX_PATH)/Window.cpp $(SFX_PATH)/test.cpp -o $(SFX_OUT)
+	$(CXX) $(FLAGS) $(COMMON_SRC) $(UTIL_SRC) $(SFX_SRC) $(GFX_PATH)/Window.cpp $(SFX_PATH)/test.cpp -o $(SFX_OUT)
 
 run_sfx:
 	$(SFX_OUT)
 
 build_input:
 	mkdir -p $(OUT_DIR)
-	$(CC) $(FLAGS) $(COMMON_SRC) $(UTIL_SRC) $(INPUT_SRC) $(GFX_PATH)/Window.cpp $(INPUT_PATH)/test.cpp -o $(INPUT_OUT)
+	$(CXX) $(FLAGS) $(COMMON_SRC) $(UTIL_SRC) $(INPUT_SRC) $(GFX_PATH)/Window.cpp $(INPUT_PATH)/test.cpp -o $(INPUT_OUT)
 
 run_input:
 	$(INPUT_OUT)
 
 build_engine:
 	mkdir -p $(OUT_DIR)
-	$(CC) $(FLAGS) $(COMMON_SRC) $(UTIL_SRC) $(GFX_SRC) $(SFX_SRC) $(INPUT_SRC) $(ENGINE_SRC) $(ENGINE_PATH)/test.cpp -o $(ENGINE_OUT)
+	$(CXX) $(FLAGS) $(COMMON_SRC) $(UTIL_SRC) $(GFX_SRC) $(SFX_SRC) $(INPUT_SRC) $(ENGINE_SRC) $(ENGINE_PATH)/test.cpp -o $(ENGINE_OUT)
 
 run_engine:
 	$(ENGINE_OUT)
