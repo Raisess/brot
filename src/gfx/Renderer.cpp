@@ -9,6 +9,9 @@ GFX::Renderer::Renderer(const Window& window) {
     exit(1);
   }
 
+  auto window_size = window.get_size();
+  SDL_RenderSetLogicalSize(sdl_value, window_size.width, window_size.height);
+
   clear();
   Text::Init();
 }
