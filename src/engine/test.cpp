@@ -2,8 +2,8 @@
 #include <memory>
 #include "../input/Keyboard.h"
 #include "../util/Time.h"
-#include "entity/Entity.h"
 #include "entity/Sprite.h"
+#include "Entity.h"
 #include "Game.h"
 #include "Scene.h"
 
@@ -18,49 +18,50 @@ int main() {
   Engine::Scene scene("main_scene");
   Engine::Entity entity(game.ctx);
 
-  entity.fill = false;
   entity.size = { 100, 100 };
-  entity.spritesheets[IDLE].push_back(std::make_shared<Engine::Sprite>(std::string(TEXTURE_PATH) + "idle_1" + std::string(TEXTURE_EXT)));
-  entity.spritesheets[IDLE].push_back(std::make_shared<Engine::Sprite>(std::string(TEXTURE_PATH) + "idle_2" + std::string(TEXTURE_EXT)));
-  entity.spritesheets[IDLE].push_back(std::make_shared<Engine::Sprite>(std::string(TEXTURE_PATH) + "idle_3" + std::string(TEXTURE_EXT)));
-  entity.spritesheets[IDLE].push_back(std::make_shared<Engine::Sprite>(std::string(TEXTURE_PATH) + "idle_4" + std::string(TEXTURE_EXT)));
+  entity.animations.push_back(Engine::Animation());
+  entity.animations[IDLE].push_sprite(std::make_shared<Engine::Sprite>(std::string(TEXTURE_PATH) + "idle_1" + std::string(TEXTURE_EXT)));
+  entity.animations[IDLE].push_sprite(std::make_shared<Engine::Sprite>(std::string(TEXTURE_PATH) + "idle_2" + std::string(TEXTURE_EXT)));
+  entity.animations[IDLE].push_sprite(std::make_shared<Engine::Sprite>(std::string(TEXTURE_PATH) + "idle_3" + std::string(TEXTURE_EXT)));
+  entity.animations[IDLE].push_sprite(std::make_shared<Engine::Sprite>(std::string(TEXTURE_PATH) + "idle_4" + std::string(TEXTURE_EXT)));
 
-  entity.spritesheets[RUNNING].push_back(std::make_shared<Engine::Sprite>(std::string(TEXTURE_PATH) + "running_5" + std::string(TEXTURE_EXT)));
-  entity.spritesheets[RUNNING].push_back(std::make_shared<Engine::Sprite>(std::string(TEXTURE_PATH) + "running_6" + std::string(TEXTURE_EXT)));
-  entity.spritesheets[RUNNING].push_back(std::make_shared<Engine::Sprite>(std::string(TEXTURE_PATH) + "running_7" + std::string(TEXTURE_EXT)));
-  entity.spritesheets[RUNNING].push_back(std::make_shared<Engine::Sprite>(std::string(TEXTURE_PATH) + "running_8" + std::string(TEXTURE_EXT)));
-  entity.spritesheets[RUNNING].push_back(std::make_shared<Engine::Sprite>(std::string(TEXTURE_PATH) + "running_9" + std::string(TEXTURE_EXT)));
-  entity.spritesheets[RUNNING].push_back(std::make_shared<Engine::Sprite>(std::string(TEXTURE_PATH) + "running_10" + std::string(TEXTURE_EXT)));
-  entity.spritesheets[RUNNING].push_back(std::make_shared<Engine::Sprite>(std::string(TEXTURE_PATH) + "running_11" + std::string(TEXTURE_EXT)));
-  entity.spritesheets[RUNNING].push_back(std::make_shared<Engine::Sprite>(std::string(TEXTURE_PATH) + "running_12" + std::string(TEXTURE_EXT)));
-  entity.spritesheets[RUNNING].push_back(std::make_shared<Engine::Sprite>(std::string(TEXTURE_PATH) + "running_13" + std::string(TEXTURE_EXT)));
+  entity.animations.push_back(Engine::Animation());
+  entity.animations[RUNNING].push_sprite(std::make_shared<Engine::Sprite>(std::string(TEXTURE_PATH) + "running_5" + std::string(TEXTURE_EXT)));
+  entity.animations[RUNNING].push_sprite(std::make_shared<Engine::Sprite>(std::string(TEXTURE_PATH) + "running_6" + std::string(TEXTURE_EXT)));
+  entity.animations[RUNNING].push_sprite(std::make_shared<Engine::Sprite>(std::string(TEXTURE_PATH) + "running_7" + std::string(TEXTURE_EXT)));
+  entity.animations[RUNNING].push_sprite(std::make_shared<Engine::Sprite>(std::string(TEXTURE_PATH) + "running_8" + std::string(TEXTURE_EXT)));
+  entity.animations[RUNNING].push_sprite(std::make_shared<Engine::Sprite>(std::string(TEXTURE_PATH) + "running_9" + std::string(TEXTURE_EXT)));
+  entity.animations[RUNNING].push_sprite(std::make_shared<Engine::Sprite>(std::string(TEXTURE_PATH) + "running_10" + std::string(TEXTURE_EXT)));
+  entity.animations[RUNNING].push_sprite(std::make_shared<Engine::Sprite>(std::string(TEXTURE_PATH) + "running_11" + std::string(TEXTURE_EXT)));
+  entity.animations[RUNNING].push_sprite(std::make_shared<Engine::Sprite>(std::string(TEXTURE_PATH) + "running_12" + std::string(TEXTURE_EXT)));
+  entity.animations[RUNNING].push_sprite(std::make_shared<Engine::Sprite>(std::string(TEXTURE_PATH) + "running_13" + std::string(TEXTURE_EXT)));
 
   scene.push_layer();
   Engine::Layer* level_layer = scene.get_layer(0);
   level_layer->entities.push_back(&entity);
 
   game.loop([&]() -> void {
-    entity.spritesheet_index = IDLE;
+    entity.animation_index = IDLE;
 
     Input::Keyboard::OnPressed(Input::Keyboard::ESC, [&]() -> void {
       return game.end();
     });
     Input::Keyboard::OnPressed(Input::Keyboard::W, [&]() -> void {
-      entity.spritesheet_index = RUNNING;
+      entity.animation_index = RUNNING;
       entity.position.y = entity.position.y - VELOCITY;
     });
     Input::Keyboard::OnPressed(Input::Keyboard::A, [&]() -> void {
       entity.flip = true;
-      entity.spritesheet_index = RUNNING;
+      entity.animation_index = RUNNING;
       entity.position.x = entity.position.x - VELOCITY;
     });
     Input::Keyboard::OnPressed(Input::Keyboard::S, [&]() -> void {
-      entity.spritesheet_index = RUNNING;
+      entity.animation_index = RUNNING;
       entity.position.y = entity.position.y + VELOCITY;
     });
     Input::Keyboard::OnPressed(Input::Keyboard::D, [&]() -> void {
       entity.flip = false;
-      entity.spritesheet_index = RUNNING;
+      entity.animation_index = RUNNING;
       entity.position.x = entity.position.x + VELOCITY;
     });
     Input::Keyboard::OnPressed(Input::Keyboard::ONE, [&]() -> void {
