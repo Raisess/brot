@@ -16,7 +16,7 @@ void Engine::Scene::draw() const {
 }
 
 void Engine::Scene::push_layer() {
-  _layers.push_back(new Layer());
+  _layers.push_back(std::make_shared<Engine::Layer>());
 }
 
 void Engine::Scene::pop_layer() {
@@ -27,7 +27,7 @@ size_t Engine::Scene::count_layer() const {
   return _layers.size();
 }
 
-Engine::Layer* Engine::Scene::get_layer(int index) const {
+std::shared_ptr<Engine::Layer> Engine::Scene::get_layer(int index) const {
   assert(index <= _layers.size());
   return _layers[index];
 }

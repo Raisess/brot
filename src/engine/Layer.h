@@ -7,7 +7,7 @@ namespace Engine {
 
 class Layer {
 public:
-  std::vector<Entity*> entities;
+  std::vector<std::shared_ptr<Entity>> entities;
 
   void update() const;
   void draw() const;

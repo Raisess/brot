@@ -2,6 +2,7 @@
 
 #include <assert.h>
 #include <iostream>
+#include <memory>
 #include <vector>
 #include "Layer.h"
 
@@ -16,12 +17,12 @@ public:
   void push_layer();
   void pop_layer();
   size_t count_layer() const;
-  Layer* get_layer(int index) const;
+  std::shared_ptr<Layer> get_layer(int index) const;
   std::string id() const;
 
 private:
   std::string _id;
-  std::vector<Layer*> _layers;
+  std::vector<std::shared_ptr<Layer>> _layers;
 };
 
 }
