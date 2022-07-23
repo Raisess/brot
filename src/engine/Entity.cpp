@@ -1,7 +1,7 @@
 #include "./Entity.h"
 
 Engine::Entity::Entity(const Engine::GameContext& game_ctx) 
-  : texture_component(std::make_unique<GFX::TextureComponent>(*game_ctx.render_ctx)) {}
+  : texture_component(std::make_shared<GFX::TextureComponent>(*game_ctx.render_ctx)) {}
 
 void Engine::Entity::update() {
   texture_component->set_angle(angle);
@@ -27,20 +27,13 @@ void Engine::Entity::update() {
     texture_component->unrect();
   }
 
-  if (spritesheet_index != _last_spritesheet_index) {
-    _sprite_count = 0;
-  }
-
-  if (spritesheets[spritesheet_index].size()) {
-    texture_component->bind(*spritesheets[spritesheet_index][_sprite_count]->image());
-
-    _sprite_count += 1;
-    if (_sprite_count == spritesheets[spritesheet_index].size()) {
-      _sprite_count = 0;
+  if (animations.size()) {
+    if (animation_index != _last_animation_index) {
+      animations[_last_animation_index].restart();
     }
-  }
 
-  _last_spritesheet_index = spritesheet_index;
+    animations[animation_index].animate(texture_component);
+  }
 }
 
 void Engine::Entity::draw() const {
