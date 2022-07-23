@@ -9,7 +9,7 @@ namespace Engine {
 
 class Scene {
 public:
-  Scene(const std::string& scene_id);
+  Scene(const std::string& id);
 
   void update() const;
   void draw() const;
@@ -17,10 +17,10 @@ public:
   void pop_layer();
   size_t count_layer() const;
   Layer* get_layer(int index) const;
-  std::string scene_id() const;
+  std::string id() const;
 
 private:
-  std::string _scene_id;
+  std::string _id;
   std::vector<Layer*> _layers;
 };
 

@@ -1,7 +1,7 @@
 #pragma once
 
 #include <vector>
-#include "./entity/Entity.h"
+#include "Entity.h"
 
 namespace Engine {
 

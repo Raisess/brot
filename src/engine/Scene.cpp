@@ -1,7 +1,7 @@
 #include "Scene.h"
 
-Engine::Scene::Scene(const std::string& scene_id)
-  : _scene_id(scene_id) {}
+Engine::Scene::Scene(const std::string& id)
+  : _id(id) {}
 
 void Engine::Scene::update() const {
   for (auto layer : _layers) {
@@ -32,6 +32,6 @@ Engine::Layer* Engine::Scene::get_layer(int index) const {
   return _layers[index];
 }
 
-std::string Engine::Scene::scene_id() const {
-  return _scene_id;
+std::string Engine::Scene::id() const {
+  return _id;
 }
