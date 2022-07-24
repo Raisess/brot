@@ -27,12 +27,12 @@ void Engine::Entity::update() {
     texture_component->unrect();
   }
 
-  if (animations.size()) {
-    if (animation_index != _last_animation_index) {
-      animations[_last_animation_index].restart();
+  if (_animations.size()) {
+    if (_animation_index != _last_animation_index) {
+      _animations[_last_animation_index].restart();
     }
 
-    animations[animation_index].animate(texture_component);
+    _animations[_animation_index].animate(texture_component);
   }
 }
 
@@ -40,4 +40,16 @@ void Engine::Entity::draw() const {
   if (hide) return;
 
   texture_component->draw();
+}
+
+void Engine::Entity::create_animation(const std::string& id, const std::vector<std::shared_ptr<Sprite>>& sprites) {
+  _animations[id] = Animation();
+
+  for (auto sprite : sprites) {
+    _animations[id].push_sprite(sprite);
+  }
+}
+
+void Engine::Entity::use_animation(const std::string& id) {
+  _animation_index = id;
 }

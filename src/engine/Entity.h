@@ -1,7 +1,7 @@
 #pragma once
 
+#include <map>
 #include <memory>
-#include <vector>
 #include "../common/Color.h"
 #include "../common/Size.h"
 #include "../common/Vec2.h"
@@ -13,8 +13,6 @@ namespace Engine {
 
 class Entity {
 public:
-  std::vector<Animation> animations;
-  size_t animation_index = 0;
   Common::Color color = {};
   Common::Size size = { 0, 0 };
   Common::Vec2 position = { 0, 0 };
@@ -28,10 +26,14 @@ public:
 
   void update();
   void draw() const;
+  void create_animation(const std::string& id, const std::vector<std::shared_ptr<Sprite>>& sprites);
+  void use_animation(const std::string& id);
 
 private:
   std::shared_ptr<GFX::TextureComponent> texture_component;
-  size_t _last_animation_index = 0;
+  std::map<std::string, Animation> _animations;
+  std::string _animation_index;
+  std::string _last_animation_index;
 };
 
 }
