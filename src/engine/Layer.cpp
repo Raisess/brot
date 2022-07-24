@@ -1,8 +1,8 @@
 #include "Layer.h"
 
-void Engine::Layer::update() const {
+void Engine::Layer::update(int delta_time) const {
   for (auto entity : entities) {
-    entity->update();
+    entity->update(delta_time);
   }
 
   for (auto ui : uis) {

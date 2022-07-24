@@ -44,7 +44,7 @@ int main() {
 
   bool up = false;
   int i = 0;
-  window.loop([&]() -> void {
+  window.loop([&](int) -> void {
     fps_text_component.bind(test_font, "FPS: " + std::to_string(window.get_fps()));
     renderer.clear();
     bg.draw();

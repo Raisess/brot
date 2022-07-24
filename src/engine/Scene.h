@@ -12,7 +12,7 @@ class Scene {
 public:
   Scene(const std::string& id);
 
-  void update() const;
+  void update(int delta_time) const;
   void draw() const;
   std::shared_ptr<Layer> push_layer();
   void pop_layer();

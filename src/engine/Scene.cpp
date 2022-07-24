@@ -5,9 +5,9 @@ Engine::Scene::Scene(const std::string& id) : _id(id) {
   Util::Logger::debug("Create Scene: " + id);
 }
 
-void Engine::Scene::update() const {
+void Engine::Scene::update(int delta_time) const {
   for (auto layer : _layers) {
-    layer->update();
+    layer->update(delta_time);
   }
 }
 

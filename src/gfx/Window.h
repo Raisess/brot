@@ -7,11 +7,11 @@
 
 #define FPS_LIMIT 60
 
+using CallbackLoop = std::function<void(int)>;
+
 namespace GFX {
 
 class Window : public SDLController<SDL_Window*> {
-
-using Loop = std::function<void(void)>;
 
 public:
   std::string title;
@@ -20,7 +20,7 @@ public:
   ~Window(void);
 
   void quit() const;
-  void loop(const Loop& loop);
+  void loop(const CallbackLoop& callback);
   const Common::Size get_size() const;
   const unsigned int get_fps() const;
 

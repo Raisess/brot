@@ -12,7 +12,7 @@
 #define TEXTURE_EXT ".png"
 #define IDLE "idle"
 #define RUNNING "running"
-#define VELOCITY 20
+#define VELOCITY 5
 
 int main() {
   Engine::Game game("Brot Engine | Engine Test");
@@ -49,7 +49,7 @@ int main() {
   std::shared_ptr<Engine::Layer> ui_layer = scene.push_layer();
   ui_layer->uis.push_back(fps_ui);
 
-  game.loop([&]() -> void {
+  game.loop([&](int delta_time) -> void {
     fps_ui->text = "FPS: " + std::to_string(game.ctx.window_ctx->get_fps());
     entity->use_animation(IDLE);
 
@@ -83,7 +83,7 @@ int main() {
       Util::Time::delay(100);
     });
 
-    scene.update();
+    scene.update(delta_time);
     scene.draw();
   });
 

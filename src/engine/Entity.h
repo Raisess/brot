@@ -25,7 +25,7 @@ public:
   Entity(const GameContext& game_ctx, const std::string& id);
   ~Entity();
 
-  void update();
+  void update(int delta_time);
   void draw() const;
   void create_animation(const std::string& id, const std::vector<std::shared_ptr<GFX::Image>>& sprites);
   void use_animation(const std::string& id);

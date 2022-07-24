@@ -21,15 +21,13 @@ public:
 
 class Game {
 
-using Loop = std::function<void(void)>;
-
 public:
   GameContext ctx;
 
   Game(const std::string& title);
   ~Game();
 
-  void loop(const Loop& callback) const;
+  void loop(const CallbackLoop& callback) const;
   void end() const;
 };
 

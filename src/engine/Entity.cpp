@@ -10,7 +10,7 @@ Engine::Entity::~Entity() {
   Util::Logger::debug("Delete Entity");
 }
 
-void Engine::Entity::update() {
+void Engine::Entity::update(int delta_time) {
   _component->set_angle(angle);
   _component->set_position(position);
   _component->set_size(size);
@@ -39,7 +39,7 @@ void Engine::Entity::update() {
       _animations[_last_animation_index].restart();
     }
 
-    _animations[_animation_index].animate(_component);
+    _animations[_animation_index].animate(delta_time, _component);
   }
 }
 

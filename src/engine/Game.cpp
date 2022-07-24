@@ -14,10 +14,10 @@ Engine::Game::~Game() {
   Util::Logger::debug("Delete Game");
 }
 
-void Engine::Game::loop(const Loop& callback) const {
-  ctx.window_ctx->loop([&]() -> void {
+void Engine::Game::loop(const CallbackLoop& callback) const {
+  ctx.window_ctx->loop([&](int delta_time) -> void {
     ctx.render_ctx->clear();
-    callback();
+    callback(delta_time);
     ctx.render_ctx->draw();
   });
 }

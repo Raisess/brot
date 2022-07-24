@@ -11,7 +11,7 @@ public:
   std::vector<std::shared_ptr<UI>> uis;
   std::vector<std::shared_ptr<Entity>> entities;
 
-  void update() const;
+  void update(int delta_time) const;
   void draw() const;
   void hide();
   void unhide();

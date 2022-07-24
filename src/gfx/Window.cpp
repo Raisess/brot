@@ -30,7 +30,7 @@ void GFX::Window::quit() const {
 
 unsigned int GFX::Window::MinimumDeltaTime = 1000 / FPS_LIMIT;
 
-void GFX::Window::loop(const Loop& loop) {
+void GFX::Window::loop(const CallbackLoop& callback) {
   SDL_Event event;
   int last_time = SDL_GetTicks64();
 
@@ -52,10 +52,10 @@ void GFX::Window::loop(const Loop& loop) {
         delta_time = MinimumDeltaTime;
       }
 
+      callback(delta_time);
+
       last_time = now;
       _fps = 1000 / delta_time;
-
-      loop();
     } else {
       Util::Time::delay(1);
     }
