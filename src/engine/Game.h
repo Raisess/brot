@@ -8,6 +8,9 @@
 
 #define GWINDOW_W 800
 #define GWINDOW_H 600
+#define LOGO_W 500
+#define LOGO_H 100
+#define INTRO_DELAY 3000
 
 namespace Engine {
 
