@@ -2,11 +2,13 @@
 
 #include <vector>
 #include "Entity.h"
+#include "UI.h"
 
 namespace Engine {
 
 class Layer {
 public:
+  std::vector<std::shared_ptr<UI>> uis;
   std::vector<std::shared_ptr<Entity>> entities;
 
   void update() const;

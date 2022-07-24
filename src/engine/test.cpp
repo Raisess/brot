@@ -6,7 +6,9 @@
 #include "Entity.h"
 #include "Game.h"
 #include "Scene.h"
+#include "UI.h"
 
+#define FONT_PATH "../tmp/test-font.ttf"
 #define TEXTURE_PATH "../tmp/dino-char/sprites/sprite_"
 #define TEXTURE_EXT ".png"
 #define IDLE "idle"
@@ -16,6 +18,9 @@
 int main() {
   Engine::Game game("Brot Engine | Engine Test");
   Engine::Scene scene("main_scene");
+
+  std::shared_ptr<Engine::UI> fps_ui = std::make_shared<Engine::UI>(game.ctx, std::make_shared<GFX::Font>(FONT_PATH));
+  fps_ui->size = { 100, 50 };
 
   std::shared_ptr<Engine::Entity> entity = std::make_shared<Engine::Entity>(game.ctx, "dino_entity");
   entity->size = { 100, 100 };
@@ -43,7 +48,12 @@ int main() {
   std::shared_ptr<Engine::Layer> level_layer = scene.get_layer(0);
   level_layer->entities.push_back(entity);
 
+  scene.push_layer();
+  std::shared_ptr<Engine::Layer> ui_layer = scene.get_layer(1);
+  ui_layer->uis.push_back(fps_ui);
+
   game.loop([&]() -> void {
+    fps_ui->text = "FPS: " + std::to_string(game.ctx.window_ctx->get_fps());
     entity->use_animation(IDLE);
 
     Input::Keyboard::OnPressed(Input::Keyboard::ESC, [&]() -> void {

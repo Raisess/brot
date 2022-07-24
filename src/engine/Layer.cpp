@@ -4,11 +4,19 @@ void Engine::Layer::update() const {
   for (auto entity : entities) {
     entity->update();
   }
+
+  for (auto ui : uis) {
+    ui->update();
+  }
 }
 
 void Engine::Layer::draw() const {
   for (auto entity : entities) {
     entity->draw();
+  }
+
+  for (auto ui : uis) {
+    ui->draw();
   }
 }
 
