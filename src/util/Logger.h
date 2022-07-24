@@ -8,6 +8,10 @@ namespace Util {
 
 class Logger {
 public:
+  static void log(const std::string& message) {
+    Logger::log("LOG", message);
+  }
+
   static void error(const std::string& message) {
     Logger::log("ERROR", message);
   }
