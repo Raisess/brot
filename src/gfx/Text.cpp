@@ -2,6 +2,8 @@
 #include "Text.h"
 
 GFX::Font::Font(const std::string& path, unsigned int point_size) {
+  Util::Logger::debug("Create Font: " + path);
+
   sdl_value = TTF_OpenFont(path.c_str(), point_size);
   if (sdl_value == nullptr) {
     Util::Logger::error("Error loading font at: " + path);
@@ -11,6 +13,7 @@ GFX::Font::Font(const std::string& path, unsigned int point_size) {
 
 GFX::Font::~Font() {
   TTF_CloseFont(sdl_value);
+  Util::Logger::debug("Delete Font");
 }
 
 GFX::Text::Text(const Renderer& renderer, const Font& font, const std::string& text, const Common::Color& color) {
