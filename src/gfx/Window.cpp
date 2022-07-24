@@ -2,7 +2,9 @@
 #include "../util/Time.h"
 #include "Window.h"
 
-GFX::Window::Window(const std::string& title, const Common::Size& size) : _size(size) {
+GFX::Window::Window(const std::string& title, const Common::Size& size) : title(title), _size(size) {
+  Util::Logger::debug("Create Window: " + title + " | width: " + std::to_string(size.width) + ", height: " + std::to_string(size.height));
+
   if (SDL_Init(SDL_INIT_VIDEO) < 0) {
     Util::Logger::error("Error initializing video " + std::string(SDL_GetError()));
     exit(1);
@@ -16,9 +18,9 @@ GFX::Window::Window(const std::string& title, const Common::Size& size) : _size(
 }
 
 GFX::Window::~Window(void) {
-  Util::Logger::debug("Quiting...");
   SDL_DestroyWindow(sdl_value);
   SDL_Quit();
+  Util::Logger::debug("Delete Window");
 }
 
 void GFX::Window::quit() const {

@@ -18,7 +18,7 @@ public:
   void pop_layer();
   size_t count_layer() const;
   std::shared_ptr<Layer> get_layer(int index) const;
-  std::string id() const;
+  const std::string id() const;
 
 private:
   std::string _id;

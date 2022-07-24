@@ -1,7 +1,14 @@
+#include "../util/Logger.h"
 #include "./Entity.h"
 
-Engine::Entity::Entity(const Engine::GameContext& game_ctx) 
-  : texture_component(std::make_shared<GFX::TextureComponent>(*game_ctx.render_ctx)) {}
+Engine::Entity::Entity(const Engine::GameContext& game_ctx, const std::string& id) 
+  : _id(id), texture_component(std::make_shared<GFX::TextureComponent>(*game_ctx.render_ctx)) {
+  Util::Logger::debug("Create Entity: " + id);
+}
+
+Engine::Entity::~Entity() {
+  Util::Logger::debug("Delete Entity");
+}
 
 void Engine::Entity::update() {
   texture_component->set_angle(angle);
@@ -52,4 +59,8 @@ void Engine::Entity::create_animation(const std::string& id, const std::vector<s
 
 void Engine::Entity::use_animation(const std::string& id) {
   _animation_index = id;
+}
+
+const std::string Engine::Entity::id() const {
+  return _id;
 }

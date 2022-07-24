@@ -3,6 +3,8 @@
 #include "Renderer.h"
 
 GFX::Renderer::Renderer(const Window& window) {
+  Util::Logger::debug("Create Renderer: " + window.title);
+
   sdl_value = SDL_CreateRenderer(window.get(), -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
   if (sdl_value == nullptr) {
     Util::Logger::error("Error creating renderer " + std::string(SDL_GetError()));
@@ -19,6 +21,7 @@ GFX::Renderer::Renderer(const Window& window) {
 GFX::Renderer::~Renderer() {
   Text::Close();
   SDL_DestroyRenderer(sdl_value);
+  Util::Logger::debug("Delete Renderer");
 }
 
 void GFX::Renderer::draw() const {
