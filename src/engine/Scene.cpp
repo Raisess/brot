@@ -17,8 +17,9 @@ void Engine::Scene::draw() const {
   }
 }
 
-void Engine::Scene::push_layer() {
+std::shared_ptr<Engine::Layer> Engine::Scene::push_layer() {
   _layers.push_back(std::make_shared<Engine::Layer>());
+  return _layers[_layers.size() - 1];
 }
 
 void Engine::Scene::pop_layer() {

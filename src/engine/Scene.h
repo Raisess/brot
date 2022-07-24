@@ -14,7 +14,7 @@ public:
 
   void update() const;
   void draw() const;
-  void push_layer();
+  std::shared_ptr<Layer> push_layer();
   void pop_layer();
   size_t count_layer() const;
   std::shared_ptr<Layer> get_layer(int index) const;

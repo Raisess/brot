@@ -2,7 +2,6 @@
 #include <memory>
 #include "../input/Keyboard.h"
 #include "../util/Time.h"
-#include "../gfx/Texture.h"
 #include "Entity.h"
 #include "Game.h"
 #include "Scene.h"
@@ -44,12 +43,10 @@ int main() {
     std::make_shared<GFX::Image>(std::string(TEXTURE_PATH) + "running_13" + std::string(TEXTURE_EXT)),
   });
 
-  scene.push_layer();
-  std::shared_ptr<Engine::Layer> level_layer = scene.get_layer(0);
+  std::shared_ptr<Engine::Layer> level_layer = scene.push_layer();
   level_layer->entities.push_back(entity);
 
-  scene.push_layer();
-  std::shared_ptr<Engine::Layer> ui_layer = scene.get_layer(1);
+  std::shared_ptr<Engine::Layer> ui_layer = scene.push_layer();
   ui_layer->uis.push_back(fps_ui);
 
   game.loop([&]() -> void {
