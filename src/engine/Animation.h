@@ -16,8 +16,8 @@ public:
 
 private:
   std::vector<std::shared_ptr<GFX::Image>> _sprites;
+  unsigned int _time_count = 0;
   size_t _sprite_count = 0;
-  size_t _time_count = 0;
 };
 
 }

@@ -1,3 +1,4 @@
+#include "../util/Time.h"
 #include "Animation.h"
 
 void Engine::Animation::push_sprite(std::shared_ptr<GFX::Image> sprite) {
@@ -7,9 +8,8 @@ void Engine::Animation::push_sprite(std::shared_ptr<GFX::Image> sprite) {
 void Engine::Animation::animate(int timestep, std::shared_ptr<GFX::TextureComponent> texture_component) {
   if (_sprites.size()) {
     texture_component->bind(*_sprites[_sprite_count]);
-    _time_count += timestep;
 
-    if (_time_count >= SPRITE_DELAY) {
+    if (Util::Time::wait(SPRITE_DELAY, timestep, _time_count)) {
       _sprite_count++;
       _time_count = 0;
     }
