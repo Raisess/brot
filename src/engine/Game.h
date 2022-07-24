@@ -27,6 +27,7 @@ public:
   GameContext ctx;
 
   Game(const std::string& title);
+  ~Game();
 
   void loop(const Loop& callback) const;
   void end() const;

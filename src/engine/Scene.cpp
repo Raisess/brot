@@ -1,7 +1,9 @@
+#include "../util/Logger.h"
 #include "Scene.h"
 
-Engine::Scene::Scene(const std::string& id)
-  : _id(id) {}
+Engine::Scene::Scene(const std::string& id) : _id(id) {
+  Util::Logger::debug("Create Scene: " + id);
+}
 
 void Engine::Scene::update() const {
   for (auto layer : _layers) {
@@ -32,6 +34,6 @@ std::shared_ptr<Engine::Layer> Engine::Scene::get_layer(int index) const {
   return _layers[index];
 }
 
-std::string Engine::Scene::id() const {
+const std::string Engine::Scene::id() const {
   return _id;
 }

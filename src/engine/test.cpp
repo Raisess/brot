@@ -17,7 +17,7 @@ int main() {
   Engine::Game game("Brot Engine | Engine Test");
   Engine::Scene scene("main_scene");
 
-  std::shared_ptr<Engine::Entity> entity = std::make_shared<Engine::Entity>(game.ctx);
+  std::shared_ptr<Engine::Entity> entity = std::make_shared<Engine::Entity>(game.ctx, "dino_entity");
   entity->size = { 100, 100 };
 
   entity->create_animation(IDLE, {

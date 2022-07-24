@@ -14,6 +14,8 @@ class Window : public SDLController<SDL_Window*> {
 using Loop = std::function<void(void)>;
 
 public:
+  std::string title;
+
   Window(const std::string& title, const Common::Size& size);
   ~Window(void);
 
