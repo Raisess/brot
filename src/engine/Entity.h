@@ -6,7 +6,7 @@
 #include "../common/Size.h"
 #include "../common/Vec2.h"
 #include "../gfx/TextureComponent.h"
-#include "entity/Animation.h"
+#include "Animation.h"
 #include "Game.h"
 
 namespace Engine {
@@ -27,7 +27,7 @@ public:
 
   void update();
   void draw() const;
-  void create_animation(const std::string& id, const std::vector<std::shared_ptr<Sprite>>& sprites);
+  void create_animation(const std::string& id, const std::vector<std::shared_ptr<GFX::Image>>& sprites);
   void use_animation(const std::string& id);
   const std::string id() const;
 

@@ -49,7 +49,7 @@ void Engine::Entity::draw() const {
   texture_component->draw();
 }
 
-void Engine::Entity::create_animation(const std::string& id, const std::vector<std::shared_ptr<Sprite>>& sprites) {
+void Engine::Entity::create_animation(const std::string& id, const std::vector<std::shared_ptr<GFX::Image>>& sprites) {
   _animations[id] = Animation();
 
   for (auto sprite : sprites) {
