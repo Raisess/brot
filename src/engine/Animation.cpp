@@ -7,7 +7,10 @@ void Engine::Animation::push_sprite(std::shared_ptr<GFX::Image> sprite) {
 
 void Engine::Animation::animate(std::shared_ptr<GFX::TextureComponent> texture_component) {
   if (_sprites.size()) {
-    Util::Time::delay(SPRITE_DELAY);
+    if (WAIT_DELAY) {
+      Util::Time::delay(SPRITE_DELAY);
+    }
+
     texture_component->bind(*_sprites[_sprite_count]);
 
     _sprite_count += 1;

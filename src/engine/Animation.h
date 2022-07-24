@@ -5,6 +5,7 @@
 #include <vector>
 #include "../gfx/TextureComponent.h"
 
+#define WAIT_DELAY false
 #define SPRITE_DELAY 50
 
 namespace Engine {
