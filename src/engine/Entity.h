@@ -32,7 +32,7 @@ public:
   const std::string id() const;
 
 private:
-  std::shared_ptr<GFX::TextureComponent> texture_component;
+  std::shared_ptr<GFX::TextureComponent> _component;
   std::map<std::string, Animation> _animations;
   std::string _id;
   std::string _animation_index;

@@ -2,7 +2,7 @@
 #include "./Entity.h"
 
 Engine::Entity::Entity(const Engine::GameContext& game_ctx, const std::string& id) 
-  : _id(id), texture_component(std::make_shared<GFX::TextureComponent>(*game_ctx.render_ctx)) {
+  : _id(id), _component(std::make_shared<GFX::TextureComponent>(*game_ctx.render_ctx)) {
   Util::Logger::debug("Create Entity: " + id);
 }
 
@@ -11,27 +11,27 @@ Engine::Entity::~Entity() {
 }
 
 void Engine::Entity::update() {
-  texture_component->set_angle(angle);
-  texture_component->set_position(position);
-  texture_component->set_size(size);
-  texture_component->set_color(color);
+  _component->set_angle(angle);
+  _component->set_position(position);
+  _component->set_size(size);
+  _component->set_color(color);
 
   if (fill) {
-    texture_component->fill();
+    _component->fill();
   } else {
-    texture_component->unfill();
+    _component->unfill();
   }
 
   if (flip) {
-    texture_component->flip();
+    _component->flip();
   } else {
-    texture_component->unflip();
+    _component->unflip();
   }
 
   if (rect) {
-    texture_component->rect();
+    _component->rect();
   } else {
-    texture_component->unrect();
+    _component->unrect();
   }
 
   if (_animations.size()) {
@@ -39,14 +39,14 @@ void Engine::Entity::update() {
       _animations[_last_animation_index].restart();
     }
 
-    _animations[_animation_index].animate(texture_component);
+    _animations[_animation_index].animate(_component);
   }
 }
 
 void Engine::Entity::draw() const {
   if (hide) return;
 
-  texture_component->draw();
+  _component->draw();
 }
 
 void Engine::Entity::create_animation(const std::string& id, const std::vector<std::shared_ptr<GFX::Image>>& sprites) {
