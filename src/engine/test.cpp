@@ -18,8 +18,8 @@ int main() {
   Engine::Game game("Brot Engine | Engine Test");
   Engine::Scene scene("main_scene");
 
-  std::shared_ptr<Engine::UI> fps_ui = std::make_shared<Engine::UI>(game.ctx, std::make_shared<GFX::Font>(FONT_PATH));
-  fps_ui->size = { 170, 50 };
+  std::shared_ptr<Engine::UI> fps_ui = std::make_shared<Engine::UI>(game.ctx, "fps_ui", std::make_shared<GFX::Font>(FONT_PATH));
+  fps_ui->size = { 100, 40 };
 
   std::shared_ptr<Engine::Entity> entity = std::make_shared<Engine::Entity>(game.ctx, "dino_entity");
   entity->size = { 100, 100 };
@@ -44,10 +44,10 @@ int main() {
   });
 
   std::shared_ptr<Engine::Layer> level_layer = scene.push_layer();
-  level_layer->entities.push_back(entity);
+  level_layer->nodes.push_back(entity);
 
   std::shared_ptr<Engine::Layer> ui_layer = scene.push_layer();
-  ui_layer->uis.push_back(fps_ui);
+  ui_layer->nodes.push_back(fps_ui);
 
   game.loop([&](int delta_time) -> void {
     fps_ui->text = "FPS: " + std::to_string(game.ctx.window_ctx->get_fps());
@@ -75,6 +75,7 @@ int main() {
       entity->position.x = entity->position.x + VELOCITY;
     });
     Input::Keyboard::OnPressed(Input::Keyboard::ONE, [&]() -> void {
+      ui_layer->toggle_fill();
       level_layer->toggle_fill();
       Util::Time::Delay(100);
     });

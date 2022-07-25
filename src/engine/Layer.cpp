@@ -1,36 +1,28 @@
 #include "Layer.h"
 
 void Engine::Layer::update(int delta_time) const {
-  for (auto entity : entities) {
-    entity->update(delta_time);
-  }
-
-  for (auto ui : uis) {
-    ui->update(delta_time);
+  for (auto node : nodes) {
+    node->update(delta_time);
   }
 }
 
 void Engine::Layer::draw() const {
-  for (auto entity : entities) {
-    entity->draw();
-  }
-
-  for (auto ui : uis) {
-    ui->draw();
+  for (auto node : nodes) {
+    node->draw();
   }
 }
 
 void Engine::Layer::hide() {
   _hidden = true;
-  for (auto entity : entities) {
-    entity->hide = true;
+  for (auto node : nodes) {
+    node->hide = true;
   }
 }
 
 void Engine::Layer::unhide() {
   _hidden = false;
-  for (auto entity : entities) {
-    entity->hide = false;
+  for (auto node : nodes) {
+    node->hide = false;
   }
 }
 
@@ -44,15 +36,15 @@ void Engine::Layer::toggle_hide() {
 
 void Engine::Layer::fill() {
   _filled = true;
-  for (auto entity : entities) {
-    entity->fill = true;
+  for (auto node : nodes) {
+    node->fill = true;
   }
 }
 
 void Engine::Layer::unfill() {
   _filled = false;
-  for (auto entity : entities) {
-    entity->fill = false;
+  for (auto node : nodes) {
+    node->fill = false;
   }
 }
 

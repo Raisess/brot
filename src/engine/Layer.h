@@ -1,15 +1,14 @@
 #pragma once
 
+#include <memory>
 #include <vector>
-#include "Entity.h"
-#include "UI.h"
+#include "_Node.h"
 
 namespace Engine {
 
 class Layer {
 public:
-  std::vector<std::shared_ptr<UI>> uis;
-  std::vector<std::shared_ptr<Entity>> entities;
+  std::vector<std::shared_ptr<Node>> nodes;
 
   void update(int delta_time) const;
   void draw() const;
