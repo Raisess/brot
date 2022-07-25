@@ -24,12 +24,13 @@ public:
 
   UI(const GameContext& game_ctx, std::shared_ptr<GFX::Font> font);
 
-  void update() const;
+  void update(int delta_time);
   void draw() const;
 
 private:
   std::unique_ptr<GFX::TextComponent> _component;
   std::shared_ptr<GFX::Font> _font;
+  unsigned int _time_count = 0;
 };
 
 }

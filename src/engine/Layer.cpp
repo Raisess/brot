@@ -6,7 +6,7 @@ void Engine::Layer::update(int delta_time) const {
   }
 
   for (auto ui : uis) {
-    ui->update();
+    ui->update(delta_time);
   }
 }
 
