@@ -7,12 +7,17 @@ GFX::Renderer::Renderer(const Window& window) {
 
   sdl_value = SDL_CreateRenderer(window.get(), -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
   if (sdl_value == nullptr) {
-    Util::Logger::Error("Error creating renderer " + std::string(SDL_GetError()));
+    Util::Logger::Error("Error creating renderer: " + std::string(SDL_GetError()));
     exit(1);
   }
 
   auto window_size = window.get_size();
   SDL_RenderSetLogicalSize(sdl_value, window_size.width, window_size.height);
+
+  int blend_mode_code = SDL_SetRenderDrawBlendMode(sdl_value, SDL_BLENDMODE_BLEND);
+  if (blend_mode_code < 0) {
+    Util::Logger::Error("Error enabling bled mode: " + std::string(SDL_GetError()));
+  }
 
   clear();
   Text::Init();
