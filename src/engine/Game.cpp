@@ -19,10 +19,10 @@ Engine::Game::~Game() {
 }
 
 void Engine::Game::loop(const CallbackLoop& callback) const {
-  GFX::TextComponent intro_text(*ctx.render_ctx);
-  intro_text.set_size({ LOGO_W, LOGO_H });
-  intro_text.set_position({ (GWINDOW_W / 2) - (LOGO_W / 2), (GWINDOW_H / 2) - (LOGO_H / 2) });
-  intro_text.bind(GFX::Font(FONT_PATH), "BROT Engine");
+  GFX::TextComponent logo(*ctx.render_ctx);
+  logo.set_size({ LOGO_W, LOGO_H });
+  logo.set_position({ (GWINDOW_W / 2) - (LOGO_W / 2), (GWINDOW_H / 2) - (LOGO_H / 2) });
+  logo.bind(GFX::Font(FONT_PATH), "Brot Engine");
 
   unsigned int intro_count = 0;
   ctx.window_ctx->loop([&](int delta_time) -> void {
@@ -31,7 +31,7 @@ void Engine::Game::loop(const CallbackLoop& callback) const {
     if (Util::Time::Wait(INTRO_DELAY, delta_time, intro_count)) {
       callback(delta_time);
     } else {
-      intro_text.draw();
+      logo.draw();
     }
 
     ctx.render_ctx->draw();
