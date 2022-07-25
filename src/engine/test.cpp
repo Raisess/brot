@@ -76,11 +76,11 @@ int main() {
     });
     Input::Keyboard::OnPressed(Input::Keyboard::ONE, [&]() -> void {
       level_layer->toggle_fill();
-      Util::Time::delay(100);
+      Util::Time::Delay(100);
     });
     Input::Keyboard::OnPressed(Input::Keyboard::TWO, [&]() -> void {
       level_layer->toggle_hide();
-      Util::Time::delay(100);
+      Util::Time::Delay(100);
     });
 
     scene.update(delta_time);

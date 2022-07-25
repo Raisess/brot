@@ -8,22 +8,22 @@ namespace Util {
 
 class Logger {
 public:
-  static void log(const std::string& message) {
-    Logger::log("LOG", message);
+  static void Log(const std::string& message) {
+    Logger::_log("LOG", message);
   }
 
-  static void error(const std::string& message) {
-    Logger::log("ERROR", message);
+  static void Error(const std::string& message) {
+    Logger::_log("ERROR", message);
   }
 
-  static void debug(const std::string& message) {
+  static void Debug(const std::string& message) {
     if (DEBUG_LOG) {
-      Logger::log("DEBUG", message);
+      Logger::_log("DEBUG", message);
     }
   }
 
 private:
-  static void log(const std::string& type, const std::string& message) {
+  static void _log(const std::string& type, const std::string& message) {
     std::cout << "> " << type << ": " << message << std::endl;
   }
 };

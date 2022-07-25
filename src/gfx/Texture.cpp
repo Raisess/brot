@@ -2,17 +2,17 @@
 #include "Texture.h"
 
 GFX::Image::Image(const std::string& path) {
-  Util::Logger::debug("Create Image: " + path);
+  Util::Logger::Debug("Create Image: " + path);
   sdl_value = IMG_Load(path.c_str());
   if (sdl_value == nullptr) {
-    Util::Logger::error("Error loading image at: " + path);
+    Util::Logger::Error("Error loading image at: " + path);
     exit(1);
   }
 }
 
 GFX::Image::~Image() {
   SDL_FreeSurface(sdl_value);
-  Util::Logger::debug("Delete Image");
+  Util::Logger::Debug("Delete Image");
 }
 
 GFX::Texture::Texture(const Renderer& renderer, const Image& image) {

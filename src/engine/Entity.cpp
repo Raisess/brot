@@ -3,11 +3,11 @@
 
 Engine::Entity::Entity(const Engine::GameContext& game_ctx, const std::string& id) 
   : _id(id), _component(std::make_shared<GFX::TextureComponent>(*game_ctx.render_ctx)) {
-  Util::Logger::debug("Create Entity: " + id);
+  Util::Logger::Debug("Create Entity: " + id);
 }
 
 Engine::Entity::~Entity() {
-  Util::Logger::debug("Delete Entity");
+  Util::Logger::Debug("Delete Entity");
 }
 
 void Engine::Entity::update(int delta_time) {

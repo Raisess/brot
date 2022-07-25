@@ -2,7 +2,7 @@
 #include "Scene.h"
 
 Engine::Scene::Scene(const std::string& id) : _id(id) {
-  Util::Logger::debug("Create Scene: " + id);
+  Util::Logger::Debug("Create Scene: " + id);
 }
 
 void Engine::Scene::update(int delta_time) const {

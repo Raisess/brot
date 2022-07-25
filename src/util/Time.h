@@ -14,11 +14,11 @@ namespace Util {
 
 class Time {
 public:
-  static void delay(unsigned int ms) {
+  static void Delay(unsigned int ms) {
     SLEEP(ms);
   }
 
-  static bool wait(unsigned int time, unsigned int timestep, unsigned int& count) {
+  static bool Wait(unsigned int time, unsigned int timestep, unsigned int& count) {
     if (count >= time) {
       return true;
     }

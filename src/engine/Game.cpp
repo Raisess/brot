@@ -11,11 +11,11 @@ Engine::GameContext::GameContext(const std::string& window_title)
     render_ctx(std::make_shared<GFX::Renderer>(*window_ctx)) {}
 
 Engine::Game::Game(const std::string& title) : ctx(GameContext(title)) {
-  Util::Logger::debug("Create Game: " + title);
+  Util::Logger::Debug("Create Game: " + title);
 }
 
 Engine::Game::~Game() {
-  Util::Logger::debug("Delete Game");
+  Util::Logger::Debug("Delete Game");
 }
 
 void Engine::Game::loop(const CallbackLoop& callback) const {
@@ -28,7 +28,7 @@ void Engine::Game::loop(const CallbackLoop& callback) const {
   ctx.window_ctx->loop([&](int delta_time) -> void {
     ctx.render_ctx->clear();
 
-    if (Util::Time::wait(INTRO_DELAY, delta_time, intro_count)) {
+    if (Util::Time::Wait(INTRO_DELAY, delta_time, intro_count)) {
       callback(delta_time);
     } else {
       intro_text.draw();

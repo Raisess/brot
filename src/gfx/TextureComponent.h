@@ -8,10 +8,10 @@ namespace GFX {
 class TextureComponent : public Component {
 public:
   TextureComponent(const Renderer& renderer) : Component(renderer) {
-    Util::Logger::debug("Create TextureComponent");
+    Util::Logger::Debug("Create TextureComponent");
   }
   ~TextureComponent() {
-    Util::Logger::debug("Delete TextureComponent");
+    Util::Logger::Debug("Delete TextureComponent");
   }
 
   void bind(const Image& image) {

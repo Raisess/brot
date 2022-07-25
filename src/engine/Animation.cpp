@@ -9,7 +9,7 @@ void Engine::Animation::animate(int timestep, std::shared_ptr<GFX::TextureCompon
   if (_sprites.size()) {
     texture_component->bind(*_sprites[_sprite_count]);
 
-    if (Util::Time::wait(SPRITE_DELAY, timestep, _time_count)) {
+    if (Util::Time::Wait(SPRITE_DELAY, timestep, _time_count)) {
       _sprite_count++;
       _time_count = 0;
     }

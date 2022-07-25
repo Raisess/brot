@@ -8,10 +8,10 @@ namespace GFX {
 class TextComponent : public Component {
 public:
   TextComponent(const Renderer& renderer) : Component(renderer) {
-    Util::Logger::debug("Create TextComponent");
+    Util::Logger::Debug("Create TextComponent");
   }
   ~TextComponent() {
-    Util::Logger::debug("Delete TextComponent");
+    Util::Logger::Debug("Delete TextComponent");
   }
 
   void bind(const Font& font, const std::string& str) {
