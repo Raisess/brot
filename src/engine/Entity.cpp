@@ -2,7 +2,8 @@
 #include "./Entity.h"
 
 Engine::Entity::Entity(const Engine::GameContext& game_ctx, const std::string& id) 
-  : _id(id), _component(std::make_shared<GFX::TextureComponent>(*game_ctx.render_ctx)) {
+  : _component(std::make_shared<GFX::TextureComponent>(*game_ctx.render_ctx)) {
+  _id = id;
   Util::Logger::Debug("Create Entity: " + id);
 }
 
@@ -59,8 +60,4 @@ void Engine::Entity::create_animation(const std::string& id, const std::vector<s
 
 void Engine::Entity::use_animation(const std::string& id) {
   _animation_index = id;
-}
-
-const std::string Engine::Entity::id() const {
-  return _id;
 }

@@ -1,7 +1,9 @@
 #include "UI.h"
 
-Engine::UI::UI(const GameContext& game_ctx, std::shared_ptr<GFX::Font> font)
-  : _component(std::make_unique<GFX::TextComponent>(*game_ctx.render_ctx)), _font(font) {}
+Engine::UI::UI(const GameContext& game_ctx, const std::string& id, std::shared_ptr<GFX::Font> font)
+  : _component(std::make_unique<GFX::TextComponent>(*game_ctx.render_ctx)), _font(font) {
+  _id = id;
+}
 
 void Engine::UI::update(int) {
   _component->set_angle(angle);
