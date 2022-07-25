@@ -1,30 +1,22 @@
-#include "Component.h"
+#include "_Component.h"
 
 GFX::Component::Component(const Renderer& renderer)
   : renderer(renderer), _size({ 0, 0 }), _position({ 0, 0 }) {}
 
-void GFX::Component::draw() {
+void GFX::Component::draw_rect() {
   sdl_value.w = _size.width;
   sdl_value.h = _size.height;
   sdl_value.x = _position.x;
   sdl_value.y = _position.y;
 
-  SDL_SetRenderDrawColor(renderer.get(), _color.red, _color.green, _color.blue, _color.alpha);
+  if (_rect || _fill) {
+    SDL_SetRenderDrawColor(renderer.get(), _color.red, _color.green, _color.blue, _color.alpha);
 
-  if ((texture == nullptr && text == nullptr) || _rect || _fill) {
     if (_fill) {
       SDL_RenderFillRect(renderer.get(), &sdl_value);
     } else {
       SDL_RenderDrawRect(renderer.get(), &sdl_value);
     }
-  }
-
-  if (texture != nullptr) {
-    SDL_RenderCopyEx(renderer.get(), texture->get(), nullptr, &sdl_value, _angle, nullptr, _flip ? SDL_FLIP_HORIZONTAL : SDL_FLIP_NONE);
-  } else if (text != nullptr) {
-    SDL_RenderCopyEx(renderer.get(), text->get(), nullptr, &sdl_value, _angle, nullptr, SDL_FLIP_NONE);
-  } else {
-    SDL_RenderCopy(renderer.get(), nullptr, nullptr, &sdl_value);
   }
 }
 

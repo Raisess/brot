@@ -1,7 +1,8 @@
 #pragma once
 
 #include "../util/Logger.h"
-#include "Component.h"
+#include "_Component.h"
+#include "Texture.h"
 
 namespace GFX {
 
@@ -17,6 +18,19 @@ public:
   void bind(const Image& image) {
     texture = std::make_unique<Texture>(renderer, image);
   }
+
+  void draw() final override {
+    draw_rect();
+
+    if (texture != nullptr || !_rect) {
+      SDL_RenderCopyEx(renderer.get(), texture->get(), nullptr, &sdl_value, _angle, nullptr, _flip ? SDL_FLIP_HORIZONTAL : SDL_FLIP_NONE);
+    } else {
+      SDL_RenderCopy(renderer.get(), nullptr, nullptr, &sdl_value);
+    }
+  }
+
+private:
+  std::unique_ptr<Texture> texture;
 };
 
 }

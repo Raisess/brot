@@ -14,7 +14,7 @@ GFX_SRC=$(GFX_PATH)/Window.cpp \
 				$(GFX_PATH)/Renderer.cpp \
 				$(GFX_PATH)/Texture.cpp \
 				$(GFX_PATH)/Text.cpp \
-				$(GFX_PATH)/Component.cpp
+				$(GFX_PATH)/_Component.cpp
 
 SFX_SRC=
 

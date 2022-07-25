@@ -7,8 +7,6 @@
 #include "../common/Vec2.h"
 #include "Renderer.h"
 #include "SDLController.h"
-#include "Text.h"
-#include "Texture.h"
 
 using namespace Common;
 
@@ -18,7 +16,8 @@ class Component : public SDLController<SDL_Rect> {
 public:
   Component(const Renderer& renderer);
 
-  void draw();
+  virtual void draw() = 0;
+
   const Size get_size() const;
   void set_size(const Size& new_size);
   const Vec2 get_position() const;
@@ -36,8 +35,6 @@ public:
 
 protected:
   const Renderer& renderer;
-  std::unique_ptr<Texture> texture;
-  std::unique_ptr<Text> text;
   bool _fill = false;
   bool _flip = false;
   bool _rect = false;
@@ -45,6 +42,8 @@ protected:
   Vec2 _position;
   Size _size;
   Color _color;
+
+  void draw_rect();
 };
 
 }

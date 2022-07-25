@@ -1,5 +1,4 @@
 #include <iostream>
-#include "Component.h"
 #include "Renderer.h"
 #include "TextComponent.h"
 #include "TextureComponent.h"
@@ -28,10 +27,11 @@ int main() {
   red_component.fill();
   red_component.bind(test_image);
 
-  GFX::Component green_component(renderer);
+  GFX::TextureComponent green_component(renderer);
   green_component.set_size({ 100, 100 });
   green_component.set_position({ 500, 300 });
   green_component.set_color({ 0, 255, 0 });
+  green_component.rect();
 
   GFX::TextureComponent blue_component(renderer);
   blue_component.set_size({ 100, 100 });
