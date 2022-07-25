@@ -7,7 +7,7 @@
 #include "Scene.h"
 #include "UI.h"
 
-#define FONT_PATH "../tmp/test-font.ttf"
+#define FONT_PATH "./assets/fonts/font.ttf"
 #define TEXTURE_PATH "../tmp/dino-char/sprites/sprite_"
 #define TEXTURE_EXT ".png"
 #define IDLE "idle"
@@ -19,7 +19,7 @@ int main() {
   Engine::Scene scene("main_scene");
 
   std::shared_ptr<Engine::UI> fps_ui = std::make_shared<Engine::UI>(game.ctx, std::make_shared<GFX::Font>(FONT_PATH));
-  fps_ui->size = { 100, 50 };
+  fps_ui->size = { 170, 50 };
 
   std::shared_ptr<Engine::Entity> entity = std::make_shared<Engine::Entity>(game.ctx, "dino_entity");
   entity->size = { 100, 100 };

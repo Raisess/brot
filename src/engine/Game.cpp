@@ -4,7 +4,7 @@
 #include "../util/Time.h"
 #include "Game.h"
 
-#define FONT_PATH "../tmp/test-font.ttf"
+#define FONT_PATH "./assets/fonts/font.ttf"
 
 Engine::GameContext::GameContext(const std::string& window_title)
   : window_ctx(std::make_unique<GFX::Window>(window_title, Common::Size(GWINDOW_W, GWINDOW_H))),
