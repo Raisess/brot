@@ -22,6 +22,7 @@ INPUT_SRC=$(INPUT_PATH)/Keyboard.cpp \
 					$(INPUT_PATH)/Mouse.cpp
 
 ENGINE_SRC=$(ENGINE_PATH)/Game.cpp \
+					 $(ENGINE_PATH)/NodeContainer.cpp \
 					 $(ENGINE_PATH)/UI.cpp \
 					 $(ENGINE_PATH)/Animation.cpp \
 					 $(ENGINE_PATH)/Entity.cpp \

@@ -12,11 +12,13 @@ public:
   enum Type {
     ENTITY = 0,
     UI,
+    CONTAINER,
   };
 
   Common::Color color = {};
   Common::Size size = { 0, 0 };
   Common::Vec2 position = { 0, 0 };
+  Common::Vec2 offset = { 0, 0 }; // NodeContainer use only
   int angle = 0;
   bool hide = false;
   bool fill = false;
