@@ -26,12 +26,12 @@ public:
   void set_color(const Color& new_color);
   const int get_angle() const;
   void set_angle(int value);
-  void fill();
-  void unfill();
-  void flip();
-  void unflip();
-  void rect();
-  void unrect();
+  const bool get_fill() const;
+  void set_fill(bool fill);
+  const bool get_flip() const;
+  void set_flip(bool flip);
+  const bool get_rect() const;
+  void set_rect(bool rect);
 
 protected:
   const Renderer& renderer;

@@ -52,26 +52,26 @@ void GFX::Component::set_angle(int angle) {
   _angle = angle;
 }
 
-void GFX::Component::fill() {
-  _fill = true;
+const bool GFX::Component::get_fill() const {
+  return _fill;
 }
 
-void GFX::Component::unfill() {
-  _fill = false;
+void GFX::Component::set_fill(bool fill) {
+  _fill = fill;
 }
 
-void GFX::Component::flip() {
-  _flip = true;
+const bool GFX::Component::get_flip() const {
+  return _flip;
 }
 
-void GFX::Component::unflip() {
-  _flip = false;
+void GFX::Component::set_flip(bool flip) {
+  _flip = flip;
 }
 
-void GFX::Component::rect() {
-  _rect = true;
+const bool GFX::Component::get_rect() const {
+  return _rect;
 }
 
-void GFX::Component::unrect() {
-  _rect = false;
+void GFX::Component::set_rect(bool rect){
+  _rect = rect;
 }

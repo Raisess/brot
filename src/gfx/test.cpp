@@ -24,14 +24,14 @@ int main() {
   red_component.set_size({ 100, 100 });
   red_component.set_position({ 0, 0 });
   red_component.set_color({ 255, 0, 0 });
-  red_component.fill();
+  red_component.set_fill(true);
   red_component.bind(test_image);
 
   GFX::TextureComponent green_component(renderer);
   green_component.set_size({ 100, 100 });
   green_component.set_position({ 500, 300 });
   green_component.set_color({ 0, 255, 0 });
-  green_component.rect();
+  green_component.set_rect(true);
 
   GFX::TextureComponent blue_component(renderer);
   blue_component.set_size({ 100, 100 });
@@ -64,9 +64,9 @@ int main() {
     }
 
     if (up) {
-      green_component.fill();
+      green_component.set_fill(true);
     } else {
-      green_component.unfill();
+      green_component.set_fill(false);
     }
 
     blue_component.set_angle(i);
