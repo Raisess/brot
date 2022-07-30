@@ -17,6 +17,9 @@ void Engine::UI::update(int) {
   _component->set_position(position);
   _component->set_size(size);
   _component->set_color(color);
+  _component->set_fill(fill);
+  _component->set_flip(flip);
+  _component->set_rect(rect);
   _component->bind(*_font, text);
 }
 

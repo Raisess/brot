@@ -58,21 +58,21 @@ int main() {
     });
     Input::Keyboard::OnPressed(Input::Keyboard::W, [&]() -> void {
       entity->use_animation(RUNNING);
-      entity->position.y = entity->position.y - VELOCITY;
+      entity->position.y -= VELOCITY;
     });
     Input::Keyboard::OnPressed(Input::Keyboard::A, [&]() -> void {
       entity->use_animation(RUNNING);
       entity->flip = true;
-      entity->position.x = entity->position.x - VELOCITY;
+      entity->position.x -= VELOCITY;
     });
     Input::Keyboard::OnPressed(Input::Keyboard::S, [&]() -> void {
       entity->use_animation(RUNNING);
-      entity->position.y = entity->position.y + VELOCITY;
+      entity->position.y += VELOCITY;
     });
     Input::Keyboard::OnPressed(Input::Keyboard::D, [&]() -> void {
       entity->use_animation(RUNNING);
       entity->flip = false;
-      entity->position.x = entity->position.x + VELOCITY;
+      entity->position.x += VELOCITY;
     });
     Input::Keyboard::OnPressed(Input::Keyboard::ONE, [&]() -> void {
       ui_layer->toggle_fill();

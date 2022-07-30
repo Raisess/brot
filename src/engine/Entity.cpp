@@ -16,24 +16,9 @@ void Engine::Entity::update(int delta_time) {
   _component->set_position(position);
   _component->set_size(size);
   _component->set_color(color);
-
-  if (fill) {
-    _component->fill();
-  } else {
-    _component->unfill();
-  }
-
-  if (flip) {
-    _component->flip();
-  } else {
-    _component->unflip();
-  }
-
-  if (rect) {
-    _component->rect();
-  } else {
-    _component->unrect();
-  }
+  _component->set_fill(fill);
+  _component->set_flip(flip);
+  _component->set_rect(rect);
 
   if (_animations.size()) {
     if (_animation_index != _last_animation_index) {
