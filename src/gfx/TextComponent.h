@@ -23,7 +23,7 @@ public:
     draw_rect();
 
     if (text != nullptr || !_rect) {
-      SDL_RenderCopyEx(renderer.get(), text->get(), nullptr, &sdl_value, _angle, nullptr, SDL_FLIP_NONE);
+      SDL_RenderCopyEx(renderer.get(), text->get(), nullptr, &sdl_value, _angle, nullptr, _flip ? SDL_FLIP_HORIZONTAL : SDL_FLIP_NONE);
     } else {
       SDL_RenderCopy(renderer.get(), nullptr, nullptr, &sdl_value);
     }
