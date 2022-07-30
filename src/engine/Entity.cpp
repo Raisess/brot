@@ -2,7 +2,7 @@
 #include "./Entity.h"
 
 Engine::Entity::Entity(const Engine::GameContext& game_ctx, const std::string& id) 
-  : Node(id),
+  : Node(id, Node::Type::ENTITY),
     _component(std::make_shared<GFX::TextureComponent>(*game_ctx.render_ctx)) {
   Util::Logger::Debug("Create Entity: " + _id);
 }

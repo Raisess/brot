@@ -2,7 +2,7 @@
 #include "UI.h"
 
 Engine::UI::UI(const GameContext& game_ctx, const std::string& id, std::shared_ptr<GFX::Font> font)
-  : Node(id),
+  : Node(id, Node::Type::UI),
     _component(std::make_unique<GFX::TextComponent>(*game_ctx.render_ctx)),
     _font(font) {
   Util::Logger::Debug("Create UI: " + _id);
