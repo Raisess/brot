@@ -12,7 +12,6 @@ Engine::NodeContainer::~NodeContainer() {
 
 void Engine::NodeContainer::update(int delta_time) {
   for (auto node : nodes) {
-    node->flip = flip;
     node->fill = fill;
     node->rect = rect;
     node->angle = angle;
