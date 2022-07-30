@@ -1,8 +1,15 @@
+#include "../util/Logger.h"
 #include "UI.h"
 
 Engine::UI::UI(const GameContext& game_ctx, const std::string& id, std::shared_ptr<GFX::Font> font)
-  : _component(std::make_unique<GFX::TextComponent>(*game_ctx.render_ctx)), _font(font) {
-  _id = id;
+  : Node(id),
+    _component(std::make_unique<GFX::TextComponent>(*game_ctx.render_ctx)),
+    _font(font) {
+  Util::Logger::Debug("Create UI: " + _id);
+}
+
+Engine::UI::~UI() {
+  Util::Logger::Debug("Delete UI: " + _id);
 }
 
 void Engine::UI::update(int) {

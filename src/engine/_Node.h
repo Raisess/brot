@@ -18,6 +18,8 @@ public:
   bool flip = false;
   bool rect = false;
 
+  Node(const std::string id) : _id(id) {}
+
   virtual void update(int delta_time) = 0;
   virtual void draw() const = 0;
 

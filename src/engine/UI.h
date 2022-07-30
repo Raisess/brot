@@ -13,6 +13,7 @@ public:
   std::string text;
 
   UI(const GameContext& game_ctx, const std::string& id, std::shared_ptr<GFX::Font> font);
+  ~UI();
 
   void update(int delta_time) final override;
   void draw() const final override;
