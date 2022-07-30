@@ -55,3 +55,25 @@ void Engine::Layer::toggle_fill() {
     fill();
   }
 }
+
+void Engine::Layer::rect() {
+  _rected = true;
+  for (auto node : nodes) {
+    node->rect = true;
+  }
+}
+
+void Engine::Layer::unrect() {
+  _rected = false;
+  for (auto node : nodes) {
+    node->rect = false;
+  }
+}
+
+void Engine::Layer::toggle_rect() {
+  if (_rected) {
+    unrect();
+  } else {
+    rect();
+  }
+}

@@ -84,11 +84,14 @@ int main() {
       dino->position.x += VELOCITY;
     });
     Input::Keyboard::OnPressed(Input::Keyboard::ONE, [&]() -> void {
-      ui_layer->toggle_fill();
       level_layer->toggle_fill();
       Util::Time::Delay(100);
     });
     Input::Keyboard::OnPressed(Input::Keyboard::TWO, [&]() -> void {
+      level_layer->toggle_rect();
+      Util::Time::Delay(100);
+    });
+    Input::Keyboard::OnPressed(Input::Keyboard::THREE, [&]() -> void {
       level_layer->toggle_hide();
       Util::Time::Delay(100);
     });

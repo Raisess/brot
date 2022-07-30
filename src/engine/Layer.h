@@ -18,10 +18,14 @@ public:
   void fill();
   void unfill();
   void toggle_fill();
+  void rect();
+  void unrect();
+  void toggle_rect();
 
 private:
   bool _hidden = false;
   bool _filled = false;
+  bool _rected = false;
 };
 
 }
