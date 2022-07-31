@@ -3,6 +3,7 @@
 #include <iostream>
 #include <SDL2/SDL_ttf.h>
 #include "../common/Color.h"
+#include "../_Sharable.h"
 #include "Renderer.h"
 #include "SDLController.h"
 
@@ -10,7 +11,9 @@
 
 namespace GFX {
 
-class Font : public SDLController<TTF_Font*> {
+class Font
+  : public SDLController<TTF_Font*>,
+    public Sharable<Font, const std::string&> {
 public:
   Font(const std::string& path, unsigned int point_size = FONT_POINT_SIZE);
   ~Font();
