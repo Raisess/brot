@@ -22,7 +22,7 @@ public:
   void draw() final override {
     draw_rect();
 
-    if (text != nullptr || !_rect) {
+    if (text != nullptr) {
       SDL_RenderCopyEx(renderer.get(), text->get(), nullptr, &sdl_value, _angle, nullptr, _flip ? SDL_FLIP_HORIZONTAL : SDL_FLIP_NONE);
     } else {
       SDL_RenderCopy(renderer.get(), nullptr, nullptr, &sdl_value);
@@ -30,7 +30,7 @@ public:
   }
 
 private:
-  std::unique_ptr<Text> text;
+  std::unique_ptr<Text> text = nullptr;
 };
 
 }
