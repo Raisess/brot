@@ -1,11 +1,25 @@
+#include <assert.h>
 #include "../util/Time.h"
 #include "Animation.h"
 
-void Engine::Animation::push_sprite(std::shared_ptr<GFX::Image> sprite) {
+Engine::Animation::Animation(const std::vector<Shared<GFX::Image>>& sprites) {
+  _sprites = sprites;
+}
+
+const int Engine::Animation::count_spites() const {
+  return _sprites.size();
+}
+
+void Engine::Animation::push_sprite(const Shared<GFX::Image>& sprite) {
   _sprites.push_back(sprite);
 }
 
-void Engine::Animation::animate(int timestep, std::shared_ptr<GFX::TextureComponent> texture_component) {
+void Engine::Animation::push_sprites(const std::vector<Shared<GFX::Image>>& sprites) {
+  assert(count_spites() == 0);
+  _sprites = sprites;
+}
+
+void Engine::Animation::animate(int timestep, const Shared<GFX::TextureComponent>& texture_component) {
   if (_sprites.size()) {
     texture_component->bind(*_sprites[_sprite_count]);
 

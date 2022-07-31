@@ -1,3 +1,4 @@
+#include <assert.h>
 #include "../util/Logger.h"
 #include "./Entity.h"
 
@@ -33,6 +34,11 @@ void Engine::Entity::draw() const {
   if (hide) return;
 
   _component->draw();
+}
+
+void Engine::Entity::create_animation(const std::string& id, const Animation& animation) {
+  assert(animation.count_spites() > 0);
+  _animations[id] = animation;
 }
 
 void Engine::Entity::create_animation(const std::string& id, const std::vector<Shared<GFX::Image>>& sprites) {
