@@ -35,12 +35,9 @@ void Engine::Entity::draw() const {
   _component->draw();
 }
 
-void Engine::Entity::create_animation(const std::string& id, const std::vector<std::shared_ptr<GFX::Image>>& sprites) {
+void Engine::Entity::create_animation(const std::string& id, const std::vector<Shared<GFX::Image>>& sprites) {
   _animations[id] = Animation();
-
-  for (auto sprite : sprites) {
-    _animations[id].push_sprite(sprite);
-  }
+  _animations[id].push_sprites(sprites);
 }
 
 void Engine::Entity::use_animation(const std::string& id) {

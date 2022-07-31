@@ -1,7 +1,7 @@
 #include <iostream>
-#include <memory>
 #include "../input/Keyboard.h"
 #include "../util/Time.h"
+#include "../_Sharable.h"
 #include "Entity.h"
 #include "Game.h"
 #include "NodeContainer.h"
@@ -15,48 +15,54 @@
 #define RUNNING "running"
 #define VELOCITY 5
 
+using namespace Engine;
+
 int main() {
-  Engine::Game game("Brot Engine | Engine Test");
-  Engine::Scene scene("main_scene");
-  std::shared_ptr<Engine::Layer> level_layer = scene.push_layer();
-  std::shared_ptr<Engine::Layer> ui_layer = scene.push_layer();
+  Game game("Brot Engine | Engine Test");
+  Scene scene("main_scene");
+  Shared<Layer> level_layer = scene.push_layer();
+  Shared<Layer> ui_layer = scene.push_layer();
 
-  std::shared_ptr<GFX::Font> game_font = std::make_shared<GFX::Font>(FONT_PATH);
+  Shared<GFX::Font> game_font = GFX::Font::Share(FONT_PATH);
 
-  std::shared_ptr<Engine::UI> fps_ui = std::make_shared<Engine::UI>(game.ctx, "fps_ui", game_font);
+  Shared<UI> fps_ui = UI::Share(game.ctx, "fps_ui", game_font);
   fps_ui->size = { 100, 40 };
   ui_layer->nodes.push_back(fps_ui);
 
-  std::shared_ptr<Engine::Entity> dino_entity = std::make_shared<Engine::Entity>(game.ctx, "dino_entity");
-  dino_entity->size = { 100, 100 };
-  dino_entity->color = { 255, 0, 0 };
-  std::shared_ptr<Engine::UI> dino_ui = std::make_shared<Engine::UI>(game.ctx, "dino_ui", game_font);
+  Shared<UI> dino_ui = UI::Share(game.ctx, "dino_ui", game_font);
   dino_ui->offset = { 25, -30 };
   dino_ui->size = { 50, 50 };
   dino_ui->text = "Dino";
-  std::shared_ptr<Engine::NodeContainer> dino = std::make_shared<Engine::NodeContainer>("dino");
+  Shared<Entity> dino_entity = Entity::Share(game.ctx, "dino_entity");
+  dino_entity->size = { 100, 100 };
+  dino_entity->color = { 255, 0, 0 };
+  dino_entity->create_animation(IDLE, {
+    GFX::Image::Share(std::string(TEXTURE_PATH) + "idle_1" + std::string(TEXTURE_EXT)),
+    GFX::Image::Share(std::string(TEXTURE_PATH) + "idle_2" + std::string(TEXTURE_EXT)),
+    GFX::Image::Share(std::string(TEXTURE_PATH) + "idle_3" + std::string(TEXTURE_EXT)),
+    GFX::Image::Share(std::string(TEXTURE_PATH) + "idle_4" + std::string(TEXTURE_EXT)),
+  });
+  dino_entity->create_animation(RUNNING, {
+    GFX::Image::Share(std::string(TEXTURE_PATH) + "running_5" + std::string(TEXTURE_EXT)),
+    GFX::Image::Share(std::string(TEXTURE_PATH) + "running_6" + std::string(TEXTURE_EXT)),
+    GFX::Image::Share(std::string(TEXTURE_PATH) + "running_7" + std::string(TEXTURE_EXT)),
+    GFX::Image::Share(std::string(TEXTURE_PATH) + "running_8" + std::string(TEXTURE_EXT)),
+    GFX::Image::Share(std::string(TEXTURE_PATH) + "running_9" + std::string(TEXTURE_EXT)),
+    GFX::Image::Share(std::string(TEXTURE_PATH) + "running_10" + std::string(TEXTURE_EXT)),
+    GFX::Image::Share(std::string(TEXTURE_PATH) + "running_11" + std::string(TEXTURE_EXT)),
+    GFX::Image::Share(std::string(TEXTURE_PATH) + "running_12" + std::string(TEXTURE_EXT)),
+    GFX::Image::Share(std::string(TEXTURE_PATH) + "running_13" + std::string(TEXTURE_EXT)),
+  });
+  Shared<NodeContainer> dino = NodeContainer::Share("dino");
   dino->nodes.push_back(dino_entity);
   dino->nodes.push_back(dino_ui);
   level_layer->nodes.push_back(dino);
 
-  dino_entity->create_animation(IDLE, {
-    std::make_shared<GFX::Image>(std::string(TEXTURE_PATH) + "idle_1" + std::string(TEXTURE_EXT)),
-    std::make_shared<GFX::Image>(std::string(TEXTURE_PATH) + "idle_2" + std::string(TEXTURE_EXT)),
-    std::make_shared<GFX::Image>(std::string(TEXTURE_PATH) + "idle_3" + std::string(TEXTURE_EXT)),
-    std::make_shared<GFX::Image>(std::string(TEXTURE_PATH) + "idle_4" + std::string(TEXTURE_EXT)),
-  });
-
-  dino_entity->create_animation(RUNNING, {
-    std::make_shared<GFX::Image>(std::string(TEXTURE_PATH) + "running_5" + std::string(TEXTURE_EXT)),
-    std::make_shared<GFX::Image>(std::string(TEXTURE_PATH) + "running_6" + std::string(TEXTURE_EXT)),
-    std::make_shared<GFX::Image>(std::string(TEXTURE_PATH) + "running_7" + std::string(TEXTURE_EXT)),
-    std::make_shared<GFX::Image>(std::string(TEXTURE_PATH) + "running_8" + std::string(TEXTURE_EXT)),
-    std::make_shared<GFX::Image>(std::string(TEXTURE_PATH) + "running_9" + std::string(TEXTURE_EXT)),
-    std::make_shared<GFX::Image>(std::string(TEXTURE_PATH) + "running_10" + std::string(TEXTURE_EXT)),
-    std::make_shared<GFX::Image>(std::string(TEXTURE_PATH) + "running_11" + std::string(TEXTURE_EXT)),
-    std::make_shared<GFX::Image>(std::string(TEXTURE_PATH) + "running_12" + std::string(TEXTURE_EXT)),
-    std::make_shared<GFX::Image>(std::string(TEXTURE_PATH) + "running_13" + std::string(TEXTURE_EXT)),
-  });
+  Shared<Entity> another_dino_entity = Entity::Share(game.ctx, "another_dino_entity");
+  another_dino_entity->size = { 100, 100 };
+  another_dino_entity->color = { 255, 0, 0 };
+  another_dino_entity->position = { 500, 100 };
+  level_layer->nodes.push_back(another_dino_entity);
 
   game.loop([&](int delta_time) -> void {
     fps_ui->text = "FPS: " + std::to_string(game.ctx.window_ctx->get_fps());

@@ -3,11 +3,11 @@
 
 Engine::NodeContainer::NodeContainer(const std::string& id)
   : Node(id, Node::Type::CONTAINER) {
-  Util::Logger::Debug("Create container: " + _id);
+  Util::Logger::Debug("Create Container: " + _id);
 }
 
 Engine::NodeContainer::~NodeContainer() {
-  Util::Logger::Debug("Delete container: " + _id);
+  Util::Logger::Debug("Delete Container: " + _id);
 }
 
 void Engine::NodeContainer::update(int delta_time) {
