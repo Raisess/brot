@@ -4,7 +4,12 @@
 #include "../util/Time.h"
 #include "Game.h"
 
+#define GWINDOW_W 1280
+#define GWINDOW_H 720
 #define FONT_PATH "./assets/fonts/font.ttf"
+#define LOGO_W 500
+#define LOGO_H 100
+#define INTRO_DELAY 1500
 
 Engine::GameContext::GameContext(const std::string& window_title)
   : window_ctx(std::make_unique<GFX::Window>(window_title, Common::Size(GWINDOW_W, GWINDOW_H))),

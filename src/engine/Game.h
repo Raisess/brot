@@ -6,12 +6,6 @@
 #include "../gfx/Renderer.h"
 #include "../gfx/Window.h"
 
-#define GWINDOW_W 1280
-#define GWINDOW_H 720
-#define LOGO_W 500
-#define LOGO_H 100
-#define INTRO_DELAY 3000
-
 namespace Engine {
 
 class GameContext {
