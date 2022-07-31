@@ -12,9 +12,9 @@ namespace Engine {
 
 class Entity
   : public Node,
-    public Sharable<Entity, const GameContext&, const std::string&> {
+    public Sharable<Entity, const GameContext&, const std::string&, const Shared<GFX::Image>&> {
 public:
-  Entity(const GameContext& game_ctx, const std::string& id);
+  Entity(const GameContext& game_ctx, const std::string& id, const Shared<GFX::Image>& sprite);
   ~Entity();
 
   void update(int delta_time) final override;
@@ -25,6 +25,7 @@ public:
 
 private:
   Shared<GFX::TextureComponent> _component;
+  Shared<GFX::Image> _sprite;
   std::map<std::string, Animation> _animations;
   std::string _animation_index;
   std::string _last_animation_index;

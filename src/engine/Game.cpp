@@ -24,6 +24,7 @@ Engine::Game::~Game() {
 }
 
 void Engine::Game::loop(const CallbackLoop& callback) const {
+  Util::Logger::Debug("Intro");
   GFX::TextComponent logo(*ctx.render_ctx);
   logo.set_size({ LOGO_W, LOGO_H });
   logo.set_position({ (GWINDOW_W / 2) - (LOGO_W / 2), (GWINDOW_H / 2) - (LOGO_H / 2) });

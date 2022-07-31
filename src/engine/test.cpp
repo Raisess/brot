@@ -28,6 +28,7 @@ int main() {
   fps_ui->size = { 100, 40 };
   ui_layer->nodes.push_back(fps_ui);
 
+  Shared<GFX::Image> dino_sprite = GFX::Image::Share(std::string(TEXTURE_PATH) + "idle_1" + std::string(TEXTURE_EXT));
   Animation dino_idle_animation = Animation({
     GFX::Image::Share(std::string(TEXTURE_PATH) + "idle_1" + std::string(TEXTURE_EXT)),
     GFX::Image::Share(std::string(TEXTURE_PATH) + "idle_2" + std::string(TEXTURE_EXT)),
@@ -50,7 +51,7 @@ int main() {
   dino_ui->offset = { 25, -30 };
   dino_ui->size = { 50, 50 };
   dino_ui->text = "Dino";
-  Shared<Entity> dino_entity = Entity::Share(game.ctx, "dino_entity");
+  Shared<Entity> dino_entity = Entity::Share(game.ctx, "dino_entity", dino_sprite);
   dino_entity->size = { 100, 100 };
   dino_entity->color = { 255, 0, 0 };
   dino_entity->create_animation(IDLE, dino_idle_animation);
@@ -60,17 +61,15 @@ int main() {
   dino->nodes.push_back(dino_ui);
   level_layer->nodes.push_back(dino);
 
-  Shared<Entity> another_dino_entity = Entity::Share(game.ctx, "another_dino_entity");
+  Shared<Entity> another_dino_entity = Entity::Share(game.ctx, "another_dino_entity", dino_sprite);
   another_dino_entity->size = { 100, 100 };
   another_dino_entity->color = { 255, 0, 0 };
   another_dino_entity->position = { 500, 100 };
-  another_dino_entity->create_animation(IDLE, dino_idle_animation);
   level_layer->nodes.push_back(another_dino_entity);
 
   game.loop([&](int delta_time) -> void {
     fps_ui->text = "FPS: " + std::to_string(game.ctx.window_ctx->get_fps());
     dino_entity->use_animation(IDLE);
-    another_dino_entity->use_animation(IDLE);
 
     Input::Keyboard::OnPressed(Input::Keyboard::ESC, [&]() -> void {
       return game.end();
