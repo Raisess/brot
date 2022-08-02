@@ -4,15 +4,15 @@
 #include "../util/Time.h"
 #include "Game.h"
 
-#define GWINDOW_W 1280
-#define GWINDOW_H 720
-#define FONT_PATH "./assets/fonts/font.ttf"
-#define LOGO_W 500
-#define LOGO_H 100
+#define GAME_WINDOW_WIDTH 1280
+#define GAME_WINDOW_HEIGHT 720
+#define INTRO_FONT_PATH "./assets/fonts/font.ttf"
+#define INTRO_LOGO_WIDTH 500
+#define INTRO_LOGO_HEIGHT 100
 #define INTRO_DELAY 1500
 
 Engine::GameContext::GameContext(const std::string& window_title)
-  : window_ctx(std::make_unique<GFX::Window>(window_title, Common::Size(GWINDOW_W, GWINDOW_H))),
+  : window_ctx(std::make_unique<GFX::Window>(window_title, Common::Size(GAME_WINDOW_WIDTH, GAME_WINDOW_HEIGHT))),
     render_ctx(std::make_shared<GFX::Renderer>(*window_ctx)) {}
 
 Engine::Game::Game(const std::string& title) : ctx(GameContext(title)) {
@@ -26,9 +26,12 @@ Engine::Game::~Game() {
 void Engine::Game::loop(const CallbackLoop& callback) const {
   Util::Logger::Debug("Intro");
   GFX::TextComponent logo(*ctx.render_ctx);
-  logo.set_size({ LOGO_W, LOGO_H });
-  logo.set_position({ (GWINDOW_W / 2) - (LOGO_W / 2), (GWINDOW_H / 2) - (LOGO_H / 2) });
-  logo.bind(GFX::Font(FONT_PATH), "Brot Engine");
+  logo.set_size({ INTRO_LOGO_WIDTH, INTRO_LOGO_HEIGHT });
+  logo.set_position({
+    (GAME_WINDOW_WIDTH / 2) - (INTRO_LOGO_WIDTH / 2),
+    (GAME_WINDOW_HEIGHT / 2) - (INTRO_LOGO_HEIGHT / 2),
+  });
+  logo.bind(GFX::Font(INTRO_FONT_PATH), "Brot Engine");
 
   unsigned int intro_count = 0;
   ctx.window_ctx->loop([&](int delta_time) -> void {
