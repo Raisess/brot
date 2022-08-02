@@ -13,6 +13,14 @@ public:
     assert(width >= 0);
     assert(height >= 0);
   }
+
+  Size operator+(const Size& size) {
+    return Size(width + size.width, height + size.height);
+  }
+
+  Size operator-(const Size& size) {
+    return Size(width - size.width, height - size.height);
+  }
 };
 
 }

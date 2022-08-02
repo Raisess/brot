@@ -48,8 +48,8 @@ int main() {
   });
 
   std::shared_ptr<UI> dino_ui = UI::Share(game.ctx, "dino_ui", game_font);
-  dino_ui->offset = { 25, -30 };
   dino_ui->size = { 50, 50 };
+  dino_ui->offset = { 25, -30 };
   dino_ui->text = "Dino";
   std::shared_ptr<Entity> dino_entity = Entity::Share(game.ctx, "dino_entity", dino_sprite);
   dino_entity->size = { 100, 100 };
@@ -91,6 +91,12 @@ int main() {
       dino_entity->use_animation(RUNNING);
       dino_entity->flip = false;
       dino->position.x += VELOCITY;
+    });
+    Input::Keyboard::OnPressed(Input::Keyboard::O, [&]() -> void {
+      dino_entity->size = dino_entity->size - Common::Size({ 10, 10 });
+    });
+    Input::Keyboard::OnPressed(Input::Keyboard::P, [&]() -> void {
+      dino_entity->size = dino_entity->size + Common::Size({ 10, 10 });
     });
     Input::Keyboard::OnPressed(Input::Keyboard::ONE, [&]() -> void {
       level_layer->toggle_fill();
