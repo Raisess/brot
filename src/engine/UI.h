@@ -11,11 +11,11 @@ namespace Engine {
 
 class UI
   : public Node,
-    public Sharable<UI, const GameContext&, const std::string&, const Shared<GFX::Font>&> {
+    public Sharable<UI, const GameContext&, const std::string&, const std::shared_ptr<GFX::Font>&> {
 public:
   std::string text;
 
-  UI(const GameContext& game_ctx, const std::string& id, const Shared<GFX::Font>& font);
+  UI(const GameContext& game_ctx, const std::string& id, const std::shared_ptr<GFX::Font>& font);
   ~UI();
 
   void update(int delta_time) final override;
@@ -23,7 +23,7 @@ public:
 
 private:
   std::unique_ptr<GFX::TextComponent> _component;
-  Shared<GFX::Font> _font;
+  std::shared_ptr<GFX::Font> _font;
   unsigned int _time_count = 0;
 };
 

@@ -1,7 +1,7 @@
 #include "../util/Logger.h"
 #include "UI.h"
 
-Engine::UI::UI(const GameContext& game_ctx, const std::string& id, const Shared<GFX::Font>& font)
+Engine::UI::UI(const GameContext& game_ctx, const std::string& id, const std::shared_ptr<GFX::Font>& font)
   : Node(id, Node::Type::UI),
     _component(std::make_unique<GFX::TextComponent>(*game_ctx.render_ctx)),
     _font(font) {

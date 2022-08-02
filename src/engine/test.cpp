@@ -1,7 +1,7 @@
 #include <iostream>
+#include <memory>
 #include "../input/Keyboard.h"
 #include "../util/Time.h"
-#include "../_Sharable.h"
 #include "Entity.h"
 #include "Game.h"
 #include "NodeContainer.h"
@@ -20,15 +20,15 @@ using namespace Engine;
 int main() {
   Game game("Brot Engine | Engine Test");
   Scene scene("main_scene");
-  Shared<Layer> level_layer = scene.push_layer();
-  Shared<Layer> ui_layer = scene.push_layer();
+  std::shared_ptr<Layer> level_layer = scene.push_layer();
+  std::shared_ptr<Layer> ui_layer = scene.push_layer();
 
-  Shared<GFX::Font> game_font = GFX::Font::Share(FONT_PATH);
-  Shared<UI> fps_ui = UI::Share(game.ctx, "fps_ui", game_font);
+  std::shared_ptr<GFX::Font> game_font = GFX::Font::Share(FONT_PATH);
+  std::shared_ptr<UI> fps_ui = UI::Share(game.ctx, "fps_ui", game_font);
   fps_ui->size = { 100, 40 };
   ui_layer->nodes.push_back(fps_ui);
 
-  Shared<GFX::Image> dino_sprite = GFX::Image::Share(std::string(TEXTURE_PATH) + "idle_1" + std::string(TEXTURE_EXT));
+  std::shared_ptr<GFX::Image> dino_sprite = GFX::Image::Share(std::string(TEXTURE_PATH) + "idle_1" + std::string(TEXTURE_EXT));
   Animation dino_idle_animation = Animation({
     GFX::Image::Share(std::string(TEXTURE_PATH) + "idle_1" + std::string(TEXTURE_EXT)),
     GFX::Image::Share(std::string(TEXTURE_PATH) + "idle_2" + std::string(TEXTURE_EXT)),
@@ -47,21 +47,21 @@ int main() {
     GFX::Image::Share(std::string(TEXTURE_PATH) + "running_13" + std::string(TEXTURE_EXT)),
   });
 
-  Shared<UI> dino_ui = UI::Share(game.ctx, "dino_ui", game_font);
+  std::shared_ptr<UI> dino_ui = UI::Share(game.ctx, "dino_ui", game_font);
   dino_ui->offset = { 25, -30 };
   dino_ui->size = { 50, 50 };
   dino_ui->text = "Dino";
-  Shared<Entity> dino_entity = Entity::Share(game.ctx, "dino_entity", dino_sprite);
+  std::shared_ptr<Entity> dino_entity = Entity::Share(game.ctx, "dino_entity", dino_sprite);
   dino_entity->size = { 100, 100 };
   dino_entity->color = { 255, 0, 0 };
   dino_entity->create_animation(IDLE, dino_idle_animation);
   dino_entity->create_animation(RUNNING, dino_running_animation);
-  Shared<NodeContainer> dino = NodeContainer::Share("dino");
+  std::shared_ptr<NodeContainer> dino = NodeContainer::Share("dino");
   dino->nodes.push_back(dino_entity);
   dino->nodes.push_back(dino_ui);
   level_layer->nodes.push_back(dino);
 
-  Shared<Entity> another_dino_entity = Entity::Share(game.ctx, "another_dino_entity", dino_sprite);
+  std::shared_ptr<Entity> another_dino_entity = Entity::Share(game.ctx, "another_dino_entity", dino_sprite);
   another_dino_entity->size = { 100, 100 };
   another_dino_entity->color = { 255, 0, 0 };
   another_dino_entity->position = { 500, 100 };

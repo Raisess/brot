@@ -2,7 +2,7 @@
 #include "../util/Logger.h"
 #include "./Entity.h"
 
-Engine::Entity::Entity(const Engine::GameContext& game_ctx, const std::string& id, const Shared<GFX::Image>& sprite)
+Engine::Entity::Entity(const Engine::GameContext& game_ctx, const std::string& id, const std::shared_ptr<GFX::Image>& sprite)
   : Node(id, Node::Type::ENTITY),
     _component(std::make_shared<GFX::TextureComponent>(*game_ctx.render_ctx)),
     _sprite(sprite) {
@@ -44,7 +44,7 @@ void Engine::Entity::create_animation(const std::string& id, const Animation& an
   _animations[id] = animation;
 }
 
-void Engine::Entity::create_animation(const std::string& id, const std::vector<Shared<GFX::Image>>& sprites) {
+void Engine::Entity::create_animation(const std::string& id, const std::vector<std::shared_ptr<GFX::Image>>& sprites) {
   _animations[id] = Animation();
   _animations[id].push_sprites(sprites);
 }

@@ -12,7 +12,7 @@ class NodeContainer
   : public Node,
     public Sharable<NodeContainer, const std::string&> {
 public:
-  std::vector<Shared<Node>> nodes;
+  std::vector<std::shared_ptr<Node>> nodes;
 
   NodeContainer(const std::string& id);
   ~NodeContainer();

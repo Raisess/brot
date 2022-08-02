@@ -2,13 +2,10 @@
 
 #include <memory>
 
-template<typename T>
-using Shared = std::shared_ptr<T>;
-
 template<typename T, typename... K>
 class Sharable {
 public:
-  static Shared<T> Share(K&& ...args) {
+  static std::shared_ptr<T> Share(K&& ...args) {
     return std::make_shared<T>(args...);
   }
 };
