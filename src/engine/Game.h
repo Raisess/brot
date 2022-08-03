@@ -4,6 +4,7 @@
 #include <functional>
 #include <memory>
 #include "../gfx/Renderer.h"
+#include "../gfx/TextComponent.h"
 #include "../gfx/Window.h"
 
 namespace Engine {
@@ -23,8 +24,12 @@ public:
   Game(const std::string& title);
   ~Game();
 
-  void loop(const CallbackLoop& callback) const;
+  void loop(const CallbackLoop& callback);
   void end() const;
+
+private:
+  std::unique_ptr<GFX::TextComponent> _logo;
+  bool _started = false;
 };
 
 }

@@ -1,5 +1,4 @@
 #include "../common/Size.h"
-#include "../gfx/TextComponent.h"
 #include "../util/Logger.h"
 #include "../util/Time.h"
 #include "Game.h"
@@ -15,35 +14,36 @@ Engine::GameContext::GameContext(const std::string& window_title)
   : window_ctx(std::make_unique<GFX::Window>(window_title, Common::Size(GAME_WINDOW_WIDTH, GAME_WINDOW_HEIGHT))),
     render_ctx(std::make_shared<GFX::Renderer>(*window_ctx)) {}
 
-Engine::Game::Game(const std::string& title) : ctx(GameContext(title)) {
+Engine::Game::Game(const std::string& title)
+  : ctx(GameContext(title)),
+    _logo(std::make_unique<GFX::TextComponent>(*ctx.render_ctx)) {
   Util::Logger::Debug("Create Game: " + title);
+  _logo->set_size({ INTRO_LOGO_WIDTH, INTRO_LOGO_HEIGHT });
+  _logo->set_position({
+    (GAME_WINDOW_WIDTH / 2) - (INTRO_LOGO_WIDTH / 2),
+    (GAME_WINDOW_HEIGHT / 2) - (INTRO_LOGO_HEIGHT / 2),
+  });
+  _logo->bind(GFX::Font(INTRO_FONT_PATH), "Brot Engine");
 }
 
 Engine::Game::~Game() {
   Util::Logger::Debug("Delete Game");
 }
 
-void Engine::Game::loop(const CallbackLoop& callback) const {
-  Util::Logger::Debug("Intro");
-  GFX::TextComponent logo(*ctx.render_ctx);
-  logo.set_size({ INTRO_LOGO_WIDTH, INTRO_LOGO_HEIGHT });
-  logo.set_position({
-    (GAME_WINDOW_WIDTH / 2) - (INTRO_LOGO_WIDTH / 2),
-    (GAME_WINDOW_HEIGHT / 2) - (INTRO_LOGO_HEIGHT / 2),
-  });
-  logo.bind(GFX::Font(INTRO_FONT_PATH), "Brot Engine");
-
-  unsigned int intro_count = 0;
+void Engine::Game::loop(const CallbackLoop& callback) {
   ctx.window_ctx->loop([&](int delta_time) -> void {
     ctx.render_ctx->clear();
 
-    if (Util::Time::Wait(INTRO_DELAY, delta_time, intro_count)) {
+    if (_started) {
       callback(delta_time);
+      ctx.render_ctx->draw();
     } else {
-      logo.draw();
+      _logo->draw();
+      ctx.render_ctx->draw();
+      Util::Time::Delay(INTRO_DELAY);
+      delete _logo.release();
+      _started = true;
     }
-
-    ctx.render_ctx->draw();
   });
 }
 
