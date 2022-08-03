@@ -1,14 +1,14 @@
 #include "Layer.h"
 
 void Engine::Layer::update(int delta_time) const {
-  for (auto node : nodes) {
-    node->update(delta_time);
+  for (int i = nodes.size() - 1; i >= 0; i--) {
+    nodes[i]->update(delta_time);
   }
 }
 
 void Engine::Layer::draw() const {
-  for (auto node : nodes) {
-    node->draw();
+  for (int i = nodes.size() - 1; i >= 0; i--) {
+    nodes[i]->draw();
   }
 }
 

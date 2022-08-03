@@ -6,14 +6,14 @@ Engine::Scene::Scene(const std::string& id) : _id(id) {
 }
 
 void Engine::Scene::update(int delta_time) const {
-  for (auto layer : _layers) {
-    layer->update(delta_time);
+  for (int i = _layers.size() - 1; i >= 0; i--) {
+    _layers[i]->update(delta_time);
   }
 }
 
 void Engine::Scene::draw() const {
-  for (auto layer : _layers) {
-    layer->draw();
+  for (int i = _layers.size() - 1; i >= 0; i--) {
+    _layers[i]->draw();
   }
 }
 
