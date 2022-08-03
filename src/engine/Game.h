@@ -14,7 +14,7 @@ public:
   std::unique_ptr<GFX::Window> window_ctx;
   std::shared_ptr<GFX::Renderer> render_ctx;
 
-  GameContext(const std::string& window_title);
+  GameContext(const std::string& window_title, const Common::Size& window_size);
 };
 
 class Game {

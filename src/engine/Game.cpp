@@ -10,12 +10,12 @@
 #define INTRO_LOGO_HEIGHT 100
 #define INTRO_DELAY 1500
 
-Engine::GameContext::GameContext(const std::string& window_title)
-  : window_ctx(std::make_unique<GFX::Window>(window_title, Common::Size(GAME_WINDOW_WIDTH, GAME_WINDOW_HEIGHT))),
+Engine::GameContext::GameContext(const std::string& window_title, const Common::Size& window_size)
+  : window_ctx(std::make_unique<GFX::Window>(window_title, window_size)),
     render_ctx(std::make_shared<GFX::Renderer>(*window_ctx)) {}
 
 Engine::Game::Game(const std::string& title)
-  : ctx(GameContext(title)),
+  : ctx(GameContext(title, { GAME_WINDOW_WIDTH, GAME_WINDOW_HEIGHT })),
     _logo(std::make_unique<GFX::TextComponent>(*ctx.render_ctx)) {
   Util::Logger::Debug("Create Game: " + title);
   _logo->set_size({ INTRO_LOGO_WIDTH, INTRO_LOGO_HEIGHT });
