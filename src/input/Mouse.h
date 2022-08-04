@@ -8,7 +8,7 @@ namespace Input {
 
 class Mouse {
 
-using Callback = std::function<void(Common::Vec2)>;
+using Callback = std::function<void(const Common::Vec2&)>;
 
 public:
   enum Button {
