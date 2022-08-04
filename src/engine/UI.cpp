@@ -14,7 +14,7 @@ Engine::UI::~UI() {
 
 void Engine::UI::update(int) {
   _component->set_angle(angle);
-  _component->set_position(position);
+  _component->set_position(position + offset);
   _component->set_size(size);
   _component->set_color(color);
   _component->set_fill(fill);

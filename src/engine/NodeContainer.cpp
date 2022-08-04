@@ -15,7 +15,7 @@ void Engine::NodeContainer::update(int delta_time) {
     node->fill = fill;
     node->rect = rect;
     node->angle = angle;
-    node->position = position + node->offset;
+    node->position = position;
     node->update(delta_time);
   }
 }
