@@ -11,23 +11,23 @@ public:
 
   Vec2(int x, int y) : x(x), y(y) {}
 
-  std::string to_print_string() {
+  std::string to_print_string() const {
     return "x: " + std::to_string(x) + ", y: " + std::to_string(y);
   }
 
-  Vec2 operator+(const Vec2& vec) {
+  Vec2 operator+(const Vec2& vec) const {
     return Vec2(x + vec.x, y + vec.y);
   }
 
-  Vec2 operator+(int value) {
+  Vec2 operator+(int value) const {
     return Vec2(x + value, y + value);
   }
 
-  Vec2 operator*(const Vec2& vec) {
+  Vec2 operator*(const Vec2& vec) const {
     return Vec2(x * vec.x, y * vec.y);
   }
 
-  Vec2 operator*(int value) {
+  Vec2 operator*(int value) const {
     return Vec2(x * value, y * value);
   }
 };
