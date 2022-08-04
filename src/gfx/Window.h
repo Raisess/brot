@@ -12,7 +12,6 @@ using CallbackLoop = std::function<void(int)>;
 namespace GFX {
 
 class Window : public SDLController<SDL_Window*> {
-
 public:
   std::string title;
 

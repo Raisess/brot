@@ -8,7 +8,7 @@
 #include "Scene.h"
 #include "UI.h"
 
-#define FONT_PATH "./assets/fonts/font.ttf"
+#define FONT_PATH "./assets/fonts/engine.ttf"
 #define TEXTURE_PATH "../tmp/dino-char/sprites/sprite_"
 #define TEXTURE_EXT ".png"
 #define IDLE "idle"
@@ -20,8 +20,8 @@ using namespace Engine;
 int main() {
   Game game("Brot Engine | Engine Test");
   Scene scene("main_scene");
-  std::shared_ptr<Layer> level_layer = scene.push_layer();
   std::shared_ptr<Layer> ui_layer = scene.push_layer();
+  std::shared_ptr<Layer> level_layer = scene.push_layer();
 
   std::shared_ptr<GFX::Font> game_font = GFX::Font::Share(FONT_PATH);
   std::shared_ptr<UI> fps_ui = UI::Share(game.ctx, "fps_ui", game_font);

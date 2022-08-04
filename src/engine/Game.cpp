@@ -5,10 +5,10 @@
 
 #define GAME_WINDOW_WIDTH 1280
 #define GAME_WINDOW_HEIGHT 720
-#define INTRO_FONT_PATH "./assets/fonts/font.ttf"
 #define INTRO_LOGO_WIDTH 500
 #define INTRO_LOGO_HEIGHT 100
 #define INTRO_DELAY 1500
+#define INTRO_FONT_PATH "./assets/fonts/engine.ttf"
 
 Engine::GameContext::GameContext(const std::string& window_title, const Common::Size& window_size)
   : window_ctx(std::make_unique<GFX::Window>(window_title, window_size)),

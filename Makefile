@@ -33,14 +33,17 @@ ENGINE_SRC=$(ENGINE_PATH)/Game.cpp \
 OUT_DIR=./build
 OUT=$(OUT_DIR)/out.o
 
-clean:
-	rm -rf $(OUT_DIR)
-
 # TEST ONLY
 GFX_OUT=$(OUT_DIR)/gfx.o
 SFX_OUT=$(OUT_DIR)/sfx.o
 INPUT_OUT=$(OUT_DIR)/input.o
 ENGINE_OUT=$(OUT_DIR)/engine.o
+
+# SCRIPTS
+SETUP_ENGINE_CFG=./setup_engine_cfg.sh
+
+clean:
+	rm -rf $(OUT_DIR)
 
 build_gfx:
 	mkdir -p $(OUT_DIR)
