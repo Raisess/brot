@@ -5,7 +5,7 @@
 #include "../common/Size.h"
 #include "SDLController.h"
 
-#define FPS_LIMIT 60
+#define DEFAULT_FPS_LIMIT 60
 
 using CallbackLoop = std::function<void(int)>;
 
@@ -15,7 +15,7 @@ class Window : public SDLController<SDL_Window*> {
 public:
   std::string title;
 
-  Window(const std::string& title, const Common::Size& size);
+  Window(const std::string& title, const Common::Size& size, int fps_limit = DEFAULT_FPS_LIMIT);
   ~Window(void);
 
   void quit() const;
@@ -24,7 +24,8 @@ public:
   const unsigned int get_fps() const;
 
 private:
-  static unsigned int MinimumDeltaTime;
+  unsigned int _minimum_delta_time;
+  unsigned int _fps_limit;
   unsigned int _fps = 0;
   Common::Size _size;
 };

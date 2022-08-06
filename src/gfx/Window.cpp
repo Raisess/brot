@@ -2,7 +2,8 @@
 #include "../util/Time.h"
 #include "Window.h"
 
-GFX::Window::Window(const std::string& title, const Common::Size& size) : title(title), _size(size) {
+GFX::Window::Window(const std::string& title, const Common::Size& size, int fps_limit)
+  : title(title), _size(size), _fps_limit(fps_limit), _minimum_delta_time(fps_limit / 1000) {
   Util::Logger::Debug("Create Window: " + title + " | width: " + std::to_string(size.width) + ", height: " + std::to_string(size.height));
 
   if (SDL_Init(SDL_INIT_VIDEO) < 0) {
@@ -28,8 +29,6 @@ void GFX::Window::quit() const {
   SDL_PushEvent(&quit_event);
 }
 
-unsigned int GFX::Window::MinimumDeltaTime = 1000 / FPS_LIMIT;
-
 void GFX::Window::loop(const CallbackLoop& callback) {
   SDL_Event event;
   int last_time = SDL_GetTicks64();
@@ -48,8 +47,8 @@ void GFX::Window::loop(const CallbackLoop& callback) {
     if (last_time < now) {
       int delta_time = now - last_time;
 
-      if (delta_time < MinimumDeltaTime) {
-        delta_time = MinimumDeltaTime;
+      if (delta_time < _minimum_delta_time) {
+        delta_time = _minimum_delta_time;
       }
 
       callback(delta_time);
