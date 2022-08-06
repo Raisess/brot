@@ -22,6 +22,9 @@ public:
   void create_animation(const std::string& id, const Animation& animation);
   void create_animation(const std::string& id, const std::vector<std::shared_ptr<GFX::Image>>& sprites);
   void use_animation(const std::string& id);
+  void resume_animation(const std::string& id);
+  void pause_animation(const std::string& id);
+  const bool is_paused_animation(const std::string& id);
 
 private:
   std::shared_ptr<GFX::TextureComponent> _component;

@@ -45,10 +45,21 @@ void Engine::Entity::create_animation(const std::string& id, const Animation& an
 }
 
 void Engine::Entity::create_animation(const std::string& id, const std::vector<std::shared_ptr<GFX::Image>>& sprites) {
-  _animations[id] = Animation();
-  _animations[id].push_sprites(sprites);
+  _animations[id] = Animation(sprites);
 }
 
 void Engine::Entity::use_animation(const std::string& id) {
   _animation_index = id;
+}
+
+void Engine::Entity::resume_animation(const std::string& id) {
+  _animations[id].resume();
+}
+
+void Engine::Entity::pause_animation(const std::string& id) {
+  _animations[id].pause();
+}
+
+const bool Engine::Entity::is_paused_animation(const std::string& id) {
+  return _animations[id].is_paused();
 }
