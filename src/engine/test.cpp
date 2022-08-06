@@ -23,45 +23,45 @@ int main() {
   std::shared_ptr<Layer> ui_layer = scene.push_layer();
   std::shared_ptr<Layer> level_layer = scene.push_layer();
 
-  std::shared_ptr<GFX::Font> game_font = GFX::Font::Share(FONT_PATH);
-  std::shared_ptr<UI> fps_ui = UI::Share(game.ctx, "fps_ui", game_font);
+  std::shared_ptr<GFX::Font> game_font = GFX::Font::Shared(FONT_PATH);
+  std::shared_ptr<UI> fps_ui = UI::Shared(game.ctx, "fps_ui", game_font);
   fps_ui->size = { 100, 40 };
   ui_layer->nodes.push_back(fps_ui);
 
-  std::shared_ptr<GFX::Image> dino_sprite = GFX::Image::Share(std::string(TEXTURE_PATH) + "idle_1" + std::string(TEXTURE_EXT));
+  std::shared_ptr<GFX::Image> dino_sprite = GFX::Image::Shared(std::string(TEXTURE_PATH) + "idle_1" + std::string(TEXTURE_EXT));
   Animation dino_idle_animation = Animation({
-    GFX::Image::Share(std::string(TEXTURE_PATH) + "idle_1" + std::string(TEXTURE_EXT)),
-    GFX::Image::Share(std::string(TEXTURE_PATH) + "idle_2" + std::string(TEXTURE_EXT)),
-    GFX::Image::Share(std::string(TEXTURE_PATH) + "idle_3" + std::string(TEXTURE_EXT)),
-    GFX::Image::Share(std::string(TEXTURE_PATH) + "idle_4" + std::string(TEXTURE_EXT)),
+    GFX::Image::Shared(std::string(TEXTURE_PATH) + "idle_1" + std::string(TEXTURE_EXT)),
+    GFX::Image::Shared(std::string(TEXTURE_PATH) + "idle_2" + std::string(TEXTURE_EXT)),
+    GFX::Image::Shared(std::string(TEXTURE_PATH) + "idle_3" + std::string(TEXTURE_EXT)),
+    GFX::Image::Shared(std::string(TEXTURE_PATH) + "idle_4" + std::string(TEXTURE_EXT)),
   });
   Animation dino_running_animation = Animation({
-    GFX::Image::Share(std::string(TEXTURE_PATH) + "running_5" + std::string(TEXTURE_EXT)),
-    GFX::Image::Share(std::string(TEXTURE_PATH) + "running_6" + std::string(TEXTURE_EXT)),
-    GFX::Image::Share(std::string(TEXTURE_PATH) + "running_7" + std::string(TEXTURE_EXT)),
-    GFX::Image::Share(std::string(TEXTURE_PATH) + "running_8" + std::string(TEXTURE_EXT)),
-    GFX::Image::Share(std::string(TEXTURE_PATH) + "running_9" + std::string(TEXTURE_EXT)),
-    GFX::Image::Share(std::string(TEXTURE_PATH) + "running_10" + std::string(TEXTURE_EXT)),
-    GFX::Image::Share(std::string(TEXTURE_PATH) + "running_11" + std::string(TEXTURE_EXT)),
-    GFX::Image::Share(std::string(TEXTURE_PATH) + "running_12" + std::string(TEXTURE_EXT)),
-    GFX::Image::Share(std::string(TEXTURE_PATH) + "running_13" + std::string(TEXTURE_EXT)),
+    GFX::Image::Shared(std::string(TEXTURE_PATH) + "running_5" + std::string(TEXTURE_EXT)),
+    GFX::Image::Shared(std::string(TEXTURE_PATH) + "running_6" + std::string(TEXTURE_EXT)),
+    GFX::Image::Shared(std::string(TEXTURE_PATH) + "running_7" + std::string(TEXTURE_EXT)),
+    GFX::Image::Shared(std::string(TEXTURE_PATH) + "running_8" + std::string(TEXTURE_EXT)),
+    GFX::Image::Shared(std::string(TEXTURE_PATH) + "running_9" + std::string(TEXTURE_EXT)),
+    GFX::Image::Shared(std::string(TEXTURE_PATH) + "running_10" + std::string(TEXTURE_EXT)),
+    GFX::Image::Shared(std::string(TEXTURE_PATH) + "running_11" + std::string(TEXTURE_EXT)),
+    GFX::Image::Shared(std::string(TEXTURE_PATH) + "running_12" + std::string(TEXTURE_EXT)),
+    GFX::Image::Shared(std::string(TEXTURE_PATH) + "running_13" + std::string(TEXTURE_EXT)),
   });
 
-  std::shared_ptr<UI> dino_ui = UI::Share(game.ctx, "dino_ui", game_font);
+  std::shared_ptr<UI> dino_ui = UI::Shared(game.ctx, "dino_ui", game_font);
   dino_ui->size = { 50, 50 };
   dino_ui->offset = { 25, -30 };
   dino_ui->text = "Dino";
-  std::shared_ptr<Entity> dino_entity = Entity::Share(game.ctx, "dino_entity", dino_sprite);
+  std::shared_ptr<Entity> dino_entity = Entity::Shared(game.ctx, "dino_entity", dino_sprite);
   dino_entity->size = { 100, 100 };
   dino_entity->color = { 255, 0, 0 };
   dino_entity->create_animation(IDLE, dino_idle_animation);
   dino_entity->create_animation(RUNNING, dino_running_animation);
-  std::shared_ptr<NodeContainer> dino = NodeContainer::Share("dino");
+  std::shared_ptr<NodeContainer> dino = NodeContainer::Shared("dino");
   dino->nodes.push_back(dino_entity);
   dino->nodes.push_back(dino_ui);
   level_layer->nodes.push_back(dino);
 
-  std::shared_ptr<Entity> another_dino_entity = Entity::Share(game.ctx, "another_dino_entity", dino_sprite);
+  std::shared_ptr<Entity> another_dino_entity = Entity::Shared(game.ctx, "another_dino_entity", dino_sprite);
   another_dino_entity->size = { 100, 100 };
   another_dino_entity->color = { 255, 0, 0 };
   another_dino_entity->position = { 500, 100 };
@@ -108,6 +108,17 @@ int main() {
     });
     Input::Keyboard::OnPressed(Input::Keyboard::THREE, [&]() -> void {
       level_layer->toggle_hide();
+      Util::Time::Delay(100);
+    });
+    Input::Keyboard::OnPressed(Input::Keyboard::FOUR, [&]() -> void {
+      if (dino_entity->is_paused_animation(IDLE)) {
+        dino_entity->resume_animation(IDLE);
+        dino_entity->resume_animation(RUNNING);
+      } else {
+        dino_entity->pause_animation(IDLE);
+        dino_entity->pause_animation(RUNNING);
+      }
+
       Util::Time::Delay(100);
     });
 
