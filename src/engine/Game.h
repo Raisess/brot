@@ -6,6 +6,7 @@
 #include "../gfx/Renderer.h"
 #include "../gfx/TextComponent.h"
 #include "../gfx/Window.h"
+#include "../util/ArgsParser.h"
 
 namespace Engine {
 
@@ -21,7 +22,7 @@ class Game {
 public:
   GameContext ctx;
 
-  Game(const std::string& title);
+  Game(const std::string& title, Util::Arguments args);
   ~Game();
 
   void loop(const CallbackLoop& callback);

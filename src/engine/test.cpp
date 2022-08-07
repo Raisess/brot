@@ -1,6 +1,7 @@
 #include <iostream>
 #include <memory>
 #include "../input/Keyboard.h"
+#include "../util/ArgsParser.h"
 #include "../util/Logger.h"
 #include "../util/Time.h"
 #include "Entity.h"
@@ -19,8 +20,8 @@
 
 using namespace Engine;
 
-int main() {
-  Game game("Brot Engine | Engine Test");
+int main(int argc, char* argv[]) {
+  Game game("Brot Engine | Engine Test", Util::ArgsParser::Parse(argc, argv));
   Scene scene("main_scene");
   std::shared_ptr<Layer> ui_layer = scene.push_layer();
   std::shared_ptr<Layer> level_layer = scene.push_layer();
