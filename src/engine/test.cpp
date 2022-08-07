@@ -74,9 +74,9 @@ int main(int argc, char* argv[]) {
     fps_ui->text = "FPS: " + std::to_string(game.ctx.window_ctx->get_fps());
     dino_entity->use_animation(IDLE);
 
-    if (Physics::Collision::IsColliding(*dino_entity, *another_dino_entity)) {
+    Physics::Collision::IsColliding(*dino_entity, *another_dino_entity, []() -> void {
       Util::Logger::Log("colliding");
-    }
+    });
 
     Input::Keyboard::OnPressed(Input::Keyboard::ESC, [&]() -> void {
       return game.end();
