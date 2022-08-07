@@ -72,4 +72,4 @@ build_engine:
 	$(CXX) $(FLAGS) $(GFX_SRC) $(SFX_SRC) $(INPUT_SRC) $(ENGINE_SRC) $(ENGINE_PATH)/test.cpp -o $(ENGINE_OUT)
 
 run_engine:
-	$(ENGINE_OUT)
+	$(ENGINE_OUT) --window_width=1280 --window_height=720

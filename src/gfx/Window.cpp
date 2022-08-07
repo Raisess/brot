@@ -2,16 +2,21 @@
 #include "../util/Time.h"
 #include "Window.h"
 
+#define DEFAULT_WINDOW_WIDTH 1280
+#define DEFAULT_WINDOW_HEIGHT 720
+
 GFX::Window::Window(const std::string& title, const Common::Size& size, int fps_limit)
   : title(title), _size(size), _fps_limit(fps_limit), _minimum_delta_time(fps_limit / 1000) {
-  Util::Logger::Debug("Create Window: " + title + " | width: " + std::to_string(size.width) + ", height: " + std::to_string(size.height));
+  _size.width = size.width ? size.width : DEFAULT_WINDOW_WIDTH;
+  _size.height = size.height ? size.height : DEFAULT_WINDOW_HEIGHT;
+  Util::Logger::Debug("Create Window: " + title + " | width: " + std::to_string(_size.width) + ", height: " + std::to_string(_size.height));
 
   if (SDL_Init(SDL_INIT_VIDEO) < 0) {
     Util::Logger::Error("Error initializing video: " + std::string(SDL_GetError()));
     exit(1);
   }
 
-  sdl_value = SDL_CreateWindow(title.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, size.width, size.height, SDL_WINDOW_SHOWN | SDL_WINDOW_OPENGL);
+  sdl_value = SDL_CreateWindow(title.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, _size.width, _size.height, SDL_WINDOW_SHOWN | SDL_WINDOW_OPENGL);
   if (sdl_value == nullptr) {
     Util::Logger::Error("Error creating window: " + std::string(SDL_GetError()));
     exit(1);
