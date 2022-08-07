@@ -12,7 +12,11 @@ public:
   Vec2(int x, int y) : x(x), y(y) {}
 
   std::string to_print_string() const {
-    return "x: " + std::to_string(x) + ", y: " + std::to_string(y);
+    return "{ x: " + std::to_string(x) + ", y: " + std::to_string(y) + " }";
+  }
+
+  int operator[](int index) const {
+    return index == 0 ? x : y;
   }
 
   Vec2 operator+(const Vec2& vec) const {
