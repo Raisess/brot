@@ -5,6 +5,6 @@ void Input::Mouse::OnClick(const Button& button, const Callback& callback) {
   unsigned int buttons = SDL_GetMouseState(&pos.x, &pos.y);
 
   if ((buttons & button) != 0) {
-    callback(pos);
+    return callback(pos);
   }
 }

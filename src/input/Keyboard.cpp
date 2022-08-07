@@ -4,7 +4,7 @@ void Input::Keyboard::OnPressed(const Key& key, const Callback& callback) {
   const unsigned char* state = SDL_GetKeyboardState(nullptr);
 
   if (state[key]) {
-    callback();
+    return callback();
   }
 }
 
@@ -19,6 +19,6 @@ void Input::Keyboard::OnPressed(const std::vector<Key>& keys, const Callback& ca
   }
 
   if (exec) {
-    callback();
+    return callback();
   }
 }
