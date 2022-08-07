@@ -1,10 +1,12 @@
 #include <iostream>
 #include <memory>
 #include "../input/Keyboard.h"
+#include "../util/Logger.h"
 #include "../util/Time.h"
 #include "Entity.h"
 #include "Game.h"
 #include "NodeContainer.h"
+#include "Physics.h"
 #include "Scene.h"
 #include "UI.h"
 
@@ -70,6 +72,10 @@ int main() {
   game.loop([&](int delta_time) -> void {
     fps_ui->text = "FPS: " + std::to_string(game.ctx.window_ctx->get_fps());
     dino_entity->use_animation(IDLE);
+
+    if (Physics::Collision::IsColliding(*dino_entity, *another_dino_entity)) {
+      Util::Logger::Log("colliding");
+    }
 
     Input::Keyboard::OnPressed(Input::Keyboard::ESC, [&]() -> void {
       return game.end();
