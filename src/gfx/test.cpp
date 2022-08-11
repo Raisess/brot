@@ -4,9 +4,9 @@
 #include "TextureComponent.h"
 #include "Window.h"
 
-#define BG_TEXTURE_PATH "../tmp/test-bg-img.png"
-#define TEXTURE_PATH "../tmp/test-img.png"
-#define FONT_PATH "../tmp/test-font.ttf"
+#define BG_TEXTURE_PATH "../../../tmp/test-bg-img.png"
+#define TEXTURE_PATH "../../../tmp/test-img.png"
+#define FONT_PATH "../../../tmp/test-font.ttf"
 #define VELOCITY 5
 
 int main() {
