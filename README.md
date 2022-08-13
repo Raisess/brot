@@ -21,16 +21,19 @@ git clone https://github.com/Raisess/brot
 cd brot
 ```
 
-## GFX Module
+## Documentation
 
-The graphical module is for all implementations of window, rendering, textures and screen components, 
-so it's a low level module and will not be highly used by the engine.
+This project is under development.
 
-- [Documentation](./docs/gfx.md)
+- [Documentation](./docs)
 
-### Compiling and running the GFX module test program
+### Compiling and running the Engine test program
 
 ```shell
-make build_gfx
-make run_gfx
+make build_engine_test
+make run_engine_test
 ```
+
+## Notice
+
+This project uses [Roboto](https://fonts.google.com/specimen/Roboto) font.

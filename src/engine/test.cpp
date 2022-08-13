@@ -11,8 +11,8 @@
 #include "Scene.h"
 #include "UI.h"
 
-#define FONT_PATH "../../assets/fonts/engine.ttf"
-#define TEXTURE_PATH "../../../tmp/dino-char/sprites/sprite_"
+#define FONT_PATH "../../assets/fonts/Roboto.ttf"
+#define TEXTURE_PATH "../../assets/sprites/dino/"
 #define TEXTURE_EXT ".png"
 #define IDLE "idle"
 #define RUNNING "running"
