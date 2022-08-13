@@ -35,6 +35,10 @@ public:
     return map;
   }
 
+  static int ToInteger(Arguments& args, const std::string& key) {
+    return args[key] != "" ? std::stoi(args[key]) : 0;
+  }
+
 private:
   static Tuple ParseDoubleHifen(const std::string& arg) {
     size_t key_size = 0;

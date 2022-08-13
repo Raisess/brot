@@ -14,8 +14,8 @@ Engine::GameContext::GameContext(const std::string& window_title, const Common::
 
 Engine::Game::Game(const std::string& title, Util::Arguments args)
   : ctx(GameContext(title, {
-      std::stoi(args["window_width"] != "" ? args["window_width"] : "0"),
-      std::stoi(args["window_height"] != "" ? args["window_height"] : "0"),
+      Util::ArgsParser::ToInteger(args, "window_width"),
+      Util::ArgsParser::ToInteger(args, "window_height"),
     })),
     _logo(std::make_unique<GFX::TextComponent>(*ctx.render_ctx)) {
   Util::Logger::Debug("Create Game: " + title);

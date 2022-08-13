@@ -26,7 +26,7 @@ build_test:
 	$(CXX) $(GFX_LIB) $(INPUT_LIB) $(LIB_OUT) ./test.cpp -o $(OUT)
 
 run_test:
-	$(OUT)
+	$(OUT) --window-width=1280 --window-height=720
 
 clean:
 	rm -f $(OUT)
