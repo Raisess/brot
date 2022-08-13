@@ -18,7 +18,7 @@ public:
   ~NodeContainer();
 
   void update(int delta_time) final override;
-  void draw() const final override;
+  void draw() final override;
 };
 
 }

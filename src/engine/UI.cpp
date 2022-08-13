@@ -12,7 +12,7 @@ Engine::UI::~UI() {
   Util::Logger::Debug("Delete UI: " + _id);
 }
 
-void Engine::UI::update(int) {
+void Engine::UI::update(int delta_time) {
   _component->set_angle(angle);
   _component->set_position(position + offset);
   _component->set_size(size);
@@ -23,7 +23,7 @@ void Engine::UI::update(int) {
   _component->bind(*_font, text);
 }
 
-void Engine::UI::draw() const {
+void Engine::UI::draw() {
   if (hide) return;
 
   _component->draw();

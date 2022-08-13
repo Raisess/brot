@@ -33,7 +33,7 @@ void Engine::Entity::update(int delta_time) {
   }
 }
 
-void Engine::Entity::draw() const {
+void Engine::Entity::draw() {
   if (hide) return;
 
   _component->draw();

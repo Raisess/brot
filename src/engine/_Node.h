@@ -28,7 +28,7 @@ public:
   Node(const std::string& id, const Type& type) : _id(id), _type(type) {}
 
   virtual void update(int delta_time) = 0;
-  virtual void draw() const = 0;
+  virtual void draw() = 0;
 
   const std::string id() const {
     return _id;

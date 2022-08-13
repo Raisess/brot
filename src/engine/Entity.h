@@ -18,7 +18,7 @@ public:
   ~Entity();
 
   void update(int delta_time) final override;
-  void draw() const final override;
+  void draw() final override;
   void create_animation(const std::string& id, const Animation& animation);
   void create_animation(const std::string& id, const std::vector<std::shared_ptr<GFX::Image>>& sprites);
   void use_animation(const std::string& id);

@@ -20,7 +20,7 @@ void Engine::NodeContainer::update(int delta_time) {
   }
 }
 
-void Engine::NodeContainer::draw() const {
+void Engine::NodeContainer::draw() {
   if (hide) return;
 
   for (auto node : nodes) {

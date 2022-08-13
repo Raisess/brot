@@ -19,7 +19,7 @@ public:
   ~UI();
 
   void update(int delta_time) final override;
-  void draw() const final override;
+  void draw() final override;
 
 private:
   std::unique_ptr<GFX::TextComponent> _component;
