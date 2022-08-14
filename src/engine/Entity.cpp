@@ -30,6 +30,8 @@ void Engine::Entity::update(int delta_time) {
     _animations[_animation_index].animate(delta_time, _component);
   } else if (_sprite != nullptr) {
     _component->bind(*_sprite);
+  } else {
+    _component->set_rect(true);
   }
 }
 
