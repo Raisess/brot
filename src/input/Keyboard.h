@@ -65,7 +65,9 @@ public:
   };
 
   static void OnPressed(const Key& key, const Callback& callback);
+  static bool OnPressed(const Key& key);
   static void OnPressed(const std::vector<Key>& keys, const Callback& callback);
+  static bool OnPressed(const std::vector<Key>& keys);
 };
 
 }
