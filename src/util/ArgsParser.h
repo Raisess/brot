@@ -14,7 +14,7 @@ using PlainArguments = std::vector<std::string>;
 
 class ArgsParser {
 public:
-  static Arguments Parse(int argc, char* argv[]) {
+  static const Arguments Parse(int argc, char* argv[]) {
     PlainArguments args = ArgsParser::ToStringVector(argc, argv);
     Arguments map = std::unordered_map<std::string, std::string>();
 
@@ -40,7 +40,7 @@ public:
   }
 
 private:
-  static Tuple ParseDoubleHifen(const std::string& arg) {
+  static const Tuple ParseDoubleHifen(const std::string& arg) {
     size_t key_size = 0;
 
     for (size_t i = 2; i < arg.size(); i++) {
@@ -57,7 +57,7 @@ private:
     return { key, value };
   }
 
-  static PlainArguments ToStringVector(int argc, char* argv[]) {
+  static const PlainArguments ToStringVector(int argc, char* argv[]) {
     if (argc == 1) {
       return {};
     }
