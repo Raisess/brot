@@ -70,6 +70,6 @@ const Common::Size GFX::Window::get_size() const {
   return _size;
 }
 
-const unsigned int GFX::Window::get_fps() const {
+const int GFX::Window::get_fps() const {
   return _fps;
 }

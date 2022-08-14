@@ -21,7 +21,7 @@ public:
   void quit() const;
   void loop(const CallbackLoop& callback);
   const Common::Size get_size() const;
-  const unsigned int get_fps() const;
+  const int get_fps() const;
 
 private:
   unsigned int _minimum_delta_time;
