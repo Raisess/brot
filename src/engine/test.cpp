@@ -40,15 +40,12 @@ public:
 };
 
 int main(int argc, char* argv[]) {
-  Game game("Brot Engine | Engine Test", Util::ArgsParser::Parse(argc, argv));
+  Game game("Brot Engine | Engine Test", argc, argv);
+  game.toggle_info();
   Scene scene("main_scene");
+  std::shared_ptr<GFX::Font> game_font = GFX::Font::Shared(FONT_PATH);
   std::shared_ptr<Layer> ui_layer = scene.push_layer();
   std::shared_ptr<Layer> level_layer = scene.push_layer();
-
-  std::shared_ptr<GFX::Font> game_font = GFX::Font::Shared(FONT_PATH);
-  std::shared_ptr<UI> fps_ui = UI::Shared(game.ctx, "fps_ui", game_font);
-  fps_ui->size = { 100, 40 };
-  ui_layer->nodes.push_back(fps_ui);
 
   std::shared_ptr<GFX::Image> dino_sprite = GFX::Image::Shared(std::string(TEXTURE_PATH) + "idle_1" + std::string(TEXTURE_EXT));
   Animation dino_idle_animation = Animation({
@@ -81,7 +78,6 @@ int main(int argc, char* argv[]) {
   level_layer->nodes.push_back(another_dino);
 
   game.loop([&](int delta_time) -> void {
-    fps_ui->text = "FPS: " + std::to_string(game.ctx.window_ctx->get_fps());
     dino->entity->use_animation(IDLE);
     another_dino->entity->use_animation(IDLE);
 
