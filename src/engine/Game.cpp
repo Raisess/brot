@@ -68,11 +68,6 @@ void Engine::Game::loop(const CallbackLoop& callback) {
     if (_started) {
       info.update({ delta_time, ctx.window_ctx->get_fps() });
       callback(delta_time);
-
-      if (Input::Keyboard::OnPressed({ Input::Keyboard::LCTRL, Input::Keyboard::NINE })) {
-        toggle_info();
-      }
-
       if (_info) {
         info.draw();
       }

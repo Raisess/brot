@@ -123,24 +123,25 @@ private:
 int main(int argc, char* argv[]) {
   Game game("pong", argc, argv);
   Scene scene("main");
-  const auto window_size = game.ctx.window_ctx->get_size();
-  const auto ui_layer = scene.push_layer();
-  const auto level_layer = scene.push_layer();
 
-  const auto player_one_points = std::make_shared<PointUI>(game.ctx, game.ctx.engine_font);
+  const auto window_size = game.ctx.window_ctx->get_size();
+  auto ui_layer = scene.push_layer();
+  auto level_layer = scene.push_layer();
+
+  auto player_one_points = std::make_shared<PointUI>(game.ctx, game.ctx.engine_font);
   player_one_points->position.x = POINT_OFFSET;
   ui_layer->nodes.push_back(player_one_points);
-  const auto player_two_points = std::make_shared<PointUI>(game.ctx, game.ctx.engine_font);
+  auto player_two_points = std::make_shared<PointUI>(game.ctx, game.ctx.engine_font);
   player_two_points->position.x = (window_size.width - player_two_points->size.width) - POINT_OFFSET;
   ui_layer->nodes.push_back(player_two_points);
 
-  const auto player_one = std::make_shared<Player>(game.ctx, window_size);
+  auto player_one = std::make_shared<Player>(game.ctx, window_size);
   player_one->position.x = PLAYER_OFFSET;
   level_layer->nodes.push_back(player_one);
-  const auto player_two = std::make_shared<Player>(game.ctx, window_size);
+  auto player_two = std::make_shared<Player>(game.ctx, window_size);
   player_two->position.x = (window_size.width - player_two->size.width) - PLAYER_OFFSET;
   level_layer->nodes.push_back(player_two);
-  const auto ball = std::make_shared<Ball>(game.ctx, window_size);
+  auto ball = std::make_shared<Ball>(game.ctx, window_size);
   level_layer->nodes.push_back(ball);
 
   game.loop([&](int dt) -> void {
