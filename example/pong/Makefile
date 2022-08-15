@@ -1,3 +1,5 @@
+CXX=clang++
+
 SRC=main.cpp
 
 OUT_DIR=../../build
@@ -11,7 +13,7 @@ build:
 	$(CXX) $(GFX_LIB) $(INPUT_LIB) $(ENGINE_LIB) $(SRC) -o $(OUT)
 
 run:
-	$(OUT)
+	$(OUT) --window-width=1600 --window-height=900
 
 clean:
 	rm -rf $(OUT)

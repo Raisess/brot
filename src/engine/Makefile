@@ -1,3 +1,4 @@
+CXX=clang++
 FLAGS=-lSDL2 -lSDL2_image -lSDL2_ttf
 
 SRC=./Game.cpp \
@@ -25,7 +26,7 @@ build_test:
 	$(CXX) $(GFX_LIB) $(INPUT_LIB) $(LIB_OUT) ./test.cpp -o $(OUT)
 
 run_test:
-	$(OUT) --window-width=1280 --window-height=720
+	$(OUT) --window-width=1600 --window-height=900
 
 clean:
 	rm -f $(OUT)

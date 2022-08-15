@@ -1,7 +1,3 @@
-CXX=g++
-FLAGS=-lSDL2 -lSDL2_image -lSDL2_ttf
-
-# PATHS
 SRC_DIR=./src
 GFX_PATH=$(SRC_DIR)/gfx
 SFX_PATH=$(SRC_DIR)/sfx
