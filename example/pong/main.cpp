@@ -10,6 +10,7 @@
 #include "../../src/gfx/Text.h"
 #include "../../src/input/Keyboard.h"
 #include "../../src/util/ArgsParser.h"
+#include "../../src/util/Number.h"
 
 #define POINT_OFFSET 50
 #define PLAYER_OFFSET 10
@@ -73,8 +74,6 @@ public:
       }) {
     fill = true;
     size = { 30, 30 };
-    position = _initial_pos;
-
     reset();
   }
 
@@ -87,8 +86,8 @@ public:
   }
 
   void reset() {
-    _hside = Side::RIGHT;
-    _vside = Side::DOWN;
+    _hside = Util::Number::Random(Side::LEFT, Side::RIGHT);
+    _vside = Util::Number::Random(Side::UP, Side::DOWN);
     _vel = BALL_VEL;
     position = _initial_pos;
   }
