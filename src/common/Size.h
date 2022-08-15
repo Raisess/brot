@@ -1,7 +1,9 @@
 #pragma once
 
-#include <assert.h>
 #include <iostream>
+
+#define MAX_SIZE 1000 * 1000
+#define NORMALIZE_SIZE(px) std::min(std::max(px, 0), MAX_SIZE)
 
 namespace Common {
 
@@ -10,10 +12,7 @@ public:
   int width;
   int height;
 
-  Size(int width, int height) : width(width), height(height) {
-    assert(width >= 0);
-    assert(height >= 0);
-  }
+  Size(int width, int height) : width(NORMALIZE_SIZE(width)), height(NORMALIZE_SIZE(height)) {}
 
   std::string to_print_string() const {
     return " { width: " + std::to_string(width) + ", height: " + std::to_string(height) + " } ";
