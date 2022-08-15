@@ -1,4 +1,3 @@
-#include <ctime>
 #include <iostream>
 #include <memory>
 #include "../../src/common/Size.h"
@@ -26,11 +25,18 @@ public:
     : UI(game_ctx, "points_ui", font) {
     size = { 70, 80 };
     position.y = POINT_OFFSET;
+    text = "0";
   }
 };
 
 class Player : public Entity {
 public:
+  enum Num {
+    NONE = 0,
+    ONE,
+    TWO,
+  };
+
   unsigned int points = 0;
 
   Player(const GameContext& game_ctx, const Size& window_size)
@@ -52,6 +58,13 @@ private:
 
 class Ball : public Entity {
 public:
+  enum Side {
+    LEFT = 0,
+    RIGHT,
+    UP,
+    DOWN,
+  };
+
   Ball(const GameContext& game_ctx, const Size& window_size)
     : Entity(game_ctx, "ball", nullptr),
       _initial_pos({
@@ -62,33 +75,31 @@ public:
     size = { 30, 30 };
     position = _initial_pos;
 
-    srand(time(nullptr));
-    _hside = rand() % 2;
-    _vside = rand() % 2;
+    reset();
   }
 
   void to_left() {
-    _hside = 0;
+    _hside = Side::LEFT;
   }
 
   void to_right() {
-    _hside = 1;
+    _hside = Side::RIGHT;
   }
 
   void reset() {
-    _hside = 0;
-    _vside = 0;
+    _hside = Side::RIGHT;
+    _vside = Side::DOWN;
     _vel = BALL_VEL;
     position = _initial_pos;
   }
 
-  int tick(const Size& limit) {
-    if (_hside) {
+  Player::Num tick(const Size& limit) {
+    if (_hside == Side::RIGHT) {
       position.x += _vel;
     } else {
       position.x -= _vel;
     }
-    if (_vside) {
+    if (_vside == Side::DOWN) {
       position.y += _vel;
     } else {
       position.y -= _vel;
@@ -96,27 +107,27 @@ public:
 
     // limits collision checks
     if (position.y <= 0) {
-      _vside = 1;
+      _vside = Side::DOWN;
     } else if (position.y >= (limit.height - size.height)) {
-      _vside = 0;
+      _vside = Side::UP;
     }
     if (position.x <= 0) {
-      return 2; // increase point to player 2
+      return Player::Num::TWO; // increase point to player 2
     } else if (position.x >= (limit.width - size.width)) {
-      return 1; // increase point to player 1
+      return Player::Num::ONE; // increase point to player 1
     }
 
-    return 0;
+    return Player::Num::NONE;
   }
 
   void increase_vel() {
-    _vel = std::min(_vel + 2, (unsigned int) 30);
+    _vel = std::min(_vel + 1, (unsigned int) 30);
   }
 
 private:
-  unsigned int _vside = 0; // 0: up, 1: down
-  unsigned int _hside = 0; // 0: left, 1: right
   unsigned int _vel = BALL_VEL;
+  unsigned int _vside;
+  unsigned int _hside;
   Vec2 _initial_pos;
 };
 
@@ -170,20 +181,26 @@ int main(int argc, char* argv[]) {
       ball->increase_vel();
     });
 
-    const int to_increase_point = ball->tick(window_size);
-    if (to_increase_point) {
+    const Player::Num to_increase_point = ball->tick(window_size);
+    switch (to_increase_point) {
+      case Player::Num::ONE:
+        player_one->points++;
+        player_one_points->text = std::to_string(player_one->points);
+        break;
+      case Player::Num::TWO:
+        player_two->points++;
+        player_two_points->text = std::to_string(player_two->points);
+        break;
+      case Player::Num::NONE:
+        break;
+    }
+
+    if (to_increase_point != Player::Num::NONE) {
       player_one->reset();
       player_two->reset();
       ball->reset();
     }
-    if (to_increase_point == 1) {
-      player_one->points++;
-    } else if (to_increase_point == 2) {
-      player_two->points++;
-    }
 
-    player_one_points->text = std::to_string(player_one->points);
-    player_two_points->text = std::to_string(player_two->points);
     scene.update(dt);
     scene.draw();
   });
