@@ -14,8 +14,8 @@
 
 #define POINT_OFFSET 50
 #define PLAYER_OFFSET 10
-#define PLAYER_VEL 10
-#define BALL_VEL 10
+#define PLAYER_VEL 1
+#define BALL_VEL 1
 
 using namespace Common;
 using namespace Engine;
@@ -119,10 +119,6 @@ public:
     return Player::Num::NONE;
   }
 
-  void increase_vel() {
-    _vel = std::min(_vel + 1, (unsigned int) 30);
-  }
-
 private:
   unsigned int _vel = BALL_VEL;
   unsigned int _vside;
@@ -132,6 +128,7 @@ private:
 
 int main(int argc, char* argv[]) {
   Game game("pong", argc, argv);
+  game.toggle_info();
   Scene scene("main");
 
   const auto window_size = game.ctx.window_ctx->get_size();
@@ -173,11 +170,9 @@ int main(int argc, char* argv[]) {
 
     Physics::Collision::IsColliding(*player_one, *ball, [&]() -> void {
       ball->to_right();
-      ball->increase_vel();
     });
     Physics::Collision::IsColliding(*player_two, *ball, [&]() -> void {
       ball->to_left();
-      ball->increase_vel();
     });
 
     const Player::Num to_increase_point = ball->tick(window_size);

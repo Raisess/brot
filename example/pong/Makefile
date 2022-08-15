@@ -11,7 +11,7 @@ build:
 	$(CXX) $(GFX_LIB) $(INPUT_LIB) $(ENGINE_LIB) $(SRC) -o $(OUT)
 
 run:
-	$(OUT)
+	$(OUT) --fps-limit=240
 
 clean:
 	rm -rf $(OUT)
