@@ -16,7 +16,7 @@
 #define TEXTURE_EXT ".png"
 #define IDLE "idle"
 #define RUNNING "running"
-#define VELOCITY 5
+#define VELOCITY 1
 
 using namespace Engine;
 
