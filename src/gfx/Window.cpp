@@ -4,9 +4,10 @@
 
 #define DEFAULT_WINDOW_WIDTH 1280
 #define DEFAULT_WINDOW_HEIGHT 720
+#define DEFAULT_FPS_LIMIT 60
 
 GFX::Window::Window(const std::string& title, const Common::Size& size, int fps_limit)
-  : title(title), _size(size), _fps_limit(fps_limit), _minimum_delta_time(fps_limit / 1000) {
+  : title(title), _size(size), _fps_limit(fps_limit ? fps_limit : DEFAULT_FPS_LIMIT), _minimum_delta_time(fps_limit / 1000) {
   _size.width = size.width ? size.width : DEFAULT_WINDOW_WIDTH;
   _size.height = size.height ? size.height : DEFAULT_WINDOW_HEIGHT;
   Util::Logger::Debug("Create Window: " + title + " | width: " + std::to_string(_size.width) + ", height: " + std::to_string(_size.height));
@@ -59,9 +60,9 @@ void GFX::Window::loop(const CallbackLoop& callback) {
       callback(delta_time);
 
       last_time = now;
-      _fps = 1000 / delta_time;
+      _fps = _fps_limit / delta_time;
     } else {
-      Util::Time::Delay(1);
+      Util::Time::Delay(now - last_time);
     }
   }
 }
