@@ -5,8 +5,6 @@
 #include "../common/Size.h"
 #include "SDLController.h"
 
-#define DEFAULT_FPS_LIMIT 60
-
 using CallbackLoop = std::function<void(int)>;
 
 namespace GFX {
@@ -15,7 +13,7 @@ class Window : public SDLController<SDL_Window*> {
 public:
   std::string title;
 
-  Window(const std::string& title, const Common::Size& size, int fps_limit = DEFAULT_FPS_LIMIT);
+  Window(const std::string& title, const Common::Size& size, int fps_limit);
   ~Window(void);
 
   void quit() const;
