@@ -12,9 +12,9 @@ Engine::UI::~UI() {
   Util::Logger::Debug("Delete UI: " + _id);
 }
 
-void Engine::UI::update(int delta_time) {
-  _component->set_angle(angle * delta_time);
-  _component->set_position((position * delta_time) + offset);
+void Engine::UI::update(int) {
+  _component->set_angle(angle);
+  _component->set_position(position + offset);
   _component->set_size(size);
   _component->set_color(color);
   _component->set_fill(fill);

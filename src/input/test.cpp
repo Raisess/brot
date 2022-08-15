@@ -5,7 +5,7 @@
 #include "Mouse.h"
 
 int main() {
-  GFX::Window window("Brot Engine | Input Test", { 800, 600 }, 60);
+  GFX::Window window("Brot Engine | Input Test", { 800, 600 });
 
   window.loop([&](int) -> void {
     Input::Keyboard::OnPressed(Input::Keyboard::ESC, [&]() -> void {

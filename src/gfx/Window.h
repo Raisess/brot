@@ -13,7 +13,7 @@ class Window : public SDLController<SDL_Window*> {
 public:
   std::string title;
 
-  Window(const std::string& title, const Common::Size& size, int fps_limit);
+  Window(const std::string& title, const Common::Size& size);
   ~Window(void);
 
   void quit() const;
@@ -22,8 +22,7 @@ public:
   const int get_fps() const;
 
 private:
-  unsigned int _minimum_delta_time;
-  unsigned int _fps_limit;
+  static unsigned int MinimunDeltaTime;
   unsigned int _fps = 0;
   Common::Size _size;
 };

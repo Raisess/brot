@@ -14,8 +14,8 @@
 
 #define POINT_OFFSET 50
 #define PLAYER_OFFSET 10
-#define PLAYER_VEL 1
-#define BALL_VEL 1
+#define PLAYER_VEL 15
+#define BALL_VEL 10
 
 using namespace Common;
 using namespace Engine;

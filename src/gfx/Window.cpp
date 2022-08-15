@@ -4,10 +4,8 @@
 
 #define DEFAULT_WINDOW_WIDTH 1280
 #define DEFAULT_WINDOW_HEIGHT 720
-#define DEFAULT_FPS_LIMIT 60
 
-GFX::Window::Window(const std::string& title, const Common::Size& size, int fps_limit)
-  : title(title), _size(size), _fps_limit(fps_limit ? fps_limit : DEFAULT_FPS_LIMIT), _minimum_delta_time(fps_limit / 1000) {
+GFX::Window::Window(const std::string& title, const Common::Size& size) : title(title), _size(size) {
   _size.width = size.width ? size.width : DEFAULT_WINDOW_WIDTH;
   _size.height = size.height ? size.height : DEFAULT_WINDOW_HEIGHT;
   Util::Logger::Debug("Create Window: " + title + " | width: " + std::to_string(_size.width) + ", height: " + std::to_string(_size.height));
@@ -35,6 +33,7 @@ void GFX::Window::quit() const {
   SDL_PushEvent(&quit_event);
 }
 
+unsigned int GFX::Window::MinimunDeltaTime = 1000 / 60;
 void GFX::Window::loop(const CallbackLoop& callback) {
   SDL_Event event;
   int last_time = SDL_GetTicks64();
@@ -53,16 +52,16 @@ void GFX::Window::loop(const CallbackLoop& callback) {
     if (last_time < now) {
       int delta_time = now - last_time;
 
-      if (delta_time < _minimum_delta_time) {
-        delta_time = _minimum_delta_time;
+      if (delta_time < MinimunDeltaTime) {
+        delta_time = MinimunDeltaTime;
       }
 
       callback(delta_time);
 
       last_time = now;
-      _fps = _fps_limit / delta_time;
+      _fps = 1000 / delta_time;
     } else {
-      Util::Time::Delay(now - last_time);
+      Util::Time::Delay(1);
     }
   }
 }
