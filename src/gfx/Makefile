@@ -3,9 +3,10 @@ FLAGS=-lSDL2 -lSDL2_image -lSDL2_ttf
 
 SRC=./Window.cpp \
 		./Renderer.cpp \
-		./Texture.cpp \
+		./_Component.cpp \
 		./Text.cpp \
-		./_Component.cpp
+		./Texture.cpp \
+		./TextureAnimation.cpp
 
 OUT_DIR=../../build
 OUT=$(OUT_DIR)/test-gfx.o

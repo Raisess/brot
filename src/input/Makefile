@@ -1,5 +1,5 @@
 CXX=clang++
-FLAGS=-lSDL2 -lSDL2_image -lSDL2_ttf
+FLAGS=-lSDL2
 
 SRC=./Keyboard.cpp \
 		./Mouse.cpp

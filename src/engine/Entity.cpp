@@ -1,4 +1,3 @@
-#include <cassert>
 #include "../util/Logger.h"
 #include "./Entity.h"
 
@@ -27,7 +26,7 @@ void Engine::Entity::update(int delta_time) {
       _animations[_last_animation_index].restart();
     }
 
-    _animations[_animation_index].animate(delta_time, _component);
+    _animations[_animation_index].play(delta_time, *_component);
   } else if (_sprite != nullptr) {
     _component->bind(*_sprite);
   } else {
@@ -41,27 +40,14 @@ void Engine::Entity::draw() {
   _component->draw();
 }
 
-void Engine::Entity::create_animation(const std::string& id, const Animation& animation) {
-  assert(animation.count_spites() > 0);
-  _animations[id] = animation;
+void Engine::Entity::create_texture_animation(const std::string& id, GFX::TextureAnimation animation) {
+  _animations[id] = std::move(animation);
 }
 
-void Engine::Entity::create_animation(const std::string& id, const std::vector<std::shared_ptr<GFX::Image>>& sprites) {
-  _animations[id] = Animation(sprites);
+void Engine::Entity::create_texture_animation(const std::string& id, const std::vector<std::shared_ptr<GFX::Image>>& sprites) {
+  _animations[id] = GFX::TextureAnimation(sprites);
 }
 
-void Engine::Entity::use_animation(const std::string& id) {
+void Engine::Entity::play_texture_animation(const std::string& id) {
   _animation_index = id;
-}
-
-void Engine::Entity::resume_animation(const std::string& id) {
-  _animations[id].resume();
-}
-
-void Engine::Entity::pause_animation(const std::string& id) {
-  _animations[id].pause();
-}
-
-const bool Engine::Entity::is_paused_animation(const std::string& id) {
-  return _animations[id].is_paused();
 }

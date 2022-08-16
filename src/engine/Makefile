@@ -1,5 +1,4 @@
 CXX=clang++
-FLAGS=-lSDL2 -lSDL2_image -lSDL2_ttf
 
 SRC=./Game.cpp \
 		./Scene.cpp \
@@ -7,7 +6,6 @@ SRC=./Game.cpp \
 		./NodeContainer.cpp \
 		./UI.cpp \
 		./Entity.cpp \
-		./Animation.cpp \
 		./Physics.cpp
 
 OUT_DIR=../../build
@@ -19,7 +17,7 @@ INPUT_LIB=$(OUT_DIR)/lib-input.so
 
 build:
 	mkdir -p $(OUT_DIR)
-	$(CXX) -fPIC -shared $(FLAGS) $(SRC) -o $(LIB_OUT)
+	$(CXX) -fPIC -shared $(SRC) -o $(LIB_OUT)
 
 build_test:
 	mkdir -p $(OUT_DIR)
