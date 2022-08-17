@@ -5,8 +5,7 @@ SRC=./Window.cpp \
 		./Renderer.cpp \
 		./_Component.cpp \
 		./Text.cpp \
-		./Texture.cpp \
-		./TextureAnimation.cpp
+		./Texture.cpp
 
 OUT_DIR=../../build
 OUT=$(OUT_DIR)/test-gfx.o

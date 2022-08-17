@@ -6,6 +6,7 @@
 #include "../util/Time.h"
 #include "Entity.h"
 #include "Game.h"
+#include "manager/SpriteAnimationManager.h"
 #include "NodeContainer.h"
 #include "Physics.h"
 #include "Scene.h"
@@ -33,7 +34,7 @@ public:
     entity->size = { 100, 100 };
     entity->color = { 255, 0, 0 };
     ui->size = { 60, 50 };
-    ui->offset = { 25, -30 };
+    ui->offset = { 20, -30 };
     ui->text = id;
     nodes = { ui, entity };
   }
@@ -47,13 +48,13 @@ int main(int argc, char* argv[]) {
   std::shared_ptr<GFX::Font> game_font = GFX::Font::Shared(FONT_PATH);
 
   std::shared_ptr<GFX::Image> dino_sprite = GFX::Image::Shared(std::string(TEXTURE_PATH) + "idle_1" + std::string(TEXTURE_EXT));
-  GFX::TextureAnimation dino_idle_animation = GFX::TextureAnimation({
+  SpriteAnimation dino_idle_animation = SpriteAnimation({
     GFX::Image::Shared(std::string(TEXTURE_PATH) + "idle_1" + std::string(TEXTURE_EXT)),
     GFX::Image::Shared(std::string(TEXTURE_PATH) + "idle_2" + std::string(TEXTURE_EXT)),
     GFX::Image::Shared(std::string(TEXTURE_PATH) + "idle_3" + std::string(TEXTURE_EXT)),
     GFX::Image::Shared(std::string(TEXTURE_PATH) + "idle_4" + std::string(TEXTURE_EXT)),
   });
-  GFX::TextureAnimation dino_running_animation = GFX::TextureAnimation({
+  SpriteAnimation dino_running_animation = SpriteAnimation({
     GFX::Image::Shared(std::string(TEXTURE_PATH) + "running_5" + std::string(TEXTURE_EXT)),
     GFX::Image::Shared(std::string(TEXTURE_PATH) + "running_6" + std::string(TEXTURE_EXT)),
     GFX::Image::Shared(std::string(TEXTURE_PATH) + "running_7" + std::string(TEXTURE_EXT)),
@@ -66,51 +67,44 @@ int main(int argc, char* argv[]) {
   });
 
   std::shared_ptr<Dino> dino = std::make_shared<Dino>("dino_0", game.ctx, dino_sprite, game_font);
-  dino->entity->create_texture_animation(IDLE, dino_idle_animation);
-  dino->entity->create_texture_animation(RUNNING, dino_running_animation);
+  Manager::AnimationManager dino_animation(*dino->entity, { { IDLE, dino_idle_animation }, { RUNNING, dino_running_animation } });
   level_layer->nodes.push_back(dino);
 
   std::shared_ptr<Dino> another_dino = std::make_shared<Dino>("dino_1", game.ctx, dino_sprite, game_font);
-  another_dino->entity->create_texture_animation(IDLE, dino_idle_animation);
+  Manager::AnimationManager another_dino_animation(*another_dino->entity, { { IDLE, dino_idle_animation }, { RUNNING, dino_running_animation } });
   another_dino->entity->flip = true;
   another_dino->position = { 500, 100 };
   level_layer->nodes.push_back(another_dino);
 
   game.loop([&](int delta_time) -> void {
-    dino->entity->play_texture_animation(IDLE);
-    another_dino->entity->play_texture_animation(IDLE);
-
     Physics::Collision::IsColliding(*dino->entity, *another_dino->entity, []() -> void {
       Util::Logger::Log("colliding");
     });
 
-    Input::Keyboard::OnPressed(Input::Keyboard::ESC, [&]() -> void {
-      return game.end();
-    });
-    Input::Keyboard::OnPressed(Input::Keyboard::W, [&]() -> void {
-      dino->entity->play_texture_animation(RUNNING);
+    another_dino_animation.play(delta_time, IDLE);
+
+    if (Input::Keyboard::OnPressed(Input::Keyboard::W)) {
+      dino_animation.play(delta_time, RUNNING);
       dino->position.y -= VELOCITY;
-    });
-    Input::Keyboard::OnPressed(Input::Keyboard::A, [&]() -> void {
-      dino->entity->play_texture_animation(RUNNING);
+    } else if (Input::Keyboard::OnPressed(Input::Keyboard::A)) {
+      dino_animation.play(delta_time, RUNNING);
       dino->entity->flip = true;
       dino->position.x -= VELOCITY;
-    });
-    Input::Keyboard::OnPressed(Input::Keyboard::S, [&]() -> void {
-      dino->entity->play_texture_animation(RUNNING);
+    } else if (Input::Keyboard::OnPressed(Input::Keyboard::S)) {
+      dino_animation.play(delta_time, RUNNING);
       dino->position.y += VELOCITY;
-    });
-    Input::Keyboard::OnPressed(Input::Keyboard::D, [&]() -> void {
-      dino->entity->play_texture_animation(RUNNING);
+    } else if (Input::Keyboard::OnPressed(Input::Keyboard::D)) {
+      dino_animation.play(delta_time, RUNNING);
       dino->entity->flip = false;
       dino->position.x += VELOCITY;
-    });
-    Input::Keyboard::OnPressed(Input::Keyboard::O, [&]() -> void {
+    } else if (Input::Keyboard::OnPressed(Input::Keyboard::O)) {
       dino->entity->size = dino->entity->size - Common::Size({ 10, 10 });
-    });
-    Input::Keyboard::OnPressed(Input::Keyboard::P, [&]() -> void {
+    } else if (Input::Keyboard::OnPressed(Input::Keyboard::P)) {
       dino->entity->size = dino->entity->size + Common::Size({ 10, 10 });
-    });
+    } else {
+      dino_animation.play(delta_time, IDLE);
+    }
+
     Input::Keyboard::OnPressed(Input::Keyboard::ONE, [&]() -> void {
       level_layer->toggle_fill();
       Util::Time::Delay(100);
@@ -122,6 +116,9 @@ int main(int argc, char* argv[]) {
     Input::Keyboard::OnPressed(Input::Keyboard::THREE, [&]() -> void {
       level_layer->toggle_hide();
       Util::Time::Delay(100);
+    });
+    Input::Keyboard::OnPressed(Input::Keyboard::ESC, [&]() -> void {
+      return game.end();
     });
 
     scene.update(delta_time);

@@ -6,6 +6,10 @@ Engine::Entity::Entity(const Engine::GameContext& game_ctx, const std::string& i
     _component(std::make_shared<GFX::TextureComponent>(*game_ctx.render_ctx)),
     _sprite(sprite) {
   Util::Logger::Debug("Create Entity: " + _id);
+
+  if (_sprite != nullptr) {
+    _component->bind(*_sprite);
+  }
 }
 
 Engine::Entity::~Entity() {
@@ -21,33 +25,18 @@ void Engine::Entity::update(int delta_time) {
   _component->set_flip(flip);
   _component->set_rect(rect);
 
-  if (_animations.size() && _animation_index != "") {
-    if (_animation_index != _last_animation_index) {
-      _animations[_last_animation_index].restart();
-    }
-
-    _animations[_animation_index].play(delta_time, *_component);
-  } else if (_sprite != nullptr) {
-    _component->bind(*_sprite);
-  } else {
+  if (_sprite == nullptr) {
     _component->set_rect(true);
   }
 }
 
+void Engine::Entity::set_sprite(const std::shared_ptr<GFX::Image>& sprite) {
+  if (_sprite != nullptr && sprite == _sprite) return;
+  _sprite = sprite;
+  _component->bind(*sprite);
+}
+
 void Engine::Entity::draw() {
   if (hide) return;
-
   _component->draw();
-}
-
-void Engine::Entity::create_texture_animation(const std::string& id, GFX::TextureAnimation animation) {
-  _animations[id] = std::move(animation);
-}
-
-void Engine::Entity::create_texture_animation(const std::string& id, const std::vector<std::shared_ptr<GFX::Image>>& sprites) {
-  _animations[id] = GFX::TextureAnimation(sprites);
-}
-
-void Engine::Entity::play_texture_animation(const std::string& id) {
-  _animation_index = id;
 }

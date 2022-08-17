@@ -6,7 +6,9 @@ SRC=./Game.cpp \
 		./NodeContainer.cpp \
 		./UI.cpp \
 		./Entity.cpp \
-		./Physics.cpp
+		./SpriteAnimation.cpp \
+		./Physics.cpp \
+		./manager/SpriteAnimationManager.cpp
 
 OUT_DIR=../../build
 OUT=$(OUT_DIR)/test-engine.o
