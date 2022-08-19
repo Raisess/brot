@@ -21,7 +21,7 @@ public:
   void set_sprite(const std::shared_ptr<Sprite>& sprite);
 
 private:
-  std::shared_ptr<GFX::TextureComponent> _component;
+  std::unique_ptr<GFX::TextureComponent> _component;
   std::shared_ptr<Sprite> _sprite;
   std::string _animation_index;
   std::string _last_animation_index;
