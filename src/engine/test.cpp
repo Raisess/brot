@@ -49,23 +49,23 @@ int main(int argc, char* argv[]) {
   std::shared_ptr<Layer> level_layer = scene.push_layer();
   std::shared_ptr<GFX::Font> game_font = GFX::Font::Shared(FONT_PATH);
 
-  std::shared_ptr<Sprite> dino_sprite = Sprite::Create(std::string(TEXTURE_PATH) + "idle_1" + std::string(TEXTURE_EXT));
+  std::shared_ptr<Sprite> dino_sprite = Sprite::Shared(std::string(TEXTURE_PATH) + "idle_1" + std::string(TEXTURE_EXT));
   SpriteAnimation dino_idle_animation = SpriteAnimation({
-    Sprite::Create(std::string(TEXTURE_PATH) + "idle_1" + std::string(TEXTURE_EXT)),
-    Sprite::Create(std::string(TEXTURE_PATH) + "idle_2" + std::string(TEXTURE_EXT)),
-    Sprite::Create(std::string(TEXTURE_PATH) + "idle_3" + std::string(TEXTURE_EXT)),
-    Sprite::Create(std::string(TEXTURE_PATH) + "idle_4" + std::string(TEXTURE_EXT)),
+    { Sprite::Shared(std::string(TEXTURE_PATH) + "idle_1" + std::string(TEXTURE_EXT)), 200 },
+    { Sprite::Shared(std::string(TEXTURE_PATH) + "idle_2" + std::string(TEXTURE_EXT)), 200 },
+    { Sprite::Shared(std::string(TEXTURE_PATH) + "idle_3" + std::string(TEXTURE_EXT)), 200 },
+    { Sprite::Shared(std::string(TEXTURE_PATH) + "idle_4" + std::string(TEXTURE_EXT)), 200 },
   });
   SpriteAnimation dino_running_animation = SpriteAnimation({
-    Sprite::Create(std::string(TEXTURE_PATH) + "running_5" + std::string(TEXTURE_EXT)),
-    Sprite::Create(std::string(TEXTURE_PATH) + "running_6" + std::string(TEXTURE_EXT)),
-    Sprite::Create(std::string(TEXTURE_PATH) + "running_7" + std::string(TEXTURE_EXT)),
-    Sprite::Create(std::string(TEXTURE_PATH) + "running_8" + std::string(TEXTURE_EXT)),
-    Sprite::Create(std::string(TEXTURE_PATH) + "running_9" + std::string(TEXTURE_EXT)),
-    Sprite::Create(std::string(TEXTURE_PATH) + "running_10" + std::string(TEXTURE_EXT)),
-    Sprite::Create(std::string(TEXTURE_PATH) + "running_11" + std::string(TEXTURE_EXT)),
-    Sprite::Create(std::string(TEXTURE_PATH) + "running_12" + std::string(TEXTURE_EXT)),
-    Sprite::Create(std::string(TEXTURE_PATH) + "running_13" + std::string(TEXTURE_EXT)),
+    { Sprite::Shared(std::string(TEXTURE_PATH) + "running_5" + std::string(TEXTURE_EXT)), 200 },
+    { Sprite::Shared(std::string(TEXTURE_PATH) + "running_6" + std::string(TEXTURE_EXT)), 200 },
+    { Sprite::Shared(std::string(TEXTURE_PATH) + "running_7" + std::string(TEXTURE_EXT)), 200 },
+    { Sprite::Shared(std::string(TEXTURE_PATH) + "running_8" + std::string(TEXTURE_EXT)), 200 },
+    { Sprite::Shared(std::string(TEXTURE_PATH) + "running_9" + std::string(TEXTURE_EXT)), 200 },
+    { Sprite::Shared(std::string(TEXTURE_PATH) + "running_10" + std::string(TEXTURE_EXT)), 200 },
+    { Sprite::Shared(std::string(TEXTURE_PATH) + "running_11" + std::string(TEXTURE_EXT)), 200 },
+    { Sprite::Shared(std::string(TEXTURE_PATH) + "running_12" + std::string(TEXTURE_EXT)), 200 },
+    { Sprite::Shared(std::string(TEXTURE_PATH) + "running_13" + std::string(TEXTURE_EXT)), 200 },
   });
 
   std::shared_ptr<Dino> dino = std::make_shared<Dino>("dino_0", game.ctx, dino_sprite, game_font);
