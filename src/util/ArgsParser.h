@@ -39,6 +39,10 @@ public:
     return args[key] != "" ? std::stoi(args[key]) : 0;
   }
 
+  static bool ToBoolean(Arguments& args, const std::string& key) {
+    return args[key] != "" && args[key] != "0" ? true : false;
+  }
+
 private:
   static const Tuple ParseDoubleHifen(const std::string& arg) {
     size_t key_size = 0;
