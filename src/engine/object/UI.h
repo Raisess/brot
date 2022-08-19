@@ -1,10 +1,10 @@
 #pragma once
 
 #include <memory>
-#include "../gfx/Text.h"
-#include "../gfx/TextComponent.h"
-#include "../_Sharable.h"
-#include "Game.h"
+#include "../../gfx/Text.h"
+#include "../../gfx/TextComponent.h"
+#include "../../_Sharable.h"
+#include "../core/Game.h"
 #include "_Node.h"
 
 namespace Engine {

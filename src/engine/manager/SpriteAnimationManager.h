@@ -1,8 +1,8 @@
 #pragma once
 
 #include <unordered_map>
-#include "../SpriteAnimation.h"
-#include "../Entity.h"
+#include "../object/SpriteAnimation.h"
+#include "../object/Entity.h"
 
 namespace Engine {
 namespace Manager {

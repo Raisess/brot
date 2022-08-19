@@ -1,9 +1,9 @@
 #pragma once
 
 #include <memory>
-#include "../gfx/TextureComponent.h"
-#include "../_Sharable.h"
-#include "Game.h"
+#include "../../gfx/TextureComponent.h"
+#include "../../_Sharable.h"
+#include "../core/Game.h"
 #include "_Node.h"
 
 namespace Engine {

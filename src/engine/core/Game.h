@@ -3,10 +3,10 @@
 #include <iostream>
 #include <functional>
 #include <memory>
-#include "../gfx/Renderer.h"
-#include "../gfx/TextComponent.h"
-#include "../gfx/Window.h"
-#include "../util/ArgsParser.h"
+#include "../../gfx/Renderer.h"
+#include "../../gfx/TextComponent.h"
+#include "../../gfx/Window.h"
+#include "../../util/ArgsParser.h"
 
 namespace Engine {
 

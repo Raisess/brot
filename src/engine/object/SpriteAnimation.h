@@ -3,7 +3,7 @@
 #include <iostream>
 #include <memory>
 #include <vector>
-#include "../gfx/Texture.h"
+#include "../../gfx/Texture.h"
 #include "Entity.h"
 
 namespace Engine {

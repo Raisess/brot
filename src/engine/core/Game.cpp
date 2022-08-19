@@ -1,7 +1,7 @@
-#include "../common/Size.h"
-#include "../input/Keyboard.h"
-#include "../util/Logger.h"
-#include "../util/Time.h"
+#include "../../common/Size.h"
+#include "../../input/Keyboard.h"
+#include "../../util/Logger.h"
+#include "../../util/Time.h"
 #include "Game.h"
 
 #define INTRO_LOGO_WIDTH 500

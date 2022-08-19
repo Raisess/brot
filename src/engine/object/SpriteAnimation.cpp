@@ -1,5 +1,5 @@
 #include <cassert>
-#include "../util/Time.h"
+#include "../../util/Time.h"
 #include "SpriteAnimation.h"
 
 #define SPRITE_DELAY 200

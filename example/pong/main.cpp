@@ -1,16 +1,16 @@
 #include <iostream>
 #include <memory>
 #include "../../src/common/Size.h"
-#include "../../src/engine/Entity.h"
-#include "../../src/engine/Game.h"
-#include "../../src/engine/Layer.h"
-#include "../../src/engine/Physics.h"
-#include "../../src/engine/Scene.h"
-#include "../../src/engine/UI.h"
 #include "../../src/gfx/Text.h"
 #include "../../src/input/Keyboard.h"
 #include "../../src/util/ArgsParser.h"
 #include "../../src/util/Number.h"
+#include "../../src/engine/core/Game.h"
+#include "../../src/engine/core/Layer.h"
+#include "../../src/engine/core/Scene.h"
+#include "../../src/engine/object/Entity.h"
+#include "../../src/engine/object/Physics.h"
+#include "../../src/engine/object/UI.h"
 
 #define POINT_OFFSET 50
 #define PLAYER_OFFSET 10

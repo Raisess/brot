@@ -1,4 +1,4 @@
-#include "../common/Vec2.h"
+#include "../../common/Vec2.h"
 #include "Physics.h"
 
 bool Engine::Physics::Collision::IsColliding(const Entity& entity_a, const Entity& entity_b) {

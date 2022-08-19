@@ -1,13 +1,13 @@
 CXX=clang++
 
-SRC=./Game.cpp \
-		./Scene.cpp \
-		./Layer.cpp \
-		./NodeContainer.cpp \
-		./UI.cpp \
-		./Entity.cpp \
-		./SpriteAnimation.cpp \
-		./Physics.cpp \
+SRC=./core/Game.cpp \
+		./core/Scene.cpp \
+		./core/Layer.cpp \
+		./object/NodeContainer.cpp \
+		./object/UI.cpp \
+		./object/Entity.cpp \
+		./object/SpriteAnimation.cpp \
+		./object/Physics.cpp \
 		./manager/SpriteAnimationManager.cpp
 
 OUT_DIR=../../build

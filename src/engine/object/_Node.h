@@ -1,9 +1,9 @@
 #pragma once
 
 #include <iostream>
-#include "../common/Color.h"
-#include "../common/Size.h"
-#include "../common/Vec2.h"
+#include "../../common/Color.h"
+#include "../../common/Size.h"
+#include "../../common/Vec2.h"
 
 namespace Engine {
 

@@ -1,5 +1,5 @@
-#include "../util/Logger.h"
-#include "./Entity.h"
+#include "../../util/Logger.h"
+#include "Entity.h"
 
 Engine::Entity::Entity(const Engine::GameContext& game_ctx, const std::string& id, const std::shared_ptr<GFX::Image>& sprite)
   : Node(id, Node::Type::ENTITY),
