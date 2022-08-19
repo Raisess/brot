@@ -16,7 +16,8 @@ Engine::GameContext::GameContext(const std::string& window_title, int argc, char
     Common::Size({
       Util::ArgsParser::ToInteger(args, "window-width"),
       Util::ArgsParser::ToInteger(args, "window-height"),
-    })
+    }),
+    Util::ArgsParser::ToBoolean(args, "window-fullscreen")
   );
   render_ctx = std::make_shared<GFX::Renderer>(*window_ctx);
   engine_font = std::make_shared<GFX::Font>(INTRO_FONT_PATH);
