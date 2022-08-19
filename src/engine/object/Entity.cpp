@@ -1,14 +1,14 @@
 #include "../../util/Logger.h"
 #include "Entity.h"
 
-Engine::Entity::Entity(const Engine::GameContext& game_ctx, const std::string& id, const std::shared_ptr<GFX::Image>& sprite)
+Engine::Entity::Entity(const Engine::GameContext& game_ctx, const std::string& id, const std::shared_ptr<Sprite>& sprite)
   : Node(id, Node::Type::ENTITY),
     _component(std::make_shared<GFX::TextureComponent>(*game_ctx.render_ctx)),
     _sprite(sprite) {
   Util::Logger::Debug("Create Entity: " + _id);
 
   if (_sprite != nullptr) {
-    _component->bind(*_sprite);
+    _component->bind(_sprite->image());
   }
 }
 
@@ -30,10 +30,10 @@ void Engine::Entity::update(int delta_time) {
   }
 }
 
-void Engine::Entity::set_sprite(const std::shared_ptr<GFX::Image>& sprite) {
-  if (_sprite != nullptr && sprite == _sprite) return;
+void Engine::Entity::set_sprite(const std::shared_ptr<Sprite>& sprite) {
+  if ((_sprite != nullptr && sprite == _sprite)) return;
   _sprite = sprite;
-  _component->bind(*sprite);
+  _component->bind(_sprite->image());
 }
 
 void Engine::Entity::draw() {

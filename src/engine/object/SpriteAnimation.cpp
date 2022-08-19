@@ -2,9 +2,7 @@
 #include "../../util/Time.h"
 #include "SpriteAnimation.h"
 
-#define SPRITE_DELAY 200
-
-Engine::SpriteAnimation::SpriteAnimation(const std::vector<std::shared_ptr<GFX::Image>>& sprites)
+Engine::SpriteAnimation::SpriteAnimation(const std::vector<std::shared_ptr<Sprite>>& sprites)
   : _sprites(sprites) {
   assert(sprites.size() > 0);
 }
@@ -14,7 +12,7 @@ void Engine::SpriteAnimation::play(int timestep, Entity& entity) {
     entity.set_sprite(_sprites[_index]);
   }
 
-  if (Util::Time::Wait(SPRITE_DELAY, timestep, _time_count)) {
+  if (Util::Time::Wait(_sprites[_index]->timesteps, timestep, _time_count)) {
     _time_count = 0;
     _last_index = _index;
     _index++;

@@ -6,11 +6,13 @@
 #include "../util/Time.h"
 #include "core/Game.h"
 #include "core/Scene.h"
-#include "manager/SpriteAnimationManager.h"
 #include "object/Entity.h"
 #include "object/NodeContainer.h"
 #include "object/Physics.h"
+#include "object/Sprite.h"
+#include "object/SpriteAnimation.h"
 #include "object/UI.h"
+#include "manager/SpriteAnimationManager.h"
 
 #define FONT_PATH "../../assets/fonts/Roboto/Roboto-Regular.ttf"
 #define TEXTURE_PATH "../../assets/sprites/dino/"
@@ -26,7 +28,7 @@ public:
   std::shared_ptr<Engine::UI> ui;
   std::shared_ptr<Engine::Entity> entity;
 
-  Dino(const std::string& id, const GameContext& game_ctx, const std::shared_ptr<GFX::Image>& sprite, const std::shared_ptr<GFX::Font>& font)
+  Dino(const std::string& id, const GameContext& game_ctx, const std::shared_ptr<Sprite>& sprite, const std::shared_ptr<GFX::Font>& font)
     : NodeContainer(id) {
     ui = UI::Shared(game_ctx, id + "_ui", font);
     entity = Entity::Shared(game_ctx, id + "_entity", sprite);
@@ -47,31 +49,31 @@ int main(int argc, char* argv[]) {
   std::shared_ptr<Layer> level_layer = scene.push_layer();
   std::shared_ptr<GFX::Font> game_font = GFX::Font::Shared(FONT_PATH);
 
-  std::shared_ptr<GFX::Image> dino_sprite = GFX::Image::Shared(std::string(TEXTURE_PATH) + "idle_1" + std::string(TEXTURE_EXT));
+  std::shared_ptr<Sprite> dino_sprite = Sprite::Create(std::string(TEXTURE_PATH) + "idle_1" + std::string(TEXTURE_EXT));
   SpriteAnimation dino_idle_animation = SpriteAnimation({
-    GFX::Image::Shared(std::string(TEXTURE_PATH) + "idle_1" + std::string(TEXTURE_EXT)),
-    GFX::Image::Shared(std::string(TEXTURE_PATH) + "idle_2" + std::string(TEXTURE_EXT)),
-    GFX::Image::Shared(std::string(TEXTURE_PATH) + "idle_3" + std::string(TEXTURE_EXT)),
-    GFX::Image::Shared(std::string(TEXTURE_PATH) + "idle_4" + std::string(TEXTURE_EXT)),
+    Sprite::Create(std::string(TEXTURE_PATH) + "idle_1" + std::string(TEXTURE_EXT)),
+    Sprite::Create(std::string(TEXTURE_PATH) + "idle_2" + std::string(TEXTURE_EXT)),
+    Sprite::Create(std::string(TEXTURE_PATH) + "idle_3" + std::string(TEXTURE_EXT)),
+    Sprite::Create(std::string(TEXTURE_PATH) + "idle_4" + std::string(TEXTURE_EXT)),
   });
   SpriteAnimation dino_running_animation = SpriteAnimation({
-    GFX::Image::Shared(std::string(TEXTURE_PATH) + "running_5" + std::string(TEXTURE_EXT)),
-    GFX::Image::Shared(std::string(TEXTURE_PATH) + "running_6" + std::string(TEXTURE_EXT)),
-    GFX::Image::Shared(std::string(TEXTURE_PATH) + "running_7" + std::string(TEXTURE_EXT)),
-    GFX::Image::Shared(std::string(TEXTURE_PATH) + "running_8" + std::string(TEXTURE_EXT)),
-    GFX::Image::Shared(std::string(TEXTURE_PATH) + "running_9" + std::string(TEXTURE_EXT)),
-    GFX::Image::Shared(std::string(TEXTURE_PATH) + "running_10" + std::string(TEXTURE_EXT)),
-    GFX::Image::Shared(std::string(TEXTURE_PATH) + "running_11" + std::string(TEXTURE_EXT)),
-    GFX::Image::Shared(std::string(TEXTURE_PATH) + "running_12" + std::string(TEXTURE_EXT)),
-    GFX::Image::Shared(std::string(TEXTURE_PATH) + "running_13" + std::string(TEXTURE_EXT)),
+    Sprite::Create(std::string(TEXTURE_PATH) + "running_5" + std::string(TEXTURE_EXT)),
+    Sprite::Create(std::string(TEXTURE_PATH) + "running_6" + std::string(TEXTURE_EXT)),
+    Sprite::Create(std::string(TEXTURE_PATH) + "running_7" + std::string(TEXTURE_EXT)),
+    Sprite::Create(std::string(TEXTURE_PATH) + "running_8" + std::string(TEXTURE_EXT)),
+    Sprite::Create(std::string(TEXTURE_PATH) + "running_9" + std::string(TEXTURE_EXT)),
+    Sprite::Create(std::string(TEXTURE_PATH) + "running_10" + std::string(TEXTURE_EXT)),
+    Sprite::Create(std::string(TEXTURE_PATH) + "running_11" + std::string(TEXTURE_EXT)),
+    Sprite::Create(std::string(TEXTURE_PATH) + "running_12" + std::string(TEXTURE_EXT)),
+    Sprite::Create(std::string(TEXTURE_PATH) + "running_13" + std::string(TEXTURE_EXT)),
   });
 
   std::shared_ptr<Dino> dino = std::make_shared<Dino>("dino_0", game.ctx, dino_sprite, game_font);
-  Manager::AnimationManager dino_animation(*dino->entity, { { IDLE, dino_idle_animation }, { RUNNING, dino_running_animation } });
+  Manager::SpriteAnimationManager dino_animation(*dino->entity, { { IDLE, dino_idle_animation }, { RUNNING, dino_running_animation } });
   level_layer->nodes.push_back(dino);
 
   std::shared_ptr<Dino> another_dino = std::make_shared<Dino>("dino_1", game.ctx, dino_sprite, game_font);
-  Manager::AnimationManager another_dino_animation(*another_dino->entity, { { IDLE, dino_idle_animation }, { RUNNING, dino_running_animation } });
+  Manager::SpriteAnimationManager another_dino_animation(*another_dino->entity, { { IDLE, dino_idle_animation }, { RUNNING, dino_running_animation } });
   another_dino->entity->flip = true;
   another_dino->position = { 500, 100 };
   level_layer->nodes.push_back(another_dino);
