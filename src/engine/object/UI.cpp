@@ -25,6 +25,5 @@ void Engine::UI::update(int) {
 
 void Engine::UI::draw() {
   if (hide) return;
-
   _component->draw();
 }
