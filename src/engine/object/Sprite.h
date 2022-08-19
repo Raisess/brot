@@ -4,17 +4,15 @@
 #include <memory>
 #include <vector>
 #include "../../gfx/Texture.h"
+#include "../../_Sharable.h"
 
 namespace Engine {
 
-class Sprite {
-#define SPRITE_DELAY 200
+class Sprite : public Sharable<Sprite, const std::string&>{
 public:
   const std::string path;
-  const int timesteps;
 
-  Sprite(const std::string& path, int timesteps);
-  static std::shared_ptr<Sprite> Create(const std::string& path, int timesteps = SPRITE_DELAY);
+  Sprite(const std::string& path);
 
   const GFX::Image& image() const {
     return *_image;
