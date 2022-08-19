@@ -5,9 +5,11 @@
 #define DEFAULT_WINDOW_WIDTH 1280
 #define DEFAULT_WINDOW_HEIGHT 720
 
-GFX::Window::Window(const std::string& title, const Common::Size& size) : title(title), _size(size) {
+GFX::Window::Window(const std::string& title, const Common::Size& size, bool fullscreen)
+  : title(title), _size(size), _fullscreen(fullscreen) {
   _size.width = size.width ? size.width : DEFAULT_WINDOW_WIDTH;
   _size.height = size.height ? size.height : DEFAULT_WINDOW_HEIGHT;
+
   Util::Logger::Debug("Create Window: " + title + " | width: " + std::to_string(_size.width) + ", height: " + std::to_string(_size.height));
 
   if (SDL_Init(SDL_INIT_VIDEO) < 0) {
@@ -15,7 +17,12 @@ GFX::Window::Window(const std::string& title, const Common::Size& size) : title(
     exit(1);
   }
 
-  sdl_value = SDL_CreateWindow(title.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, _size.width, _size.height, SDL_WINDOW_SHOWN | SDL_WINDOW_OPENGL);
+  sdl_value = SDL_CreateWindow(
+    title.c_str(),
+    SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
+    _size.width, _size.height,
+    SDL_WINDOW_SHOWN | SDL_WINDOW_OPENGL | (_fullscreen ? SDL_WINDOW_FULLSCREEN : 0)
+  );
   if (sdl_value == nullptr) {
     Util::Logger::Error("Error creating window: " + std::string(SDL_GetError()));
     exit(1);
@@ -64,12 +71,4 @@ void GFX::Window::loop(const CallbackLoop& callback) {
       Util::Time::Delay(1);
     }
   }
-}
-
-const Common::Size GFX::Window::get_size() const {
-  return _size;
-}
-
-const int GFX::Window::get_fps() const {
-  return _fps;
 }

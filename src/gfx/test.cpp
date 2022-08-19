@@ -10,7 +10,7 @@
 #define VELOCITY 5
 
 int main() {
-  GFX::Window window("Brot Engine | GFX Test", { 800, 600 });
+  GFX::Window window("Brot Engine | GFX Test", { 800, 600 }, false);
   GFX::Renderer renderer(window);
   GFX::Image test_bg_image(BG_TEXTURE_PATH);
   GFX::Image test_image(TEXTURE_PATH);
