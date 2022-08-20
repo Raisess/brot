@@ -25,6 +25,14 @@ public:
   Size operator-(const Size& size) const {
     return Size(width - size.width, height - size.height);
   }
+
+  Size operator*(const Size& size) const {
+    return Size(width * size.width, height * size.height);
+  }
+
+  Size operator*(int value) const {
+    return Size(width * value, height * value);
+  }
 };
 
 }
