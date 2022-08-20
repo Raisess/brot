@@ -27,6 +27,14 @@ public:
     return Vec2(x + value, y + value);
   }
 
+  Vec2 operator-(const Vec2& vec) const {
+    return Vec2(x - vec.x, y - vec.y);
+  }
+
+  Vec2 operator-(int value) const {
+    return Vec2(x - value, y - value);
+  }
+
   Vec2 operator*(const Vec2& vec) const {
     return Vec2(x * vec.x, y * vec.y);
   }
