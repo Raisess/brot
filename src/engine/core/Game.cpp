@@ -65,6 +65,10 @@ Engine::Game::~Game() {
   Util::Logger::Debug("Delete Game");
 }
 
+void Engine::Game::toggle_info() {
+  _info = !_info;
+}
+
 void Engine::Game::loop(const CallbackLoop& callback) {
   ctx.window_ctx->loop([&](int delta_time) -> void {
     ctx.render_ctx->clear();
@@ -84,10 +88,6 @@ void Engine::Game::loop(const CallbackLoop& callback) {
       _started = true;
     }
   });
-}
-
-void Engine::Game::toggle_info() {
-  _info = !_info;
 }
 
 void Engine::Game::end() const {

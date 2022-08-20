@@ -69,14 +69,15 @@ int main(int argc, char* argv[]) {
   });
 
   std::shared_ptr<Dino> dino = std::make_shared<Dino>("dino_0", game.ctx, dino_sprite, game_font);
-  Manager::SpriteAnimationManager dino_animation(*dino->entity, { { IDLE, dino_idle_animation }, { RUNNING, dino_running_animation } });
+  dino->position = { 100, 0 };
   level_layer->nodes.push_back(dino);
+  Manager::SpriteAnimationManager dino_animation(*dino->entity, { { IDLE, dino_idle_animation }, { RUNNING, dino_running_animation } });
 
   std::shared_ptr<Dino> another_dino = std::make_shared<Dino>("dino_1", game.ctx, dino_sprite, game_font);
-  Manager::SpriteAnimationManager another_dino_animation(*another_dino->entity, { { IDLE, dino_idle_animation }, { RUNNING, dino_running_animation } });
   another_dino->entity->flip = true;
   another_dino->position = { 500, 100 };
   level_layer->nodes.push_back(another_dino);
+  Manager::SpriteAnimationManager another_dino_animation(*another_dino->entity, { { IDLE, dino_idle_animation }, { RUNNING, dino_running_animation } });
 
   game.loop([&](int delta_time) -> void {
     Physics::Collision::IsColliding(*dino->entity, *another_dino->entity, []() -> void {

@@ -48,8 +48,8 @@ public:
   Game(const std::string& title, int argc, char* argv[]);
   ~Game();
 
-  void loop(const CallbackLoop& callback);
   void toggle_info();
+  void loop(const CallbackLoop& callback);
   void end() const;
 
 private:
