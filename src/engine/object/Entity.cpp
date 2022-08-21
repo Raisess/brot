@@ -3,7 +3,7 @@
 
 Engine::Entity::Entity(const Engine::GameContext& game_ctx, const std::string& id, const std::shared_ptr<Sprite>& sprite)
   : Node(id),
-    _component(std::make_unique<GFX::TextureComponent>(*game_ctx.render_ctx)),
+    _component(std::make_unique<GFX::TextureComponent>(*game_ctx.renderer)),
     _sprite(sprite) {
   Util::Logger::Debug("Create Entity: " + _id);
 

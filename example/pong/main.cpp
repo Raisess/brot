@@ -131,7 +131,7 @@ int main(int argc, char* argv[]) {
   game.toggle_info();
   Scene scene("main");
 
-  const auto window_size = game.ctx.window_ctx->get_size();
+  const auto window_size = game.ctx.window->get_size();
   auto ui_layer = scene.push_layer();
   auto level_layer = scene.push_layer();
 

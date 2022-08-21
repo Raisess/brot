@@ -11,7 +11,7 @@
 
 Engine::GameContext::GameContext(const std::string& window_title, int argc, char* argv[]) {
   Util::Arguments args = Util::ArgsParser::Parse(argc, argv);
-  window_ctx = std::make_unique<GFX::Window>(
+  window = std::make_unique<GFX::Window>(
     window_title,
     Common::Size({
       Util::ArgsParser::ToInteger(args, "window-width"),
@@ -19,18 +19,18 @@ Engine::GameContext::GameContext(const std::string& window_title, int argc, char
     }),
     Util::ArgsParser::ToBoolean(args, "window-fullscreen")
   );
-  render_ctx = std::make_shared<GFX::Renderer>(*window_ctx);
-  sound_ctx = std::make_unique<SFX::Player>();
+  renderer = std::make_shared<GFX::Renderer>(*window);
+  sound = std::make_unique<SFX::Player>();
   engine_font = std::make_shared<GFX::Font>(INTRO_FONT_PATH);
 }
 
 int Engine::GameInfo::Offset = 10;
 Engine::GameInfo::GameInfo(const GameContext& game_ctx) : game_ctx(game_ctx) {
-  _fps = std::make_unique<GFX::TextComponent>(*game_ctx.render_ctx);
+  _fps = std::make_unique<GFX::TextComponent>(*game_ctx.renderer);
   _fps->set_color({ 255, 0, 0 });
   _fps->set_position({ Offset, 0 });
   _fps->set_size({ 70, 40 });
-  _delta_time = std::make_unique<GFX::TextComponent>(*game_ctx.render_ctx);
+  _delta_time = std::make_unique<GFX::TextComponent>(*game_ctx.renderer);
   _delta_time->set_color({ 255, 0, 0 });
   _delta_time->set_size({ 120, 40 });
   _delta_time->set_position({ Offset, 40 });
@@ -50,10 +50,10 @@ void Engine::GameInfo::draw() {
 Engine::Game::Game(const std::string& title, int argc, char* argv[])
   : ctx(GameContext(title, argc, argv)),
     info(GameInfo(ctx)),
-    _logo(std::make_unique<GFX::TextComponent>(*ctx.render_ctx)) {
+    _logo(std::make_unique<GFX::TextComponent>(*ctx.renderer)) {
   Util::Logger::Debug("Create Game: " + title);
 
-  const Common::Size window_size = ctx.window_ctx->get_size();
+  const Common::Size window_size = ctx.window->get_size();
   _logo->set_size({ INTRO_LOGO_WIDTH, INTRO_LOGO_HEIGHT });
   _logo->set_position({
     (window_size.width / 2) - (INTRO_LOGO_WIDTH / 2),
@@ -71,19 +71,19 @@ void Engine::Game::toggle_info() {
 }
 
 void Engine::Game::loop(const CallbackLoop& callback) {
-  ctx.window_ctx->loop([&](int delta_time) -> void {
-    ctx.render_ctx->clear();
+  ctx.window->loop([&](int delta_time) -> void {
+    ctx.renderer->clear();
 
     if (_started) {
-      info.update({ delta_time, ctx.window_ctx->get_fps() });
+      info.update({ delta_time, ctx.window->get_fps() });
       callback(delta_time);
       if (_info) {
         info.draw();
       }
-      ctx.render_ctx->draw();
+      ctx.renderer->draw();
     } else {
       _logo->draw();
-      ctx.render_ctx->draw();
+      ctx.renderer->draw();
       Util::Time::Delay(INTRO_DELAY);
       delete _logo.release();
       _started = true;
@@ -92,5 +92,5 @@ void Engine::Game::loop(const CallbackLoop& callback) {
 }
 
 void Engine::Game::end() const {
-  ctx.window_ctx->quit();
+  ctx.window->quit();
 }

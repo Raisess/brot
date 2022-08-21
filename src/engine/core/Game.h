@@ -13,9 +13,9 @@ namespace Engine {
 
 class GameContext {
 public:
-  std::unique_ptr<GFX::Window> window_ctx;
-  std::shared_ptr<GFX::Renderer> render_ctx;
-  std::shared_ptr<SFX::Player> sound_ctx;
+  std::unique_ptr<GFX::Window> window;
+  std::shared_ptr<GFX::Renderer> renderer;
+  std::shared_ptr<SFX::Player> sound;
   std::shared_ptr<GFX::Font> engine_font;
 
   GameContext(const std::string& window_title, int argc, char* argv[]);

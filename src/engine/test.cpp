@@ -93,7 +93,7 @@ int main(int argc, char* argv[]) {
     Camera::Move(
       *level_layer,
       dino->position,
-      Common::Vec2((game.ctx.window_ctx->get_size() / 2).xy() - dino->size.xy()).inverse()
+      Common::Vec2((game.ctx.window->get_size() / 2).xy() - dino->size.xy()).inverse()
     );
 
     Physics::Collision::IsColliding(*dino, *another_dino, []() -> void {
@@ -111,21 +111,21 @@ int main(int argc, char* argv[]) {
     if (Input::Keyboard::OnPressed(Input::Keyboard::W)) {
       dino->position.y = dino->position.y -= VELOCITY;
       dino_animation.play(delta_time, RUNNING);
-      game.ctx.sound_ctx->play(delta_time, footstep_sound);
+      game.ctx.sound->play(delta_time, footstep_sound);
     } else if (Input::Keyboard::OnPressed(Input::Keyboard::A)) {
       dino->flip = true;
       dino->position.x = dino->position.x -= VELOCITY;
       dino_animation.play(delta_time, RUNNING);
-      game.ctx.sound_ctx->play(delta_time, footstep_sound);
+      game.ctx.sound->play(delta_time, footstep_sound);
     } else if (Input::Keyboard::OnPressed(Input::Keyboard::S)) {
       dino->position.y = dino->position.y += VELOCITY;
       dino_animation.play(delta_time, RUNNING);
-      game.ctx.sound_ctx->play(delta_time, footstep_sound);
+      game.ctx.sound->play(delta_time, footstep_sound);
     } else if (Input::Keyboard::OnPressed(Input::Keyboard::D)) {
       dino->flip = false;
       dino->position.x = dino->position.x += VELOCITY;
       dino_animation.play(delta_time, RUNNING);
-      game.ctx.sound_ctx->play(delta_time, footstep_sound);
+      game.ctx.sound->play(delta_time, footstep_sound);
     } else {
       dino_animation.play(delta_time, IDLE);
     }
