@@ -2,8 +2,6 @@
 
 #include <SDL2/SDL.h>
 
-namespace GFX {
-
 template<typename T>
 class SDLController {
 public:
@@ -14,5 +12,3 @@ public:
 protected:
   T sdl_value;
 };
-
-}

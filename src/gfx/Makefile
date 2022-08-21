@@ -17,7 +17,7 @@ build:
 
 build_test:
 	mkdir -p $(OUT_DIR)
-	$(CXX) $(LIB_OUT) $(SRC) ./test.cpp -o $(OUT)
+	$(CXX) $(FLAGS) $(LIB_OUT) ./test.cpp -o $(OUT)
 
 run_test:
 	$(OUT)

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "SDLController.h"
+#include "../SDLController.h"
 #include "Window.h"
 
 namespace GFX {

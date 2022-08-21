@@ -3,7 +3,7 @@
 #include <iostream>
 #include <functional>
 #include "../common/Size.h"
-#include "SDLController.h"
+#include "../SDLController.h"
 
 using CallbackLoop = std::function<void(int)>;
 

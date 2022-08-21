@@ -5,8 +5,8 @@
 #include "../common/Color.h"
 #include "../common/Size.h"
 #include "../common/Vec2.h"
+#include "../SDLController.h"
 #include "Renderer.h"
-#include "SDLController.h"
 
 using namespace Common;
 

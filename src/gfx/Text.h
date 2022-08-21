@@ -5,7 +5,7 @@
 #include "../common/Color.h"
 #include "../_Sharable.h"
 #include "Renderer.h"
-#include "SDLController.h"
+#include "../SDLController.h"
 
 #define FONT_POINT_SIZE 25
 

@@ -4,7 +4,7 @@
 #include <SDL2/SDL_image.h>
 #include "../_Sharable.h"
 #include "Renderer.h"
-#include "SDLController.h"
+#include "../SDLController.h"
 
 namespace GFX {
 
