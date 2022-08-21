@@ -9,7 +9,7 @@ OUT_DIR=./build
 clean:
 	rm -rf $(OUT_DIR)
 
-all: build_gfx build_input build_engine
+all: build_gfx build_sfx build_input build_engine
 
 build_engine:
 	make -C $(ENGINE_PATH)
@@ -28,6 +28,15 @@ build_input_test:
 
 run_input_test:
 	make -C $(INPUT_PATH) run_test
+
+build_sfx:
+	make -C $(SFX_PATH)
+
+build_sfx_test:
+	make -C $(SFX_PATH) build_test
+
+run_sfx_test:
+	make -C $(SFX_PATH) run_test
 
 build_gfx:
 	make -C $(GFX_PATH)
