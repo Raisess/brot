@@ -16,6 +16,7 @@ OUT=$(OUT_DIR)/test-engine.o
 LIB_OUT=$(OUT_DIR)/lib-engine.so
 
 GFX_LIB=$(OUT_DIR)/lib-gfx.so
+SFX_LIB=$(OUT_DIR)/lib-sfx.so
 INPUT_LIB=$(OUT_DIR)/lib-input.so
 
 build:
@@ -24,7 +25,7 @@ build:
 
 build_test:
 	mkdir -p $(OUT_DIR)
-	$(CXX) $(GFX_LIB) $(INPUT_LIB) $(LIB_OUT) ./test.cpp -o $(OUT)
+	$(CXX) $(GFX_LIB) $(SFX_LIB) $(INPUT_LIB) $(LIB_OUT) ./test.cpp -o $(OUT)
 
 run_test:
 	$(OUT) --window-width=1600 --window-height=900

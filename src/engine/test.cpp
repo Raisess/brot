@@ -1,6 +1,8 @@
 #include <iostream>
 #include <memory>
 #include "../input/Keyboard.h"
+#include "../sfx/Player.h"
+#include "../sfx/Sound.h"
 #include "../util/ArgsParser.h"
 #include "../util/Logger.h"
 #include "../util/Time.h"
@@ -17,6 +19,7 @@
 #define FONT_PATH "../../assets/fonts/Roboto/Roboto-Regular.ttf"
 #define TEXTURE_PATH "../../assets/sprites/dino/"
 #define TEXTURE_EXT ".png"
+#define SOUND_PATH "../../assets/sounds/footstep.wav"
 #define IDLE "idle"
 #define RUNNING "running"
 #define VELOCITY 10
@@ -50,6 +53,9 @@ private:
 int main(int argc, char* argv[]) {
   Game game("Brot Engine | Engine Test", argc, argv);
   game.toggle_info();
+  SFX::Player sound_player;
+  SFX::Sound footstep_sound(SOUND_PATH, 200);
+  footstep_sound.set_volume(50);
   Scene scene("main_scene");
   std::shared_ptr<Layer> level_layer = scene.push_layer();
   std::shared_ptr<GFX::Font> game_font = GFX::Font::Shared(FONT_PATH);
@@ -106,17 +112,21 @@ int main(int argc, char* argv[]) {
     if (Input::Keyboard::OnPressed(Input::Keyboard::W)) {
       dino->position.y = dino->position.y -= VELOCITY;
       dino_animation.play(delta_time, RUNNING);
+      sound_player.play(delta_time, footstep_sound);
     } else if (Input::Keyboard::OnPressed(Input::Keyboard::A)) {
       dino->flip = true;
       dino->position.x = dino->position.x -= VELOCITY;
       dino_animation.play(delta_time, RUNNING);
+      sound_player.play(delta_time, footstep_sound);
     } else if (Input::Keyboard::OnPressed(Input::Keyboard::S)) {
       dino->position.y = dino->position.y += VELOCITY;
       dino_animation.play(delta_time, RUNNING);
+      sound_player.play(delta_time, footstep_sound);
     } else if (Input::Keyboard::OnPressed(Input::Keyboard::D)) {
       dino->flip = false;
       dino->position.x = dino->position.x += VELOCITY;
       dino_animation.play(delta_time, RUNNING);
+      sound_player.play(delta_time, footstep_sound);
     } else {
       dino_animation.play(delta_time, IDLE);
     }
