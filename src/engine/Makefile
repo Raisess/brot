@@ -8,6 +8,7 @@ SRC=./core/Game.cpp \
 		./object/Sprite.cpp \
 		./object/SpriteAnimation.cpp \
 		./object/Physics.cpp \
+		./object/Camera.cpp \
 		./manager/SpriteAnimationManager.cpp
 
 OUT_DIR=../../build

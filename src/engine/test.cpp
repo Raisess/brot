@@ -7,6 +7,7 @@
 #include "core/Game.h"
 #include "core/Scene.h"
 #include "manager/SpriteAnimationManager.h"
+#include "object/Camera.h"
 #include "object/Entity.h"
 #include "object/Physics.h"
 #include "object/Sprite.h"
@@ -29,12 +30,12 @@ public:
     size = { 100, 100 };
     color = { 255, 0, 0 };
     _ui.size = { 60, 50 };
-    _ui.offset = { 20, -30 };
     _ui.text = id;
   }
 
   void on_update(int delta_time) final override {
     _ui.position = position;
+    _ui.offset = Common::Vec2(20, -30) + offset;
     _ui.update(delta_time);
   }
 
@@ -84,11 +85,23 @@ int main(int argc, char* argv[]) {
   level_layer->nodes.push_back(another_dino);
 
   game.loop([&](int delta_time) -> void {
+    Camera::Move(
+      *level_layer,
+      dino->position,
+      Common::Vec2((game.ctx.window_ctx->get_size() / 2).xy() - dino->size.xy()).inverse()
+    );
+
     Physics::Collision::IsColliding(*dino, *another_dino, []() -> void {
       Util::Logger::Log("colliding");
     });
 
     another_dino_animation.play(delta_time, IDLE);
+
+    if (Input::Keyboard::OnPressed(Input::Keyboard::UP)) {
+      Camera::Zoom(*level_layer, 10);
+    } else if (Input::Keyboard::OnPressed(Input::Keyboard::DOWN)) {
+      Camera::Zoom(*level_layer, -10);
+    }
 
     if (Input::Keyboard::OnPressed(Input::Keyboard::W)) {
       dino->position.y = dino->position.y -= VELOCITY;
