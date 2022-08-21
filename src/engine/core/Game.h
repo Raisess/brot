@@ -6,6 +6,7 @@
 #include "../../gfx/Renderer.h"
 #include "../../gfx/TextComponent.h"
 #include "../../gfx/Window.h"
+#include "../../sfx/Player.h"
 #include "../../util/ArgsParser.h"
 
 namespace Engine {
@@ -14,6 +15,7 @@ class GameContext {
 public:
   std::unique_ptr<GFX::Window> window_ctx;
   std::shared_ptr<GFX::Renderer> render_ctx;
+  std::shared_ptr<SFX::Player> sound_ctx;
   std::shared_ptr<GFX::Font> engine_font;
 
   GameContext(const std::string& window_title, int argc, char* argv[]);
