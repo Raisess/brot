@@ -12,8 +12,8 @@ GFX::Window::Window(const std::string& title, const Common::Size& size, bool ful
 
   Util::Logger::Debug("Create Window: " + title + " | width: " + std::to_string(_size.width) + ", height: " + std::to_string(_size.height));
 
-  if (SDL_Init(SDL_INIT_VIDEO) < 0) {
-    Util::Logger::Error("Error initializing video: " + std::string(SDL_GetError()));
+  if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) < 0) {
+    Util::Logger::Error("Error initializing video or audio: " + std::string(SDL_GetError()));
     exit(1);
   }
 
