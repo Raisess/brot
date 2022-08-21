@@ -6,10 +6,16 @@ namespace SFX {
 
 class Player {
 public:
-  Player();
+  enum Channel {
+    AUTO = -1,
+    MONO = 1,
+    STEREO,
+  };
+
+  Player(Channel channel = Channel::STEREO);
   ~Player();
 
-  void play(int delta_time, const Sound& sound);
+  void play(int delta_time, const Sound& sound, Channel channel = Channel::AUTO);
   void restart();
 
 private:

@@ -3,8 +3,8 @@
 #include "../util/Time.h"
 #include "Player.h"
 
-SFX::Player::Player() {
-  if (Mix_OpenAudio(44100, AUDIO_S16SYS, 2, 512) < 0) {
+SFX::Player::Player(Channel channel) {
+  if (Mix_OpenAudio(44100, AUDIO_S16SYS, channel, 512) < 0) {
     Util::Logger::Error("Error opening audio");
     exit(1);
   }
@@ -12,7 +12,7 @@ SFX::Player::Player() {
 
 SFX::Player::~Player() {}
 
-void SFX::Player::play(int delta_time, const Sound& sound) {
+void SFX::Player::play(int delta_time, const Sound& sound, Channel channel) {
   if (sound.get_duration() == 0) return;
 
   if (Util::Time::Wait(sound.get_duration(), delta_time, _elapsed_time)) {
@@ -20,7 +20,7 @@ void SFX::Player::play(int delta_time, const Sound& sound) {
   } else {
     if (!_playing) {
       _playing = true;
-      Mix_PlayChannel(-1, sound.get(), 0);
+      Mix_PlayChannel(channel, sound.get(), 0);
     }
   }
 }
