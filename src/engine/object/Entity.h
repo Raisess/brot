@@ -16,6 +16,9 @@ public:
   Entity(const GameContext& game_ctx, const std::string& id, const std::shared_ptr<Sprite>& sprite);
   ~Entity();
 
+  virtual void on_update(int delta_time) {};
+  virtual void on_draw() {};
+
   void update(int delta_time) final override;
   void draw() final override;
   void set_sprite(const std::shared_ptr<Sprite>& sprite);

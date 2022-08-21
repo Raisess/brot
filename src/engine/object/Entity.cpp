@@ -2,7 +2,7 @@
 #include "Entity.h"
 
 Engine::Entity::Entity(const Engine::GameContext& game_ctx, const std::string& id, const std::shared_ptr<Sprite>& sprite)
-  : Node(id, Node::Type::ENTITY),
+  : Node(id),
     _component(std::make_unique<GFX::TextureComponent>(*game_ctx.render_ctx)),
     _sprite(sprite) {
   Util::Logger::Debug("Create Entity: " + _id);
@@ -28,6 +28,8 @@ void Engine::Entity::update(int delta_time) {
   if (_sprite == nullptr) {
     _component->set_rect(true);
   }
+
+  on_update(delta_time);
 }
 
 void Engine::Entity::set_sprite(const std::shared_ptr<Sprite>& sprite) {
@@ -39,4 +41,5 @@ void Engine::Entity::set_sprite(const std::shared_ptr<Sprite>& sprite) {
 void Engine::Entity::draw() {
   if (hide) return;
   _component->draw();
+  on_draw();
 }
