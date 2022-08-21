@@ -6,13 +6,12 @@
 #include "../util/Time.h"
 #include "core/Game.h"
 #include "core/Scene.h"
+#include "manager/SpriteAnimationManager.h"
 #include "object/Entity.h"
-#include "object/NodeContainer.h"
 #include "object/Physics.h"
 #include "object/Sprite.h"
 #include "object/SpriteAnimation.h"
 #include "object/UI.h"
-#include "manager/SpriteAnimationManager.h"
 
 #define FONT_PATH "../../assets/fonts/Roboto/Roboto-Regular.ttf"
 #define TEXTURE_PATH "../../assets/sprites/dino/"
@@ -23,23 +22,28 @@
 
 using namespace Engine;
 
-class Dino : public NodeContainer {
+class Dino : public Entity {
 public:
-  std::shared_ptr<Engine::UI> ui;
-  std::shared_ptr<Engine::Entity> entity;
-
   Dino(const std::string& id, const GameContext& game_ctx, const std::shared_ptr<Sprite>& sprite, const std::shared_ptr<GFX::Font>& font)
-    : NodeContainer(id) {
-    ui = UI::Shared(game_ctx, id + "_ui", font);
-    entity = Entity::Shared(game_ctx, id + "_entity", sprite);
-
-    entity->size = { 100, 100 };
-    entity->color = { 255, 0, 0 };
-    ui->size = { 60, 50 };
-    ui->offset = { 20, -30 };
-    ui->text = id;
-    nodes = { ui, entity };
+    : Entity(game_ctx, id, sprite), _ui(game_ctx, id + "_ui", font) {
+    size = { 100, 100 };
+    color = { 255, 0, 0 };
+    _ui.size = { 60, 50 };
+    _ui.offset = { 20, -30 };
+    _ui.text = id;
   }
+
+  void on_update(int delta_time) final override {
+    _ui.position = position;
+    _ui.update(delta_time);
+  }
+
+  void on_draw() final override {
+    _ui.draw();
+  }
+
+private:
+  Engine::UI _ui;
 };
 
 int main(int argc, char* argv[]) {
@@ -70,40 +74,36 @@ int main(int argc, char* argv[]) {
 
   std::shared_ptr<Dino> dino = std::make_shared<Dino>("dino_0", game.ctx, dino_sprite, game_font);
   dino->position = { 100, 0 };
+  Manager::SpriteAnimationManager dino_animation(*dino, { { IDLE, dino_idle_animation }, { RUNNING, dino_running_animation } });
   level_layer->nodes.push_back(dino);
-  Manager::SpriteAnimationManager dino_animation(*dino->entity, { { IDLE, dino_idle_animation }, { RUNNING, dino_running_animation } });
 
   std::shared_ptr<Dino> another_dino = std::make_shared<Dino>("dino_1", game.ctx, dino_sprite, game_font);
-  another_dino->entity->flip = true;
+  another_dino->flip = true;
   another_dino->position = { 500, 100 };
+  Manager::SpriteAnimationManager another_dino_animation(*another_dino, { { IDLE, dino_idle_animation }, { RUNNING, dino_running_animation } });
   level_layer->nodes.push_back(another_dino);
-  Manager::SpriteAnimationManager another_dino_animation(*another_dino->entity, { { IDLE, dino_idle_animation }, { RUNNING, dino_running_animation } });
 
   game.loop([&](int delta_time) -> void {
-    Physics::Collision::IsColliding(*dino->entity, *another_dino->entity, []() -> void {
+    Physics::Collision::IsColliding(*dino, *another_dino, []() -> void {
       Util::Logger::Log("colliding");
     });
 
     another_dino_animation.play(delta_time, IDLE);
 
     if (Input::Keyboard::OnPressed(Input::Keyboard::W)) {
+      dino->position.y = dino->position.y -= VELOCITY;
       dino_animation.play(delta_time, RUNNING);
-      dino->position.y -= VELOCITY;
     } else if (Input::Keyboard::OnPressed(Input::Keyboard::A)) {
+      dino->flip = true;
+      dino->position.x = dino->position.x -= VELOCITY;
       dino_animation.play(delta_time, RUNNING);
-      dino->entity->flip = true;
-      dino->position.x -= VELOCITY;
     } else if (Input::Keyboard::OnPressed(Input::Keyboard::S)) {
+      dino->position.y = dino->position.y += VELOCITY;
       dino_animation.play(delta_time, RUNNING);
-      dino->position.y += VELOCITY;
     } else if (Input::Keyboard::OnPressed(Input::Keyboard::D)) {
+      dino->flip = false;
+      dino->position.x = dino->position.x += VELOCITY;
       dino_animation.play(delta_time, RUNNING);
-      dino->entity->flip = false;
-      dino->position.x += VELOCITY;
-    } else if (Input::Keyboard::OnPressed(Input::Keyboard::O)) {
-      dino->entity->size = dino->entity->size - Common::Size({ 10, 10 });
-    } else if (Input::Keyboard::OnPressed(Input::Keyboard::P)) {
-      dino->entity->size = dino->entity->size + Common::Size({ 10, 10 });
     } else {
       dino_animation.play(delta_time, IDLE);
     }
