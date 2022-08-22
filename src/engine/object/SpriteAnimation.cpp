@@ -9,7 +9,7 @@ Engine::SpriteAnimation::SpriteAnimation(const std::vector<SpriteStruct>& sprite
 
 void Engine::SpriteAnimation::play(int delta_time, Entity& entity) {
   if (_last_index == 0 || _index != _last_index) {
-    entity.set_sprite(_sprites[_index].sprite);
+    entity.set_sprite(*_sprites[_index].sprite);
   }
 
   if (Util::Time::Wait(_sprites[_index].timesteps, delta_time, _time_count)) {

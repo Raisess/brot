@@ -27,8 +27,9 @@ using namespace Engine;
 
 class Dino : public Entity {
 public:
-  Dino(const std::string& id, const GameContext& game_ctx, const std::shared_ptr<Sprite>& sprite, const std::shared_ptr<GFX::Font>& font)
-    : Entity(game_ctx, id, sprite), _ui(game_ctx, id + "_ui", font) {
+  Dino(const std::string& id, const GameContext& game_ctx, const Sprite& sprite, const std::shared_ptr<GFX::Font>& font)
+    : Entity(game_ctx, id), _ui(game_ctx, id + "_ui", font) {
+    set_sprite(sprite);
     size = { 100, 100 };
     color = { 255, 0, 0 };
     _ui.size = { 60, 50 };
@@ -54,16 +55,15 @@ int main(int argc, char* argv[]) {
   game.toggle_info();
   Scene scene("main_scene");
   std::shared_ptr<Layer> level_layer = scene.push_layer();
-  std::shared_ptr<GFX::Font> game_font = GFX::Font::Shared(FONT_PATH);
 
-  std::shared_ptr<Sprite> dino_sprite = Sprite::Shared(std::string(TEXTURE_PATH) + "idle_1" + std::string(TEXTURE_EXT));
-  SpriteAnimation dino_idle_animation = SpriteAnimation({
+  std::shared_ptr<GFX::Font> game_font = GFX::Font::Shared(FONT_PATH);
+  SpriteAnimation dino_idle_animation({
     { Sprite::Shared(std::string(TEXTURE_PATH) + "idle_1" + std::string(TEXTURE_EXT)), 200 },
     { Sprite::Shared(std::string(TEXTURE_PATH) + "idle_2" + std::string(TEXTURE_EXT)), 200 },
     { Sprite::Shared(std::string(TEXTURE_PATH) + "idle_3" + std::string(TEXTURE_EXT)), 200 },
     { Sprite::Shared(std::string(TEXTURE_PATH) + "idle_4" + std::string(TEXTURE_EXT)), 200 },
   });
-  SpriteAnimation dino_running_animation = SpriteAnimation({
+  SpriteAnimation dino_running_animation({
     { Sprite::Shared(std::string(TEXTURE_PATH) + "running_5" + std::string(TEXTURE_EXT)), 200 },
     { Sprite::Shared(std::string(TEXTURE_PATH) + "running_6" + std::string(TEXTURE_EXT)), 200 },
     { Sprite::Shared(std::string(TEXTURE_PATH) + "running_7" + std::string(TEXTURE_EXT)), 200 },
@@ -75,15 +75,17 @@ int main(int argc, char* argv[]) {
     { Sprite::Shared(std::string(TEXTURE_PATH) + "running_13" + std::string(TEXTURE_EXT)), 200 },
   });
 
+  Sprite dino_sprite(std::string(TEXTURE_PATH) + "idle_1" + std::string(TEXTURE_EXT));
   std::shared_ptr<Dino> dino = std::make_shared<Dino>("dino_0", game.ctx, dino_sprite, game_font);
   dino->position = { 100, 0 };
   Manager::SpriteAnimationManager dino_animation(*dino, { { IDLE, dino_idle_animation }, { RUNNING, dino_running_animation } });
-  level_layer->nodes.push_back(dino);
 
   std::shared_ptr<Dino> another_dino = std::make_shared<Dino>("dino_1", game.ctx, dino_sprite, game_font);
   another_dino->flip = true;
   another_dino->position = { 500, 100 };
   Manager::SpriteAnimationManager another_dino_animation(*another_dino, { { IDLE, dino_idle_animation }, { RUNNING, dino_running_animation } });
+
+  level_layer->nodes.push_back(dino);
   level_layer->nodes.push_back(another_dino);
 
   SFX::Sound footstep_sound(SOUND_PATH, 200);

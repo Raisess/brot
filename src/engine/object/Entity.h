@@ -11,9 +11,9 @@ namespace Engine {
 
 class Entity
   : public Node,
-    public Sharable<Entity, const GameContext&, const std::string&, const std::shared_ptr<Sprite>&> {
+    public Sharable<Entity, const GameContext&, const std::string&> {
 public:
-  Entity(const GameContext& game_ctx, const std::string& id, const std::shared_ptr<Sprite>& sprite);
+  Entity(const GameContext& game_ctx, const std::string& id);
   ~Entity();
 
   virtual void on_update(int delta_time) {};
@@ -21,11 +21,10 @@ public:
 
   void update(int delta_time) final override;
   void draw() final override;
-  void set_sprite(const std::shared_ptr<Sprite>& sprite);
+  void set_sprite(const Sprite& sprite);
 
 private:
   std::unique_ptr<GFX::TextureComponent> _component;
-  std::shared_ptr<Sprite> _sprite;
 };
 
 }
