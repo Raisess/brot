@@ -2,13 +2,14 @@ CXX=clang++
 
 SRC=main.cpp
 
-OUT_DIR=../../build
+OUT_DIR=../../test-build
 OUT=$(OUT_DIR)/pong.o
 
-GFX_LIB=$(OUT_DIR)/lib-gfx.so
-SFX_LIB=$(OUT_DIR)/lib-sfx.so
-INPUT_LIB=$(OUT_DIR)/lib-input.so
-ENGINE_LIB=$(OUT_DIR)/lib-engine.so
+LIB_DIR=/usr/local/bin/brot
+GFX_LIB=$(LIB_DIR)/lib-gfx.so
+SFX_LIB=$(LIB_DIR)/lib-sfx.so
+INPUT_LIB=$(LIB_DIR)/lib-input.so
+ENGINE_LIB=$(LIB_DIR)/lib-engine.so
 
 build:
 	$(CXX) $(GFX_LIB) $(SFX_LIB) $(INPUT_LIB) $(ENGINE_LIB) $(SRC) -o $(OUT)
