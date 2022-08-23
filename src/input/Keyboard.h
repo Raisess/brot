@@ -64,10 +64,10 @@ public:
     ESC = SDL_SCANCODE_ESCAPE,
   };
 
-  static void OnPressed(const Key& key, const Callback& callback);
-  static bool OnPressed(const Key& key);
-  static void OnPressed(const std::vector<Key>& keys, const Callback& callback);
-  static bool OnPressed(const std::vector<Key>& keys);
+  static void IsPressed(const Key& key, const Callback& callback);
+  static bool IsPressed(const Key& key);
+  static void IsPressed(const std::vector<Key>& keys, const Callback& callback);
+  static bool IsPressed(const std::vector<Key>& keys);
 };
 
 }

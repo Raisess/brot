@@ -41,7 +41,7 @@ public:
   unsigned int points = 0;
 
   Player(const GameContext& game_ctx)
-    : Entity(game_ctx, "player", nullptr),
+    : Entity(game_ctx, "player"),
       _initial_pos(0) {
     fill = true;
     size = { 30, 150 };
@@ -67,7 +67,7 @@ public:
   };
 
   Ball(const GameContext& game_ctx)
-    : Entity(game_ctx, "ball", nullptr),
+    : Entity(game_ctx, "ball"),
       _initial_pos({
         ((game_ctx.window->get_size().width / 2) - (size.width / 2)),
         ((game_ctx.window->get_size().height / 2) - (size.height / 2)),
@@ -182,19 +182,19 @@ int main(int argc, char* argv[]) {
   ui_layer->nodes.push_back(pong.player_two_ui);
 
   game.loop([&](int dt) -> void {
-    Input::Keyboard::OnPressed(Input::Keyboard::ESC, [&]() -> void {
+    Input::Keyboard::IsPressed(Input::Keyboard::ESC, [&]() -> void {
       return game.end();
     });
-    Input::Keyboard::OnPressed(Input::Keyboard::W, [&]() -> void {
+    Input::Keyboard::IsPressed(Input::Keyboard::W, [&]() -> void {
       pong.player_one->position.y = std::max(pong.player_one->position.y - PLAYER_VEL, 0);
     });
-    Input::Keyboard::OnPressed(Input::Keyboard::S, [&]() -> void {
+    Input::Keyboard::IsPressed(Input::Keyboard::S, [&]() -> void {
       pong.player_one->position.y = std::min(pong.player_one->position.y + PLAYER_VEL, window_size.height - pong.player_one->size.height);
     });
-    Input::Keyboard::OnPressed(Input::Keyboard::UP, [&]() -> void {
+    Input::Keyboard::IsPressed(Input::Keyboard::UP, [&]() -> void {
       pong.player_two->position.y = std::max(pong.player_two->position.y - PLAYER_VEL, 0);
     });
-    Input::Keyboard::OnPressed(Input::Keyboard::DOWN, [&]() -> void {
+    Input::Keyboard::IsPressed(Input::Keyboard::DOWN, [&]() -> void {
       pong.player_two->position.y = std::min(pong.player_two->position.y + PLAYER_VEL, window_size.height - pong.player_two->size.height);
     });
 

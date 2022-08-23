@@ -104,26 +104,26 @@ int main(int argc, char* argv[]) {
 
     another_dino_animation.play(delta_time, IDLE);
 
-    if (Input::Keyboard::OnPressed(Input::Keyboard::UP)) {
+    if (Input::Keyboard::IsPressed(Input::Keyboard::UP)) {
       Camera::Zoom(*level_layer, 10);
-    } else if (Input::Keyboard::OnPressed(Input::Keyboard::DOWN)) {
+    } else if (Input::Keyboard::IsPressed(Input::Keyboard::DOWN)) {
       Camera::Zoom(*level_layer, -10);
     }
 
-    if (Input::Keyboard::OnPressed(Input::Keyboard::W)) {
+    if (Input::Keyboard::IsPressed(Input::Keyboard::W)) {
       dino->position.y = dino->position.y -= VELOCITY;
       dino_animation.play(delta_time, RUNNING);
       game.ctx.sound->play(delta_time, footstep_sound);
-    } else if (Input::Keyboard::OnPressed(Input::Keyboard::A)) {
+    } else if (Input::Keyboard::IsPressed(Input::Keyboard::A)) {
       dino->flip = true;
       dino->position.x = dino->position.x -= VELOCITY;
       dino_animation.play(delta_time, RUNNING);
       game.ctx.sound->play(delta_time, footstep_sound);
-    } else if (Input::Keyboard::OnPressed(Input::Keyboard::S)) {
+    } else if (Input::Keyboard::IsPressed(Input::Keyboard::S)) {
       dino->position.y = dino->position.y += VELOCITY;
       dino_animation.play(delta_time, RUNNING);
       game.ctx.sound->play(delta_time, footstep_sound);
-    } else if (Input::Keyboard::OnPressed(Input::Keyboard::D)) {
+    } else if (Input::Keyboard::IsPressed(Input::Keyboard::D)) {
       dino->flip = false;
       dino->position.x = dino->position.x += VELOCITY;
       dino_animation.play(delta_time, RUNNING);
@@ -132,19 +132,19 @@ int main(int argc, char* argv[]) {
       dino_animation.play(delta_time, IDLE);
     }
 
-    Input::Keyboard::OnPressed(Input::Keyboard::ONE, [&]() -> void {
+    Input::Keyboard::IsPressed(Input::Keyboard::ONE, [&]() -> void {
       level_layer->toggle_fill();
       Util::Time::Delay(100);
     });
-    Input::Keyboard::OnPressed(Input::Keyboard::TWO, [&]() -> void {
+    Input::Keyboard::IsPressed(Input::Keyboard::TWO, [&]() -> void {
       level_layer->toggle_rect();
       Util::Time::Delay(100);
     });
-    Input::Keyboard::OnPressed(Input::Keyboard::THREE, [&]() -> void {
+    Input::Keyboard::IsPressed(Input::Keyboard::THREE, [&]() -> void {
       level_layer->toggle_hide();
       Util::Time::Delay(100);
     });
-    Input::Keyboard::OnPressed(Input::Keyboard::ESC, [&]() -> void {
+    Input::Keyboard::IsPressed(Input::Keyboard::ESC, [&]() -> void {
       return game.end();
     });
 

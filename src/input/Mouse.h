@@ -16,7 +16,7 @@ public:
     RIGHT = SDL_BUTTON_RMASK,
   };
 
-  static void OnClick(const Button& button, const Callback& callback);
+  static void IsClick(const Button& button, const Callback& callback);
 };
 
 }
