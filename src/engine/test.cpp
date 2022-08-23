@@ -1,19 +1,19 @@
 #include <iostream>
 #include <memory>
-#include "../input/Keyboard.h"
-#include "../sfx/Sound.h"
-#include "../util/ArgsParser.h"
-#include "../util/Logger.h"
-#include "../util/Time.h"
-#include "core/Game.h"
-#include "core/Scene.h"
-#include "manager/SpriteAnimationManager.h"
-#include "object/Camera.h"
-#include "object/Entity.h"
-#include "object/Physics.h"
-#include "object/Sprite.h"
-#include "object/SpriteAnimation.h"
-#include "object/UI.h"
+#include <brot/input/Keyboard.h>
+#include <brot/sfx/Sound.h>
+#include <brot/util/ArgsParser.h>
+#include <brot/util/Logger.h>
+#include <brot/util/Time.h>
+#include <brot/engine/core/Game.h>
+#include <brot/engine/core/Scene.h>
+#include <brot/engine/manager/SpriteAnimationManager.h>
+#include <brot/engine/object/Camera.h>
+#include <brot/engine/object/Entity.h>
+#include <brot/engine/object/Physics.h>
+#include <brot/engine/object/Sprite.h>
+#include <brot/engine/object/SpriteAnimation.h>
+#include <brot/engine/object/UI.h>
 
 #define FONT_PATH "../../assets/fonts/Roboto/Roboto-Regular.ttf"
 #define TEXTURE_PATH "../../assets/sprites/dino/"

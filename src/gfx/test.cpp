@@ -1,8 +1,8 @@
 #include <iostream>
-#include "Renderer.h"
-#include "TextComponent.h"
-#include "TextureComponent.h"
-#include "Window.h"
+#include <brot/gfx/Renderer.h>
+#include <brot/gfx/TextComponent.h>
+#include <brot/gfx/TextureComponent.h>
+#include <brot/gfx/Window.h>
 
 #define BG_TEXTURE_PATH "../../../tmp/test-bg-img.png"
 #define TEXTURE_PATH "../../../tmp/test-img.png"

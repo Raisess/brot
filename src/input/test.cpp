@@ -1,8 +1,8 @@
-#include "../common/Vec2.h"
-#include "../gfx/Window.h"
-#include "../util/Logger.h"
-#include "Keyboard.h"
-#include "Mouse.h"
+#include <brot/common/Vec2.h>
+#include <brot/gfx/Window.h>
+#include <brot/util/Logger.h>
+#include <brot/input/Keyboard.h>
+#include <brot/input/Mouse.h>
 
 int main() {
   GFX::Window window("Brot Engine | Input Test", { 800, 600 }, false);

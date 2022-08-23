@@ -1,7 +1,7 @@
-#include "../gfx/Window.h"
-#include "../util/Logger.h"
-#include "Player.h"
-#include "Sound.h"
+#include <brot/gfx/Window.h>
+#include <brot/util/Logger.h>
+#include <brot/sfx/Player.h>
+#include <brot/sfx/Sound.h>
 
 #define SOUND_PATH "../../assets/sounds/footstep.wav"
 

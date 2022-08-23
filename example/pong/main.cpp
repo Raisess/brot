@@ -1,15 +1,14 @@
 #include <iostream>
 #include <memory>
-#include "../../src/common/Size.h"
-#include "../../src/gfx/Text.h"
-#include "../../src/input/Keyboard.h"
-#include "../../src/util/Number.h"
-#include "../../src/engine/core/Game.h"
-#include "../../src/engine/core/Layer.h"
-#include "../../src/engine/core/Scene.h"
-#include "../../src/engine/object/Entity.h"
-#include "../../src/engine/object/Physics.h"
-#include "../../src/engine/object/UI.h"
+#include <brot/common/Size.h>
+#include <brot/input/Keyboard.h>
+#include <brot/util/Number.h>
+#include <brot/engine/core/Game.h>
+#include <brot/engine/core/Layer.h>
+#include <brot/engine/core/Scene.h>
+#include <brot/engine/object/Entity.h>
+#include <brot/engine/object/Physics.h>
+#include <brot/engine/object/UI.h>
 
 #define FONT_PATH "../../assets/fonts/Roboto/Roboto-Regular.ttf"
 #define POINT_OFFSET 50
