@@ -28,7 +28,7 @@ build:
 
 build_test:
 	mkdir -p $(TEST_OUT_DIR)
-	$(CXX) $(GFX_LIB) $(SFX_LIB) $(ENGINE_LIB) $(LIB_OUT) ./test.cpp -o $(TEST_OUT)
+	$(CXX) $(GFX_LIB) $(SFX_LIB) $(INPUT_LIB) $(ENGINE_LIB) ./test.cpp -o $(TEST_OUT)
 
 run_test:
 	$(TEST_OUT) --window-width=1600 --window-height=900
