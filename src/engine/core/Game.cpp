@@ -7,7 +7,7 @@
 #define INTRO_LOGO_WIDTH 500
 #define INTRO_LOGO_HEIGHT 100
 #define INTRO_DELAY 1500
-#define INTRO_FONT_PATH "../../assets/fonts/Roboto/Roboto-Regular.ttf"
+#define INTRO_FONT_PATH "/usr/local/etc/brot/assets/fonts/Roboto/Roboto-Regular.ttf"
 
 Engine::GameContext::GameContext(const std::string& window_title, int argc, char* argv[]) {
   Util::Arguments args = Util::ArgsParser::Parse(argc, argv);

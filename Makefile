@@ -6,13 +6,17 @@ ENGINE_PATH=$(SRC_DIR)/engine
 
 OUT_DIR=./build
 
+ASSETS_DIR=./assets
+
 clean:
 	rm -rf $(OUT_DIR)
 
 install:
 	sudo mkdir -p /usr/local/bin/brot
-	sudo mkdir -p /usr/local/include/brot
 	sudo cp -r $(OUT_DIR)/* /usr/local/bin/brot
+	sudo mkdir -p /usr/local/etc/brot
+	sudo cp -r $(ASSETS_DIR) /usr/local/etc/brot
+	sudo mkdir -p /usr/local/include/brot
 	sudo cp -r $(SRC_DIR)/* /usr/local/include/brot
 
 all: build_gfx build_sfx build_input build_engine
