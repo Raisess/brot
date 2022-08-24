@@ -77,12 +77,12 @@ int main(int argc, char* argv[]) {
   Sprite dino_sprite(std::string(TEXTURE_PATH) + "idle_1" + std::string(TEXTURE_EXT));
   std::shared_ptr<Dino> dino = std::make_shared<Dino>("dino_0", game.ctx, dino_sprite, game_font);
   dino->position = { 100, 0 };
-  Manager::SpriteAnimationManager dino_animation(*dino, { { IDLE, dino_idle_animation }, { RUNNING, dino_running_animation } });
+  SpriteAnimationManager dino_animation(*dino, { { IDLE, dino_idle_animation }, { RUNNING, dino_running_animation } });
 
   std::shared_ptr<Dino> another_dino = std::make_shared<Dino>("dino_1", game.ctx, dino_sprite, game_font);
   another_dino->flip = true;
   another_dino->position = { 500, 100 };
-  Manager::SpriteAnimationManager another_dino_animation(*another_dino, { { IDLE, dino_idle_animation }, { RUNNING, dino_running_animation } });
+  SpriteAnimationManager another_dino_animation(*another_dino, { { IDLE, dino_idle_animation }, { RUNNING, dino_running_animation } });
 
   SFX::Sound footstep_sound(SOUND_PATH, 200);
   footstep_sound.set_volume(50);

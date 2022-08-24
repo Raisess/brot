@@ -5,7 +5,6 @@
 #include "../object/SpriteAnimation.h"
 
 namespace Engine {
-namespace Manager {
 
 class SpriteAnimationManager {
 public:
@@ -19,5 +18,4 @@ private:
   std::string _last_animation_id;
 };
 
-}
 }
