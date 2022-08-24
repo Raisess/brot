@@ -17,7 +17,7 @@ LIB_OUT=$(OUT_DIR)/lib-engine.so
 TEST_OUT_DIR=../../test-build
 TEST_OUT=$(TEST_OUT_DIR)/test-engine.o
 
-LIB_DIR=/usr/local/bin/brot
+LIB_DIR=/usr/local/lib/brot
 GFX_LIB=$(LIB_DIR)/lib-gfx.so
 SFX_LIB=$(LIB_DIR)/lib-sfx.so
 INPUT_LIB=$(LIB_DIR)/lib-input.so

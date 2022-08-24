@@ -12,7 +12,7 @@ LIB_OUT=$(OUT_DIR)/lib-gfx.so
 TEST_OUT_DIR=../../test-build
 TEST_OUT=$(OUT_DIR)/test-gfx.o
 
-LIB_DIR=/usr/local/bin/brot
+LIB_DIR=/usr/local/lib/brot
 GFX_LIB=$(LIB_DIR)/lib-gfx.so
 
 build:

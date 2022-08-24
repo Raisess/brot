@@ -12,8 +12,8 @@ clean:
 	rm -rf $(OUT_DIR)
 
 install:
-	sudo mkdir -p /usr/local/bin/brot
-	sudo cp -r $(OUT_DIR)/* /usr/local/bin/brot
+	sudo mkdir -p /usr/local/lib/brot
+	sudo cp -r $(OUT_DIR)/* /usr/local/lib/brot
 	sudo mkdir -p /usr/local/etc/brot
 	sudo cp -r $(ASSETS_DIR) /usr/local/etc/brot
 	sudo mkdir -p /usr/local/include/brot
