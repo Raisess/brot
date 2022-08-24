@@ -2,11 +2,10 @@
 #include <memory>
 #include <brot/input/Keyboard.h>
 #include <brot/sfx/Sound.h>
-#include <brot/util/ArgsParser.h>
 #include <brot/util/Logger.h>
 #include <brot/util/Time.h>
 #include <brot/engine/core/Game.h>
-#include <brot/engine/core/Scene.h>
+#include <brot/engine/manager/SceneManager.h>
 #include <brot/engine/manager/SpriteAnimationManager.h>
 #include <brot/engine/object/Camera.h>
 #include <brot/engine/object/Entity.h>
@@ -53,8 +52,8 @@ private:
 int main(int argc, char* argv[]) {
   Game game("Brot Engine | Engine Test", argc, argv);
   game.toggle_info();
-  Scene scene("main_scene");
-  std::shared_ptr<Layer> level_layer = scene.push_layer();
+
+  SceneManager scene_manager = SceneManager::Create({ "main_scene" });
 
   std::shared_ptr<GFX::Font> game_font = GFX::Font::Shared(FONT_PATH);
   SpriteAnimation dino_idle_animation({
@@ -85,11 +84,11 @@ int main(int argc, char* argv[]) {
   another_dino->position = { 500, 100 };
   Manager::SpriteAnimationManager another_dino_animation(*another_dino, { { IDLE, dino_idle_animation }, { RUNNING, dino_running_animation } });
 
-  level_layer->nodes.push_back(dino);
-  level_layer->nodes.push_back(another_dino);
-
   SFX::Sound footstep_sound(SOUND_PATH, 200);
   footstep_sound.set_volume(50);
+
+  std::shared_ptr<Scene> scene = scene_manager.load("main_scene", 0, { dino, another_dino });
+  std::shared_ptr<Layer> level_layer = scene->get_layer(0);
 
   game.loop([&](int delta_time) -> void {
     Camera::Move(
@@ -148,8 +147,7 @@ int main(int argc, char* argv[]) {
       return game.end();
     });
 
-    scene.update(delta_time);
-    scene.draw();
+    scene_manager.use("main_scene", delta_time);
   });
 
   return 0;
