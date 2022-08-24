@@ -1,25 +1,26 @@
 #pragma once
 
 #include <functional>
-#include "Entity.h"
+#include "../../common/Vec2.h"
+#include "_Node.h"
 
 namespace Engine {
 
 class Physics {
 
-using CollisionCallback = std::function<void(const Entity&, const Entity&)>;
+using CollisionCallback = std::function<void(const Node&, const Node&)>;
 using CollisionCallbackNoParam = std::function<void(void)>;
 
 public:
   class Collision {
   public:
-    static bool IsColliding(const Entity& entity_a, const Entity& entity_b);
-    static void IsColliding(const Entity& entity_a, const Entity& entity_b, const CollisionCallback& callback);
-    static void IsColliding(const Entity& entity_a, const Entity& entity_b, const CollisionCallbackNoParam& callback);
-    static bool Overlapping(const Vec2& point_a, const Vec2& point_b);
+    static bool IsColliding(const Node&, const Node&);
+    static void IsColliding(const Node&, const Node&, const CollisionCallback&);
+    static void IsColliding(const Node&, const Node&, const CollisionCallbackNoParam&);
+    static bool Overlapping(const Common::Vec2&, const Common::Vec2&);
 
   private:
-    static bool CheckCollison(const Entity& entity_a, const Entity& entity_b);
+    static bool CheckCollison(const Node& entity_a, const Node& entity_b);
   };
 
   class Gravity {};
