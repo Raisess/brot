@@ -30,9 +30,8 @@ size_t Engine::Scene::count_layer() const {
   return _layers.size();
 }
 
-std::shared_ptr<Engine::Layer> Engine::Scene::get_layer(int index) const {
-  assert(index <= _layers.size());
-  return _layers[index];
+std::shared_ptr<Engine::Layer> Engine::Scene::get_layer(int index) {
+  return index == _layers.size() ? push_layer() : _layers[index];
 }
 
 const std::string Engine::Scene::id() const {

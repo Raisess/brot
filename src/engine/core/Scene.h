@@ -1,6 +1,5 @@
 #pragma once
 
-#include <assert.h>
 #include <iostream>
 #include <memory>
 #include <vector>
@@ -15,9 +14,9 @@ public:
   void update(int delta_time) const;
   void draw() const;
   std::shared_ptr<Layer> push_layer();
-  void pop_layer();
+  std::shared_ptr<Layer> get_layer(int index);
   size_t count_layer() const;
-  std::shared_ptr<Layer> get_layer(int index) const;
+  void pop_layer();
   const std::string id() const;
 
 private:
