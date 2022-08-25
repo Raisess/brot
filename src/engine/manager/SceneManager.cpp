@@ -27,7 +27,7 @@ std::shared_ptr<Engine::Scene> Engine::SceneManager::get(const std::string& scen
 std::shared_ptr<Engine::Scene> Engine::SceneManager::load(
   const std::string& scene_id,
   unsigned int layer_idx,
-  const std::vector<std::shared_ptr<Node>>&& nodes
+  std::vector<std::shared_ptr<Node>> nodes
 ) {
   auto scene = _scene_collection[scene_id];
   auto layer = scene->get_layer(layer_idx);

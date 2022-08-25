@@ -13,16 +13,16 @@ class SceneManager {
 using SceneCollection = std::unordered_map<std::string, std::shared_ptr<Scene>>;
 
 public:
-  static SceneManager Create(std::vector<std::string>&&); // change Instantiated to true
+  static SceneManager Create(std::vector<std::string>&&);
   ~SceneManager();
 
   std::shared_ptr<Scene> get(const std::string& scene_id);
-  std::shared_ptr<Scene> load(const std::string& scene_id, unsigned int layer_idx, const std::vector<std::shared_ptr<Node>>&&);
+  std::shared_ptr<Scene> load(const std::string& scene_id, unsigned int layer_idx, std::vector<std::shared_ptr<Node>>);
   void use(const std::string& scene_id, unsigned int delta_time, std::function<void(void)>);
   void use(const std::string& scene_id, unsigned int delta_time);
 
 private:
-  static bool Instantiated; // starts at false, prevent multiple instances
+  static bool Instantiated;
   SceneCollection _scene_collection;
 
   SceneManager(std::vector<std::string>&&);
