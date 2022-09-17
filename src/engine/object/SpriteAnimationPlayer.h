@@ -1,14 +1,14 @@
 #pragma once
 
 #include <unordered_map>
-#include "../object/Entity.h"
-#include "../object/SpriteAnimation.h"
+#include "Entity.h"
+#include "SpriteAnimation.h"
 
 namespace Engine {
 
-class SpriteAnimationManager {
+class SpriteAnimationPlayer {
 public:
-  SpriteAnimationManager(Entity& entity, const std::unordered_map<std::string, SpriteAnimation>&);
+  SpriteAnimationPlayer(Entity& entity, const std::unordered_map<std::string, SpriteAnimation>&);
 
   void play(int delta_time, const std::string& animation_id);
 

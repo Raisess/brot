@@ -19,6 +19,11 @@ install:
 	sudo mkdir -p /usr/local/include/brot
 	sudo cp -r $(SRC_DIR)/* /usr/local/include/brot
 
+uninstall:
+	sudo rm -rf /usr/local/lib/brot
+	sudo rm -rf /usr/local/etc/brot
+	sudo rm -rf /usr/local/include/brot
+
 all: build_gfx build_sfx build_input build_engine
 
 build_engine:
