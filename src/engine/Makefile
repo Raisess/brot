@@ -10,7 +10,8 @@ SRC=./core/Game.cpp \
 		./object/SpriteAnimationPlayer.cpp \
 		./object/Physics.cpp \
 		./object/Camera.cpp \
-		./manager/SceneManager.cpp
+		./manager/SceneManager.cpp \
+		./manager/SpriteManager.cpp
 
 OUT_DIR=../../build
 LIB_OUT=$(OUT_DIR)/lib-engine.so

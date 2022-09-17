@@ -6,17 +6,18 @@
 #include <brot/util/Time.h>
 #include <brot/engine/core/Game.h>
 #include <brot/engine/manager/SceneManager.h>
-#include <brot/engine/manager/SpriteAnimationManager.h>
+#include <brot/engine/manager/SpriteManager.h>
 #include <brot/engine/object/Camera.h>
 #include <brot/engine/object/Entity.h>
 #include <brot/engine/object/Physics.h>
 #include <brot/engine/object/Sprite.h>
 #include <brot/engine/object/SpriteAnimation.h>
+#include <brot/engine/object/SpriteAnimationPlayer.h>
 #include <brot/engine/object/UI.h>
 
+#define MAIN_SCENE "main_scene"
+#define TEXTURE_BASE_PATH "../../assets/sprites/dino/"
 #define FONT_PATH "../../assets/fonts/Roboto/Roboto-Regular.ttf"
-#define TEXTURE_PATH "../../assets/sprites/dino/"
-#define TEXTURE_EXT ".png"
 #define SOUND_PATH "../../assets/sounds/footstep.wav"
 #define IDLE "idle"
 #define RUNNING "running"
@@ -53,41 +54,67 @@ int main(int argc, char* argv[]) {
   Game game("Brot Engine | Engine Test", argc, argv);
   game.toggle_info();
 
-  SceneManager scene_manager = SceneManager::Create({ "main_scene" });
+  SceneManager scene_manager = SceneManager::Create({ MAIN_SCENE });
+  SpriteManager sprite_manager = SpriteManager::Create(TEXTURE_BASE_PATH);
+
+  sprite_manager.load({
+    "idle_1.png",
+    "idle_2.png",
+    "idle_3.png",
+    "idle_4.png",
+    "running_5.png",
+    "running_6.png",
+    "running_7.png",
+    "running_8.png",
+    "running_9.png",
+    "running_10.png",
+    "running_11.png",
+    "running_12.png",
+    "running_13.png",
+  });
 
   std::shared_ptr<GFX::Font> game_font = GFX::Font::Shared(FONT_PATH);
   SpriteAnimation dino_idle_animation({
-    { Sprite::Shared(std::string(TEXTURE_PATH) + "idle_1" + std::string(TEXTURE_EXT)), 200 },
-    { Sprite::Shared(std::string(TEXTURE_PATH) + "idle_2" + std::string(TEXTURE_EXT)), 200 },
-    { Sprite::Shared(std::string(TEXTURE_PATH) + "idle_3" + std::string(TEXTURE_EXT)), 200 },
-    { Sprite::Shared(std::string(TEXTURE_PATH) + "idle_4" + std::string(TEXTURE_EXT)), 200 },
+    { sprite_manager.get("idle_1.png"), 200 },
+    { sprite_manager.get("idle_2.png"), 200 },
+    { sprite_manager.get("idle_3.png"), 200 },
+    { sprite_manager.get("idle_4.png"), 200 },
   });
   SpriteAnimation dino_running_animation({
-    { Sprite::Shared(std::string(TEXTURE_PATH) + "running_5" + std::string(TEXTURE_EXT)), 200 },
-    { Sprite::Shared(std::string(TEXTURE_PATH) + "running_6" + std::string(TEXTURE_EXT)), 200 },
-    { Sprite::Shared(std::string(TEXTURE_PATH) + "running_7" + std::string(TEXTURE_EXT)), 200 },
-    { Sprite::Shared(std::string(TEXTURE_PATH) + "running_8" + std::string(TEXTURE_EXT)), 200 },
-    { Sprite::Shared(std::string(TEXTURE_PATH) + "running_9" + std::string(TEXTURE_EXT)), 200 },
-    { Sprite::Shared(std::string(TEXTURE_PATH) + "running_10" + std::string(TEXTURE_EXT)), 200 },
-    { Sprite::Shared(std::string(TEXTURE_PATH) + "running_11" + std::string(TEXTURE_EXT)), 200 },
-    { Sprite::Shared(std::string(TEXTURE_PATH) + "running_12" + std::string(TEXTURE_EXT)), 200 },
-    { Sprite::Shared(std::string(TEXTURE_PATH) + "running_13" + std::string(TEXTURE_EXT)), 200 },
+    { sprite_manager.get("running_5.png"), 200 },
+    { sprite_manager.get("running_6.png"), 200 },
+    { sprite_manager.get("running_7.png"), 200 },
+    { sprite_manager.get("running_8.png"), 200 },
+    { sprite_manager.get("running_9.png"), 200 },
+    { sprite_manager.get("running_10.png"), 200 },
+    { sprite_manager.get("running_11.png"), 200 },
+    { sprite_manager.get("running_12.png"), 200 },
+    { sprite_manager.get("running_13.png"), 200 },
   });
 
-  Sprite dino_sprite(std::string(TEXTURE_PATH) + "idle_1" + std::string(TEXTURE_EXT));
-  std::shared_ptr<Dino> dino = std::make_shared<Dino>("dino_0", game.ctx, dino_sprite, game_font);
+  std::shared_ptr<Dino> dino = std::make_shared<Dino>(
+    "dino_0",
+    game.ctx,
+    *sprite_manager.get("idle_1.png"),
+    game_font
+  );
   dino->position = { 100, 0 };
-  SpriteAnimationManager dino_animation(*dino, { { IDLE, dino_idle_animation }, { RUNNING, dino_running_animation } });
+  SpriteAnimationPlayer dino_animation(*dino, { { IDLE, dino_idle_animation }, { RUNNING, dino_running_animation } });
 
-  std::shared_ptr<Dino> another_dino = std::make_shared<Dino>("dino_1", game.ctx, dino_sprite, game_font);
+  std::shared_ptr<Dino> another_dino = std::make_shared<Dino>(
+    "dino_1",
+    game.ctx,
+    *sprite_manager.get("idle_1.png"),
+    game_font
+  );
   another_dino->flip = true;
   another_dino->position = { 500, 100 };
-  SpriteAnimationManager another_dino_animation(*another_dino, { { IDLE, dino_idle_animation }, { RUNNING, dino_running_animation } });
+  SpriteAnimationPlayer another_dino_animation(*another_dino, { { IDLE, dino_idle_animation }, { RUNNING, dino_running_animation } });
 
   SFX::Sound footstep_sound(SOUND_PATH, 200);
   footstep_sound.set_volume(50);
 
-  std::shared_ptr<Scene> scene = scene_manager.load("main_scene", 0, { dino, another_dino });
+  std::shared_ptr<Scene> scene = scene_manager.load(MAIN_SCENE, 0, { dino, another_dino });
   std::shared_ptr<Layer> level_layer = scene->get_layer(0);
 
   game.loop([&](int delta_time) -> void {
@@ -147,7 +174,7 @@ int main(int argc, char* argv[]) {
       return game.end();
     });
 
-    scene_manager.use("main_scene", delta_time);
+    scene_manager.use(MAIN_SCENE, delta_time);
   });
 
   return 0;
