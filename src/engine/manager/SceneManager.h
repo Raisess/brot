@@ -9,9 +9,6 @@
 namespace Engine {
 
 class SceneManager {
-
-using SceneCollection = std::unordered_map<std::string, std::shared_ptr<Scene>>;
-
 public:
   static SceneManager Create(std::vector<std::string>&&);
   ~SceneManager();
@@ -23,7 +20,7 @@ public:
 
 private:
   static bool Instantiated;
-  SceneCollection _scene_collection;
+  std::unordered_map<std::string, std::shared_ptr<Scene>> _scene_collection;
 
   SceneManager(std::vector<std::string>&&);
 };
