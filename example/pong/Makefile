@@ -12,6 +12,7 @@ INPUT_LIB=$(LIB_DIR)/lib-input.so
 ENGINE_LIB=$(LIB_DIR)/lib-engine.so
 
 build:
+	mkdir -p $(OUT_DIR)
 	$(CXX) $(GFX_LIB) $(SFX_LIB) $(INPUT_LIB) $(ENGINE_LIB) $(SRC) -o $(OUT)
 
 run:
