@@ -9,9 +9,6 @@ A lightweight game engine for lightweight 2D games.
 ```shell
 # for arch based systems
 sudo pacman -S sdl2 sdl2_image sdl2_ttf sdl2_mixer
-
-# for ubuntu based systems
-sudo apt install libsdl2-2.0-0 libsdl2-dev sdl2_image sdl2_ttf sdl2_mixer
 ```
 
 ### Setup
